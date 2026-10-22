@@ -4,9 +4,15 @@ Navigation development for the CantonMonkey RLinf fork. This directory contains
 413 files imported from the committed `rlinf-nav/` source at
 `b9c2af0ef32f41f6065896ee5d6dbf4e494ce169` (`navrlt-lightnav-v1`).
 The RLinf runtime baseline is `0505431899574619da86f551bad70b71e0ea2177`.
-See [EXPORT_PROVENANCE.json](EXPORT_PROVENANCE.json) for source/export digests.
-Publication checks and known historical-manifest failures are recorded in
+See [EXPORT_PROVENANCE.json](EXPORT_PROVENANCE.json) for the **initial import**
+digests at commit `3f02d5d`; later edits are tracked by Git, not by rewriting that
+historical receipt. Current source packages receive a separate `SOURCE_STAGE.json`.
+Publication checks and historical replay limitations are recorded in
 [EXPORT_VALIDATION.md](EXPORT_VALIDATION.md).
+
+The P8 public unit-test packaging defect is repaired. See
+[P8 hashes and migration](P8_HASH_AND_MIGRATION.md) for the cause, test boundary
+and current Navigation-RLT source staging commands.
 
 ## Contents
 
@@ -57,9 +63,11 @@ Ray and Habitat; some historical evidence tests require external run artifacts.
    `envs`, `data` and `runs`. Point each runner's paths at the actual deployment;
    the public `extensions/navigation` layout is a source layout. For configuration
    smoke scripts set `RLINF_CHECKOUT` to the selected installed runtime checkout.
-5. Regenerate manifests, source fingerprints and run receipts after configuring
-   or installing files. Frozen hashes in historical manifests describe their
-   original source; substitution and relocation change those bytes.
+5. Stage Navigation-RLT source with `scripts.stage_navigation_rlt_code` as
+   documented in [the migration guide](P8_HASH_AND_MIGRATION.md). Configure the
+   target machine and generate a new run manifest before execution. New run
+   receipts must come from the new run; historical receipts cannot be relabeled.
+   Frozen P8 manifests remain historical and are not generic launch templates.
 6. Start with the selected runner's bounded smoke and verify rollout, actor
    update, weight synchronization and re-sampling on the target hardware.
 

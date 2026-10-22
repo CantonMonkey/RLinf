@@ -1,0 +1,167 @@
+{
+  "arms": {
+    "learned_route_stop_oracle_waypoint": {
+      "route_and_stop_source": "deterministic_candidate_argmax",
+      "true_stop_predicted_waypoint_fallback": "candidate_deterministic_mean; counted explicitly and never described as oracle",
+      "waypoint_source_when_waypoint": "train_shortest_path_expert_when_available"
+    },
+    "oracle_route_stop_learned_waypoint": {
+      "route_and_stop_source": "train_shortest_path_expert_route_label",
+      "waypoint_source_when_waypoint": "deterministic_candidate_mean"
+    }
+  },
+  "attribution_rule": {
+    "authorize_feature_v2_when": "sample_sufficient and not learned_route_stop_oracle_waypoint.recovered and not oracle_route_stop_learned_waypoint.recovered and not route_group_pass and not waypoint_group_pass",
+    "labels": {
+      "both_arms_recovered": "both_component_substitutions_recover",
+      "feature_v2": "joint_teacher_failure_authorizes_feature_v2",
+      "insufficient": "insufficient_teacher_samples",
+      "neither_group_failed": "closed_loop_interaction_or_distribution_shift",
+      "route_arm_only": "waypoint_branch_failure_supported",
+      "route_group_only": "route_stop_failure_without_closed_loop_recovery",
+      "waypoint_arm_only": "route_stop_branch_failure_supported",
+      "waypoint_group_only": "waypoint_failure_without_closed_loop_recovery"
+    },
+    "otherwise_authorize_feature_v2": false
+  },
+  "claim_boundary": {
+    "bc_promotion": false,
+    "causal_diagnostic_only": true,
+    "cuda_worker_smoke": false,
+    "g9": false,
+    "ppo": false,
+    "remote_push": false,
+    "training": false,
+    "validation_split_access": false
+  },
+  "created": "2026-09-29",
+  "development_episodes": [
+    {
+      "episode_id": "4836",
+      "index": 4826,
+      "scene": "mJXqzFtmKg4"
+    },
+    {
+      "episode_id": "10622",
+      "index": 10603,
+      "scene": "1pXnuDYAj8r"
+    },
+    {
+      "episode_id": "6520",
+      "index": 6510,
+      "scene": "qoiz87JEwZ2"
+    },
+    {
+      "episode_id": "7298",
+      "index": 7288,
+      "scene": "p5wJjkQkbXX"
+    },
+    {
+      "episode_id": "2856",
+      "index": 2849,
+      "scene": "E9uDoFAP3SH"
+    },
+    {
+      "episode_id": "6921",
+      "index": 6911,
+      "scene": "S9hNv5qa7GM"
+    },
+    {
+      "episode_id": "5572",
+      "index": 5562,
+      "scene": "Vvot9Ly1tCj"
+    },
+    {
+      "episode_id": "1937",
+      "index": 1933,
+      "scene": "VLzqgDo317F"
+    }
+  ],
+  "diagnostics": {
+    "compiled_first_action": true,
+    "counterfactual_at_each_hybrid_state": true,
+    "route_arm_true_stop_predicted_waypoint_fallback": {
+      "count_field": "true_stop_predicted_waypoint_candidate_fallback_count",
+      "execution_source": "candidate_deterministic_mean",
+      "is_oracle": false
+    },
+    "route_confusion": true,
+    "stop_precision_recall": true,
+    "teacher_forced_on_expert_rollout_states": true,
+    "waypoint_bearing_and_distance_error": true,
+    "zero_forward_macro": true
+  },
+  "implementation": {
+    "runner_bytes": 60634,
+    "runner_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_causal_probe.py",
+    "runner_sha256": "e7385827f10e9430462b0a866ec2f817d4aacab6ef5f3b148b2e79bd5d7375c8"
+  },
+  "protocol": {
+    "decision_budget_per_episode": 160,
+    "deterministic": true,
+    "episode_count_per_arm": 8,
+    "physical_budget_per_episode": 160,
+    "reuse_readiness_provider": true,
+    "single_model_load": true,
+    "teacher_forced_decision_budget_per_episode": 160,
+    "teacher_forced_episode_count": 8,
+    "teacher_forced_physical_budget_per_episode": 160
+  },
+  "readiness_binding": {
+    "candidate_bc_ready": 0,
+    "candidate_checkpoint_sha256": "4faa2bc0469fbe39d34a1621b754a1ed719dd49e7611bee29948a6f3e6ea09ce",
+    "candidate_policy_state_sha256": "2452e19181894090b09fb07ead8e40d9bc923f553de47a2b687e74249ca5a518",
+    "readiness_gate_pass": false,
+    "readiness_manifest_canonical_sha256": "d7dbfef254e403be18f2bdc5745fffb4965c2a3a078416b0b1b0313fb336ab62",
+    "readiness_manifest_raw_sha256": "db090197cbfd038152d5d11d51535e5cfe99841b899e6f546666b85412c9e490",
+    "readiness_manifest_relative_path": "integrations/rlinf_v03/streamvln_p8_successor_bc_readiness_manifest.json",
+    "readiness_receipt_file_sha256": "ab38275bfada10eee09eee0318a3ba09b4ba69229d61f338b2e6a5d12645ecc1",
+    "readiness_receipt_sha256": "3454fe772d1426881f9cf36abb0c019cfeeef385b13c7b0b00c04e4a0fe15ffc"
+  },
+  "schema_name": "streamvln_p8_successor_causal_probe_manifest",
+  "schema_version": 1,
+  "source_contract": {
+    "commits": {
+      "habitat_sim": "f179b584bcd713c5a2a998132211e2cae881d6d1",
+      "rlinf": "0505431899574619da86f551bad70b71e0ea2177",
+      "streamvln": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc"
+    },
+    "original_streamvln_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "split_contract": {
+    "allowed_splits": [
+      "train"
+    ],
+    "train_only": true,
+    "val_seen_reads": 0,
+    "val_unseen_reads": 0
+  },
+  "stage": "P8 successor train-only causal feature probe",
+  "thresholds": {
+    "arm_recovered": {
+      "episode_count": 8,
+      "forward_nonstop_fraction_min": 0.295,
+      "root_recovery_unavailable_count_max": 0,
+      "success_count_min": 4,
+      "successful_stop_count_min": 1
+    },
+    "teacher_route": {
+      "premature_stop_count_max": 1,
+      "route_nonstop_bal_acc_min": 0.65,
+      "stop_recall_min": 0.5
+    },
+    "teacher_sample_min": {
+      "keep_original": 8,
+      "stop": 4,
+      "waypoint": 8
+    },
+    "teacher_waypoint": {
+      "bearing_abs_error_median_deg_max": 15.0,
+      "bearing_abs_error_p90_deg_max": 45.0,
+      "first_action_agreement_min": 0.65,
+      "percentile_method": "nearest_rank",
+      "vector_l2_median_m_max": 0.25
+    }
+  }
+}

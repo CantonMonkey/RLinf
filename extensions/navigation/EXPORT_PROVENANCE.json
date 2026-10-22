@@ -1,5 +1,7 @@
 {
   "schema_version": 1,
+  "scope": "initial_import_snapshot_not_current_worktree",
+  "export_commit": "3f02d5d64a34c0186537d9691b54cdb13e4df8b6",
   "source_commit": "b9c2af0ef32f41f6065896ee5d6dbf4e494ce169",
   "source_branch": "navrlt-lightnav-v1",
   "source_directory": "rlinf-nav",

@@ -1,17 +1,18 @@
+# Copyright 2026 CantonMonkey.
+# SPDX-License-Identifier: Apache-2.0
+
 from __future__ import annotations
 
 import argparse
 import copy
 import hashlib
 import json
-from pathlib import Path
-import shutil
 import sys
 import tempfile
-from types import SimpleNamespace
 import unittest
-from unittest import mock
-
+from contextlib import ExitStack
+from pathlib import Path
+from types import SimpleNamespace
 
 RLINF_NAV_ROOT = Path(__file__).resolve().parents[1]
 ROOT = RLINF_NAV_ROOT.parent
@@ -19,12 +20,16 @@ MODULE_DIR = RLINF_NAV_ROOT / "integrations" / "rlinf_v03"
 if str(MODULE_DIR) not in sys.path:
     sys.path.insert(0, str(MODULE_DIR))
 
-import run_streamvln_p8_successor_feature_v2_ab as module
+import run_streamvln_p8_successor_feature_v2_ab as module  # noqa: E402
+from p8_public_fixture import (  # noqa: E402
+    FIXTURES,
+    public_p8_contract,
+    stage_fixture_implementation,
+)
 
-
-MANIFEST_PATH = MODULE_DIR / "streamvln_p8_successor_feature_v2_ab_manifest.json"
-READINESS_PATH = MODULE_DIR / "streamvln_p8_successor_bc_readiness_manifest.json"
-CAUSAL_PATH = MODULE_DIR / "streamvln_p8_successor_causal_probe_manifest.json"
+MANIFEST_PATH = FIXTURES / "feature_v2_ab.json"
+READINESS_PATH = FIXTURES / "readiness.json"
+CAUSAL_PATH = FIXTURES / "causal.json"
 
 
 def load_contract():
@@ -40,8 +45,12 @@ def load_contract():
 
 
 def nav(
-    *, success: int, successful_stop: int = 1, forward: int = 30,
-    left: int = 35, right: int = 35,
+    *,
+    success: int,
+    successful_stop: int = 1,
+    forward: int = 30,
+    left: int = 35,
+    right: int = 35,
 ):
     return {
         "episode_count": 8,
@@ -88,21 +97,19 @@ def adjudication_payload():
     keep = nav(success=5)
     v1 = nav(success=2)
     v2 = nav(success=4)
-    v2.update(
-        {
-            "accepted_override_count": 4,
-            "accepted_override_episode_count": 2,
-            "successful_episode_with_accepted_override_count": 1,
-            "recover": {
-                "eligible_blocked_count": 1,
-                "covered_next_decision_count": 1,
-                "recover_parent_count": 1,
-                "alignment_miss_count": 0,
-                "root_recovery_unavailable_count": 0,
-                "root_keep_fallback_count": 1,
-            },
-        }
-    )
+    v2.update({
+        "accepted_override_count": 4,
+        "accepted_override_episode_count": 2,
+        "successful_episode_with_accepted_override_count": 1,
+        "recover": {
+            "eligible_blocked_count": 1,
+            "covered_next_decision_count": 1,
+            "recover_parent_count": 1,
+            "alignment_miss_count": 0,
+            "root_recovery_unavailable_count": 0,
+            "root_keep_fallback_count": 1,
+        },
+    })
     return {
         "teacher_forced": {
             module.ARM_V1: {"metrics": teacher_metrics(balanced=0.55, agreement=0.55)},
@@ -127,7 +134,12 @@ class FakeABProvider:
 
 
 class FeatureV2ABTests(unittest.TestCase):
-    def test_manifest_freezes_authorized_matched_protocol_and_full_closure(self):
+    def setUp(self):
+        stack = ExitStack()
+        self.addCleanup(stack.close)
+        stack.enter_context(public_p8_contract(module))
+
+    def test_fixture_freezes_matched_protocol_and_full_closure(self):
         manifest, contract = load_contract()
         self.assertEqual(len(contract["train"]), 8)
         self.assertEqual(len(contract["development"]), 8)
@@ -142,9 +154,7 @@ class FeatureV2ABTests(unittest.TestCase):
         self.assertTrue(manifest["lineage"]["causal_authorize_feature_v2"])
 
         changed = copy.deepcopy(manifest)
-        changed["thresholds"]["teacher_route"][
-            "feature_v2_delta_vs_v1_min"
-        ] = 0.09
+        changed["thresholds"]["teacher_route"]["feature_v2_delta_vs_v1_min"] = 0.09
         with self.assertRaises(module.ProtocolError):
             module.validate_feature_v2_ab_manifest(
                 changed,
@@ -198,9 +208,7 @@ class FeatureV2ABTests(unittest.TestCase):
         )
 
         failed = copy.deepcopy(payload)
-        failed["navigation"][module.ARM_V2]["recover"][
-            "alignment_miss_count"
-        ] = 1
+        failed["navigation"][module.ARM_V2]["recover"]["alignment_miss_count"] = 1
         gate = module.adjudicate_feature_v2_ab(
             failed, thresholds=module.EXPECTED_THRESHOLDS
         )
@@ -211,21 +219,15 @@ class FeatureV2ABTests(unittest.TestCase):
         manifest, _contract = load_contract()
         with tempfile.TemporaryDirectory() as directory:
             deploy_root = Path(directory)
-            for row in manifest["implementation"]["files"]:
-                source_relative = Path(row["source_relative_path"])
-                source_relative = source_relative.relative_to("rlinf-nav")
-                source = (RLINF_NAV_ROOT / source_relative).resolve(strict=True)
-                self.assertTrue(source.is_relative_to(RLINF_NAV_ROOT))
-                target = deploy_root / row["deployment_relative_path"]
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(source, target)
+            stage_fixture_implementation(manifest, deploy_root)
             self.assertEqual(
                 len(module.verify_implementation(manifest, rlinf_root=deploy_root)),
                 len(module.REQUIRED_IMPLEMENTATION_DEPLOYMENTS),
             )
-            target = deploy_root / manifest["implementation"]["files"][0][
-                "deployment_relative_path"
-            ]
+            target = (
+                deploy_root
+                / manifest["implementation"]["files"][0]["deployment_relative_path"]
+            )
             target.write_bytes(target.read_bytes() + b"drift")
             with self.assertRaises(module.ProtocolError):
                 module.verify_implementation(manifest, rlinf_root=deploy_root)
@@ -365,110 +367,103 @@ class FeatureV2ABTests(unittest.TestCase):
                     "file_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
                 }
             episodes = [
-                {"episode_id": row["episode_id"]}
-                for row in contract["development"]
+                {"episode_id": row["episode_id"]} for row in contract["development"]
             ]
             payload = adjudication_payload()
-            payload.update(
-                {
-                    "candidates": candidates,
-                    "candidate_bc_ready": {
-                        module.ARM_V1: 0,
-                        module.ARM_V2: 0,
-                    },
-                    "paired_dataset_sha256": "a" * 64,
-                    "train_label_counts": {
-                        "stop": 4,
-                        "keep_original": 8,
-                        "waypoint": 8,
-                    },
-                    "split_read_counts": {
-                        "train": 48,
-                        "val_seen": 0,
-                        "val_unseen": 0,
-                    },
-                    "training": {
-                        arm: {
-                            "warmup": {
-                                "updates": 500,
-                                "dataset_sha256": "b" * 64,
-                            },
-                            "final": {
-                                "updates": 1500,
-                                "dataset_sha256": "a" * 64,
-                            },
-                        }
-                        for arm in module.ARMS
-                    },
-                    "pretraining_feature_guard": {
-                        "passed": True,
-                        "optimizer_steps_before_guard": 0,
-                        "adapter_feature_v2_opt_in": True,
-                        "default_adapter_feature_v2_opt_in": False,
-                        "feature_v1_dim": 7173,
-                        "feature_v2_dim": 3604,
-                        "feature_v2_schema_version": 2,
-                        "same_frame_ref": True,
-                        "same_physical_step": True,
-                        "same_reset_ordinal": True,
-                        "same_episode_generation": True,
-                        "both_fresh": True,
-                        "feature_v2_schema_sha256": (
-                            module.EXPECTED_FEATURE_SCHEMA_DIGESTS[2]
-                        ),
-                        "contextual_hidden_sha256": "c" * 64,
-                    },
-                    "feature_pair_counts": {
-                        "decision_states": 20,
-                        "fresh_context_states": 10,
-                        "stale_context_states": 10,
-                        "v1_latch_updates": 10,
-                    },
-                    "value_head_frozen": True,
-                    "guards": {
-                        "model_load_count": 1,
-                        "single_process": True,
-                        "train_only": True,
-                        "optimizer_steps_per_arm": 2000,
-                        "optimizer_steps_total": 4000,
-                        "ppo_updates": 0,
-                        "promotion_attempts": 0,
-                        "retune_attempts": 0,
-                    },
-                    "collection": {},
-                    "episodes": {
-                        "matched_keep": copy.deepcopy(episodes),
-                        module.ARM_V1: copy.deepcopy(episodes),
-                        module.ARM_V2: copy.deepcopy(episodes),
-                    },
-                }
-            )
-            for arm in module.ARMS:
-                payload["teacher_forced"][arm]["episodes"] = copy.deepcopy(
-                    episodes
-                )
-                payload["navigation"][arm].update(
-                    {
-                        "accepted_override_count": (
-                            4 if arm == module.ARM_V2 else 0
-                        ),
-                        "accepted_override_episode_count": (
-                            2 if arm == module.ARM_V2 else 0
-                        ),
-                        "successful_episode_with_accepted_override_count": (
-                            1 if arm == module.ARM_V2 else 0
-                        ),
-                        "recover": {
-                            "eligible_blocked_count": 0,
-                            "covered_next_decision_count": 0,
-                            "recover_parent_count": 0,
-                            "alignment_miss_count": 0,
-                            "root_recovery_unavailable_count": 0,
-                            "root_keep_fallback_count": 0,
+            payload.update({
+                "candidates": candidates,
+                "candidate_bc_ready": {
+                    module.ARM_V1: 0,
+                    module.ARM_V2: 0,
+                },
+                "paired_dataset_sha256": "a" * 64,
+                "train_label_counts": {
+                    "stop": 4,
+                    "keep_original": 8,
+                    "waypoint": 8,
+                },
+                "split_read_counts": {
+                    "train": 48,
+                    "val_seen": 0,
+                    "val_unseen": 0,
+                },
+                "training": {
+                    arm: {
+                        "warmup": {
+                            "updates": 500,
+                            "dataset_sha256": "b" * 64,
+                        },
+                        "final": {
+                            "updates": 1500,
+                            "dataset_sha256": "a" * 64,
                         },
                     }
-                )
+                    for arm in module.ARMS
+                },
+                "pretraining_feature_guard": {
+                    "passed": True,
+                    "optimizer_steps_before_guard": 0,
+                    "adapter_feature_v2_opt_in": True,
+                    "default_adapter_feature_v2_opt_in": False,
+                    "feature_v1_dim": 7173,
+                    "feature_v2_dim": 3604,
+                    "feature_v2_schema_version": 2,
+                    "same_frame_ref": True,
+                    "same_physical_step": True,
+                    "same_reset_ordinal": True,
+                    "same_episode_generation": True,
+                    "both_fresh": True,
+                    "feature_v2_schema_sha256": (
+                        module.EXPECTED_FEATURE_SCHEMA_DIGESTS[2]
+                    ),
+                    "contextual_hidden_sha256": "c" * 64,
+                },
+                "feature_pair_counts": {
+                    "decision_states": 20,
+                    "fresh_context_states": 10,
+                    "stale_context_states": 10,
+                    "v1_latch_updates": 10,
+                },
+                "value_head_frozen": True,
+                "guards": {
+                    "model_load_count": 1,
+                    "single_process": True,
+                    "train_only": True,
+                    "optimizer_steps_per_arm": 2000,
+                    "optimizer_steps_total": 4000,
+                    "ppo_updates": 0,
+                    "promotion_attempts": 0,
+                    "retune_attempts": 0,
+                },
+                "collection": {},
+                "episodes": {
+                    "matched_keep": copy.deepcopy(episodes),
+                    module.ARM_V1: copy.deepcopy(episodes),
+                    module.ARM_V2: copy.deepcopy(episodes),
+                },
+            })
+            for arm in module.ARMS:
+                payload["teacher_forced"][arm]["episodes"] = copy.deepcopy(episodes)
+                payload["navigation"][arm].update({
+                    "accepted_override_count": (4 if arm == module.ARM_V2 else 0),
+                    "accepted_override_episode_count": (
+                        2 if arm == module.ARM_V2 else 0
+                    ),
+                    "successful_episode_with_accepted_override_count": (
+                        1 if arm == module.ARM_V2 else 0
+                    ),
+                    "recover": {
+                        "eligible_blocked_count": 0,
+                        "covered_next_decision_count": 0,
+                        "recover_parent_count": 0,
+                        "alignment_miss_count": 0,
+                        "root_recovery_unavailable_count": 0,
+                        "root_keep_fallback_count": 0,
+                    },
+                })
             output = base / "receipt.json"
+            deploy_root = base / "deployment"
+            stage_fixture_implementation(manifest, deploy_root)
             args = argparse.Namespace(
                 stage="feature_v2_ab",
                 split="train",
@@ -477,7 +472,7 @@ class FeatureV2ABTests(unittest.TestCase):
                 causal_manifest=CAUSAL_PATH,
                 causal_receipt=base / "unused-causal.json",
                 release_manifest=base / "unused-release.json",
-                rlinf_root=RLINF_NAV_ROOT,
+                rlinf_root=deploy_root,
                 source_root=base / "unused-source",
                 checkpoint=base / "unused-checkpoint",
                 tokenizer=base / "unused-tokenizer",
@@ -487,16 +482,11 @@ class FeatureV2ABTests(unittest.TestCase):
                 output=output,
             )
             provider = FakeABProvider(payload)
-            with mock.patch.object(
-                module,
-                "verify_implementation",
-                return_value=manifest["implementation"]["files"],
-            ):
-                receipt = module.run(
-                    args,
-                    preflight_provider=lambda *_args: {"status": "pass"},
-                    ab_provider=provider,
-                )
+            receipt = module.run(
+                args,
+                preflight_provider=lambda *_args: {"status": "pass"},
+                ab_provider=provider,
+            )
             self.assertEqual(provider.calls, 1)
             self.assertTrue(receipt["gate_pass"])
             self.assertIsNone(receipt["promotion"])

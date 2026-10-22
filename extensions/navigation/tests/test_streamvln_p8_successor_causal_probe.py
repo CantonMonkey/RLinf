@@ -1,12 +1,17 @@
+# Copyright 2026 CantonMonkey.
+# SPDX-License-Identifier: Apache-2.0
+
 import argparse
 import copy
 import importlib.util
 import json
 import math
-from pathlib import Path
 import tempfile
 import unittest
+from contextlib import ExitStack
+from pathlib import Path
 
+from p8_public_fixture import FIXTURES, public_causal_contract
 
 MODULE_DIR = Path(__file__).resolve().parents[1] / "integrations" / "rlinf_v03"
 SPEC = importlib.util.spec_from_file_location(
@@ -15,10 +20,8 @@ SPEC = importlib.util.spec_from_file_location(
 )
 PROBE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PROBE)
-PROBE_MANIFEST = MODULE_DIR / "streamvln_p8_successor_causal_probe_manifest.json"
-READINESS_MANIFEST = (
-    MODULE_DIR / "streamvln_p8_successor_bc_readiness_manifest.json"
-)
+PROBE_MANIFEST = FIXTURES / "causal.json"
+READINESS_MANIFEST = FIXTURES / "readiness.json"
 
 
 def fake_navigation():
@@ -52,17 +55,13 @@ def fake_teacher():
 
 
 def fake_payload(development):
-    episodes = [
-        {"episode_id": row["episode_id"]} for row in development
-    ]
+    episodes = [{"episode_id": row["episode_id"]} for row in development]
     return {
         "candidate_checkpoint_sha256": PROBE.EXPECTED_CANDIDATE_SHA256,
         "candidate_policy_state_sha256": PROBE.EXPECTED_POLICY_STATE_SHA256,
         "teacher_forced": {
             "metrics": fake_teacher(),
-            "episodes": [
-                {"episode_id": row["episode_id"]} for row in development
-            ],
+            "episodes": [{"episode_id": row["episode_id"]} for row in development],
         },
         "arms": {
             arm: {
@@ -90,6 +89,11 @@ def fake_payload(development):
 
 
 class CausalProbeContractTests(unittest.TestCase):
+    def setUp(self):
+        stack = ExitStack()
+        self.addCleanup(stack.close)
+        stack.enter_context(public_causal_contract(PROBE))
+
     @classmethod
     def setUpClass(cls):
         cls.probe_manifest = json.loads(PROBE_MANIFEST.read_text(encoding="utf-8"))
@@ -122,9 +126,7 @@ class CausalProbeContractTests(unittest.TestCase):
             self.probe_manifest, self.readiness_manifest
         )
         self.assertEqual(len(contract["development"]), 8)
-        self.assertEqual(
-            len({row["scene"] for row in contract["development"]}), 8
-        )
+        self.assertEqual(len({row["scene"] for row in contract["development"]}), 8)
         self.assertEqual(contract["protocol"]["decision_budget_per_episode"], 160)
         self.assertEqual(set(self.probe_manifest["arms"]), set(PROBE.ARMS))
         self.assertFalse(self.probe_manifest["claim_boundary"]["training"])
@@ -136,9 +138,7 @@ class CausalProbeContractTests(unittest.TestCase):
         with self.assertRaisesRegex(PROBE.ProtocolError, "differ"):
             PROBE.validate_probe_manifest(changed, self.readiness_manifest)
         changed = copy.deepcopy(self.probe_manifest)
-        changed["arms"][PROBE.ARM_ROUTE]["waypoint_source_when_waypoint"] = (
-            "candidate"
-        )
+        changed["arms"][PROBE.ARM_ROUTE]["waypoint_source_when_waypoint"] = "candidate"
         with self.assertRaisesRegex(PROBE.ProtocolError, "arms drifted"):
             PROBE.validate_probe_manifest(changed, self.readiness_manifest)
 
@@ -210,23 +210,15 @@ class CausalProbeContractTests(unittest.TestCase):
         self.assertEqual(summary["stop"]["false_positive"], 1)
         self.assertEqual(summary["stop"]["false_negative"], 1)
         self.assertEqual(summary["waypoint"]["comparison_count"], 2)
-        self.assertAlmostEqual(
-            summary["waypoint"]["mean_bearing_abs_error_deg"], 45.0
-        )
+        self.assertAlmostEqual(summary["waypoint"]["mean_bearing_abs_error_deg"], 45.0)
         self.assertEqual(
             summary["waypoint"]["compiled_first_action_confusion"]["FORWARD"]["LEFT"],
             1,
         )
-        self.assertEqual(
-            summary["waypoint"]["predicted_zero_forward_macro_count"], 1
-        )
+        self.assertEqual(summary["waypoint"]["predicted_zero_forward_macro_count"], 1)
         self.assertEqual(summary["route_support"]["stop"], 1)
-        self.assertAlmostEqual(
-            summary["waypoint"]["first_action_agreement"], 0.5
-        )
-        self.assertAlmostEqual(
-            summary["waypoint"]["median_vector_l2_m"], 0.75
-        )
+        self.assertAlmostEqual(summary["waypoint"]["first_action_agreement"], 0.5)
+        self.assertAlmostEqual(summary["waypoint"]["median_vector_l2_m"], 0.75)
         self.assertEqual(
             summary["route_arm_true_stop_predicted_waypoint_fallback"][
                 "true_stop_predicted_waypoint_candidate_fallback_count"
@@ -234,9 +226,7 @@ class CausalProbeContractTests(unittest.TestCase):
             1,
         )
         self.assertFalse(
-            summary["route_arm_true_stop_predicted_waypoint_fallback"][
-                "is_oracle"
-            ]
+            summary["route_arm_true_stop_predicted_waypoint_fallback"]["is_oracle"]
         )
 
     def test_route_arm_true_stop_waypoint_uses_candidate_not_fake_oracle(self):
@@ -253,9 +243,7 @@ class CausalProbeContractTests(unittest.TestCase):
             selected["selected_waypoint_source"],
             "candidate_deterministic_mean_true_stop_fallback",
         )
-        self.assertTrue(
-            selected["true_stop_predicted_waypoint_candidate_fallback"]
-        )
+        self.assertTrue(selected["true_stop_predicted_waypoint_candidate_fallback"])
 
         selected = PROBE._select_hybrid_execution(
             arm=PROBE.ARM_ROUTE,
@@ -269,9 +257,7 @@ class CausalProbeContractTests(unittest.TestCase):
             selected["selected_waypoint_source"],
             "train_shortest_path_expert",
         )
-        self.assertFalse(
-            selected["true_stop_predicted_waypoint_candidate_fallback"]
-        )
+        self.assertFalse(selected["true_stop_predicted_waypoint_candidate_fallback"])
 
     def test_frozen_threshold_boundaries_are_inclusive(self):
         contract = PROBE.validate_probe_manifest(
@@ -359,11 +345,7 @@ class CausalProbeContractTests(unittest.TestCase):
         )
         self.assertFalse(below_boundary["recovered"])
         self.assertEqual(
-            {
-                name
-                for name, passed in below_boundary["checks"].items()
-                if not passed
-            },
+            {name for name, passed in below_boundary["checks"].items() if not passed},
             {"forward_nonstop_fraction"},
         )
 
@@ -475,9 +457,7 @@ class CausalProbeContractTests(unittest.TestCase):
                 / "run_streamvln_p8_successor_causal_probe.py"
             )
             copied.parent.mkdir(parents=True)
-            copied.write_bytes(
-                (MODULE_DIR / copied.name).read_bytes() + b"\n# drift\n"
-            )
+            copied.write_bytes((MODULE_DIR / copied.name).read_bytes() + b"\n# drift\n")
             with self.assertRaisesRegex(PROBE.ProtocolError, "bytes/hash drifted"):
                 PROBE.verify_probe_implementation(
                     self.probe_manifest, runner_path=copied
@@ -518,13 +498,9 @@ class CausalProbeContractTests(unittest.TestCase):
             self.assertFalse(result["claim_boundary"]["training"])
             self.assertFalse(result["claim_boundary"]["validation_split_access"])
             self.assertFalse(result["authorize_feature_v2"])
+            self.assertTrue(result["result"]["arms"][PROBE.ARM_ROUTE]["recovered"])
             self.assertTrue(
-                result["result"]["arms"][PROBE.ARM_ROUTE]["recovered"]
-            )
-            self.assertTrue(
-                result["result"]["teacher_forced"]["judgement"][
-                    "sample_sufficient"
-                ]
+                result["result"]["teacher_forced"]["judgement"]["sample_sufficient"]
             )
             on_disk = json.loads(args.output.read_text(encoding="utf-8"))
             self.assertEqual(on_disk, result)
