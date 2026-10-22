@@ -1,5 +1,7 @@
 # CantonMonkey navigation development
 
+项目介绍、架构与快速开始：**[RLinf-VLN README](README_VLN.md)**。
+
 This branch adds the navigation extension under
 [`extensions/navigation`](extensions/navigation/README.md).
 

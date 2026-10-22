@@ -1,5 +1,8 @@
-> **CantonMonkey navigation branch:** see [NAVIGATION.md](NAVIGATION.md) for the
-> imported navigation extension, source provenance and deployment instructions.
+> **RLinf-VLN · CantonMonkey 导航分支**
+>
+> 视觉语言导航的仿真、采样与强化学习工具链。
+> **[项目介绍与快速开始 → README_VLN.md](README_VLN.md)** ·
+> [Navigation extension](extensions/navigation/README.md) · [源码来源](NAVIGATION.md)
 
 <div align="center">
   <img src="https://github.com/RLinf/misc/raw/main/pic/logo_white.svg" alt="RLinf-logo" width="600"/>

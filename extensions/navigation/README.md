@@ -1,5 +1,7 @@
 # Navigation extension
 
+中文项目介绍、架构与使用流程：**[RLinf-VLN README](../../README_VLN.md)**。
+
 Navigation development for the CantonMonkey RLinf fork. This directory contains
 413 files imported from the committed `rlinf-nav/` source at
 `b9c2af0ef32f41f6065896ee5d6dbf4e494ce169` (`navrlt-lightnav-v1`).
