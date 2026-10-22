@@ -1,0 +1,26 @@
+# Full 500-step R2R horizon for one scene-disjoint val_unseen episode.
+# Supply matching runner.resume_dir and runner.ckpt_path at launch.
+defaults:
+  - vln_r2r_ppo_smoke
+  - _self_
+
+runner:
+  only_eval: true
+  resume_dir: null
+  ckpt_path: null
+  logger:
+    experiment_name: vln-r2r-val-unseen-630
+
+rollout:
+  model: ${actor.model}
+
+env:
+  eval:
+    rollout_epoch: 1
+    max_episode_steps: 500
+    max_steps_per_rollout_epoch: 500
+    dataset_split: val_unseen
+    episode_index: 630
+    video_cfg:
+      save_video: true
+      fps: 6

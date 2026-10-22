@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "stage": "G7.18 train-only unbiased learning-signal and short-behavior smoke",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "predecessor": {
+    "stage": "G7.17 bounded high-level RL plumbing smoke",
+    "accepted_result_sha256": "143303650dca8c2832386a516c613e208638f6967a87084654bb1a9b55ea09fd",
+    "review_trace": ".aris/traces/result-to-claim/2026-09-27_run12"
+  },
+  "policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh",
+    "navigable",
+    "oracle_action",
+    "oracle_waypoint",
+    "shortest_path",
+    "geodesic_distance",
+    "distance_to_goal",
+    "future_collision",
+    "future_outcome",
+    "severity_label",
+    "success",
+    "spl"
+  ],
+  "protocol": {
+    "split": "train",
+    "collection_scene_specs": [
+      {"index": 70, "episode_id": "71", "scene": "i5noydFURQK"},
+      {"index": 3944, "episode_id": "3954", "scene": "e9zR4mvMWw7"},
+      {"index": 5052, "episode_id": "5062", "scene": "vyrNrziPKCB"},
+      {"index": 8228, "episode_id": "8241", "scene": "VFuaQ6m2Qom"}
+    ],
+    "behavior_scene_specs": [
+      {"index": 6384, "episode_id": "6394", "scene": "kEZ7cmS4wCh"},
+      {"index": 10458, "episode_id": "10477", "scene": "dhjEzFoUFzH"},
+      {"index": 1743, "episode_id": "1747", "scene": "GdvgFV5R1Z5"},
+      {"index": 7270, "episode_id": "7280", "scene": "JF19kD82Mey"}
+    ],
+    "sampling": {
+      "method": "one ordinary stochastic policy sample per reached decision",
+      "seed_domain": "sha256(base_seed, g718, phase, episode_id, decision_index)",
+      "sample_calls_per_decision": 1,
+      "target_mode_scan": false,
+      "mode_filter_or_resample": false,
+      "recovery_override": false
+    },
+    "max_decisions_per_episode": 3,
+    "max_primitives_per_episode": 12,
+    "behavior_control": {
+      "control": "initial policy with zero optimizer updates",
+      "treatment": "same model after the fixed PPO updates",
+      "matched_fields": ["scene", "episode", "reset", "initial_observation", "sampling_seed_schedule", "primitive_budget", "executor"]
+    },
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "learning_rate": 0.00001,
+    "value_learning_rate": 0.00001,
+    "ppo_full_batch_updates": 2,
+    "preupdate_ratio_max_deviation": 0.03,
+    "postupdate_ratio_max_deviation": 0.5,
+    "postupdate_distribution_kl_max": 0.1,
+    "postupdate_functional_change_min": 1e-8,
+    "behavior_improvement_required": false,
+    "checkpoint_selection": false,
+    "val_unseen_episode_count": 0
+  },
+  "required_reports": [
+    "reward_advantage_return_distribution",
+    "realized_path_m",
+    "collisions_and_blocked_forwards",
+    "stop_termination_and_timeout",
+    "recover_frequency",
+    "primitive_action_distribution",
+    "high_level_mode_distribution",
+    "paired_before_after_behavior"
+  ],
+  "gates": {
+    "collection_and_behavior_scenes_disjoint": true,
+    "ordinary_sampling_exactly_once_per_reached_decision": true,
+    "matched_no_update_control_has_zero_parameter_change": true,
+    "initial_behavior_reset_and_seed_schedule_match_treatment": true,
+    "causal_executor_feedback_and_history_only_topology": true,
+    "reward_bootstrap_and_episode_local_variable_duration_gae": true,
+    "preupdate_ratio_near_one": true,
+    "finite_nonzero_actor_and_value_gradients": true,
+    "exact_fixed_update_count": true,
+    "postupdate_ratio_and_distribution_kl_bounded": true,
+    "postupdate_distribution_change_measurable": true,
+    "only_high_level_parameters_change": true,
+    "frozen_parameters_and_collection_inputs_unchanged": true,
+    "all_required_behavior_reports_present": true,
+    "no_checkpoint_selection": true,
+    "val_unseen_episode_count": 0
+  },
+  "model_load": true,
+  "rl_update": true,
+  "navigation_evaluation": false,
+  "controller_comparison": false,
+  "robot_execution": false,
+  "g8_ready": false
+}

@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "rule": "identical fixed G4/G5 scene-disjoint train and val_unseen episodes; train-only oracle and labels; val_unseen is never used for training, tuning, or checkpoint selection",
+    "train_seed": 20260926,
+    "val_unseen_seed": 20260927
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "g4_frozen_anchor": {
+    "sha256": "06af75cdf0870d1f9af1ecd16a98ec3bbc7aefe22bbc9b899159c47b4b28f31f",
+    "role": "external original-StreamVLN action-space anchor; executor-unmatched to G5"
+  },
+  "train": [
+    {
+      "index": 70,
+      "episode_id": "71",
+      "scene": "i5noydFURQK",
+      "source_geodesic_m": 4.938568592071533
+    },
+    {
+      "index": 3944,
+      "episode_id": "3954",
+      "scene": "e9zR4mvMWw7",
+      "source_geodesic_m": 10.62592887878418
+    },
+    {
+      "index": 5052,
+      "episode_id": "5062",
+      "scene": "vyrNrziPKCB",
+      "source_geodesic_m": 5.103242874145508
+    },
+    {
+      "index": 8228,
+      "episode_id": "8241",
+      "scene": "VFuaQ6m2Qom",
+      "source_geodesic_m": 7.610518932342529
+    },
+    {
+      "index": 6384,
+      "episode_id": "6394",
+      "scene": "kEZ7cmS4wCh",
+      "source_geodesic_m": 7.6513776779174805
+    },
+    {
+      "index": 10458,
+      "episode_id": "10477",
+      "scene": "dhjEzFoUFzH",
+      "source_geodesic_m": 10.186869621276855
+    },
+    {
+      "index": 1743,
+      "episode_id": "1747",
+      "scene": "GdvgFV5R1Z5",
+      "source_geodesic_m": 6.556042671203613
+    },
+    {
+      "index": 7270,
+      "episode_id": "7280",
+      "scene": "JF19kD82Mey",
+      "source_geodesic_m": 6.167070388793945
+    }
+  ],
+  "val_unseen": [
+    {
+      "index": 526,
+      "episode_id": "527",
+      "scene": "EU6Fwq7SyZv",
+      "source_geodesic_m": 5.682068347930908
+    },
+    {
+      "index": 1582,
+      "episode_id": "1583",
+      "scene": "pLe4wQe7qrG",
+      "source_geodesic_m": 7.765632152557373
+    },
+    {
+      "index": 1143,
+      "episode_id": "1144",
+      "scene": "x8F5xyUWy9e",
+      "source_geodesic_m": 7.653949737548828
+    },
+    {
+      "index": 1082,
+      "episode_id": "1083",
+      "scene": "TbHJrupSAjP",
+      "source_geodesic_m": 8.459192276000977
+    },
+    {
+      "index": 144,
+      "episode_id": "145",
+      "scene": "zsNo4HB9uLZ",
+      "source_geodesic_m": 7.243781566619873
+    },
+    {
+      "index": 396,
+      "episode_id": "397",
+      "scene": "Z6MFQCViBuw",
+      "source_geodesic_m": 9.98071002960205
+    },
+    {
+      "index": 1498,
+      "episode_id": "1499",
+      "scene": "2azQ1b91cZZ",
+      "source_geodesic_m": 7.761274814605713
+    },
+    {
+      "index": 1233,
+      "episode_id": "1234",
+      "scene": "8194nk5LbLH",
+      "source_geodesic_m": 11.670259475708008
+    }
+  ],
+  "stage": "G7.11 train-only explicit metric-depth footprint-corridor controller gate",
+  "g78_passability_split": {
+    "rule": "first six fixed train scenes for fitting; final two fixed train scenes for threshold-only scene-disjoint development",
+    "train_scenes": [
+      "i5noydFURQK",
+      "e9zR4mvMWw7",
+      "vyrNrziPKCB",
+      "VFuaQ6m2Qom",
+      "kEZ7cmS4wCh",
+      "dhjEzFoUFzH"
+    ],
+    "train_dev_scenes": [
+      "GdvgFV5R1Z5",
+      "JF19kD82Mey"
+    ]
+  },
+  "g79_macro_audit": {
+    "split": "train",
+    "decision_index": 0,
+    "train_dev_scenes": [
+      "GdvgFV5R1Z5",
+      "JF19kD82Mey"
+    ],
+    "episode_indices": [
+      1743,
+      7270
+    ],
+    "candidate_count_per_scene": 32,
+    "excluded_candidate": "macro_p90_d0p5",
+    "repeat_count": 2,
+    "forward_step_m": 0.25,
+    "horizon_forward_steps": 2,
+    "physical_horizon_m": 0.5
+  },
+  "g710_severity_audit": {
+    "split": "train",
+    "train_dev_scenes": [
+      "GdvgFV5R1Z5",
+      "JF19kD82Mey"
+    ],
+    "episode_indices": [
+      1743,
+      7270
+    ],
+    "state_definitions": [
+      {
+        "name": "reset",
+        "transition_actions": []
+      },
+      {
+        "name": "after_fixed_p0_d0p5",
+        "transition_actions": [
+          1,
+          1
+        ]
+      }
+    ],
+    "candidate_count_per_state": 32,
+    "excluded_candidate": "macro_p90_d0p5",
+    "repeat_count": 2,
+    "total_rows": 128,
+    "forward_step_m": 0.25,
+    "clearance_spacing_m": 0.125,
+    "clearance_search_radius_m": 2.0,
+    "severity_thresholds": {
+      "free_endpoint_tolerance_m": 0.05,
+      "free_lateral_tolerance_m": 0.05,
+      "free_realized_ratio": 0.9,
+      "sliding_primitive_deficit_m": 0.05,
+      "severe_endpoint_error_m": 0.25,
+      "severe_lateral_error_m": 0.25,
+      "severe_realized_ratio": 0.5,
+      "severe_min_primitive_progress_m": 0.05
+    },
+    "predictor_gates": {
+      "spearman_min": 0.3,
+      "severe_auroc_min": 0.75,
+      "severe_recall_min": 0.8,
+      "severe_balanced_accuracy_min": 0.7,
+      "grazing_false_positive_rate_max": 0.3
+    }
+  },
+  "g711_geometry_controller": {
+    "split": "train",
+    "train_dev_scenes": [
+      "GdvgFV5R1Z5",
+      "JF19kD82Mey"
+    ],
+    "episode_indices": [
+      1743,
+      7270
+    ],
+    "state_definitions": [
+      {
+        "name": "reset",
+        "transition_actions": []
+      },
+      {
+        "name": "after_fixed_p0_d0p5",
+        "transition_actions": [
+          1,
+          1
+        ]
+      }
+    ],
+    "candidate_count_per_state": 32,
+    "excluded_candidate": "macro_p90_d0p5",
+    "repeat_count": 2,
+    "row_count": 128,
+    "physical_variants": [
+      "open_loop",
+      "endpoint_geometry",
+      "depth_receding",
+      "navmesh_receding_oracle"
+    ],
+    "physical_repeat_count": 1024,
+    "frozen_g78_reference": true,
+    "forward_step_m": 0.25,
+    "turn_angle_degrees": 15.0,
+    "depth_projection": {
+      "height": 64,
+      "width": 64,
+      "hfov_degrees": 90.0,
+      "fx": 32.0,
+      "fy": 32.0,
+      "cx": 31.5,
+      "cy": 31.5,
+      "sensor_height_m": 1.25,
+      "agent_height_m": 1.5,
+      "agent_radius_m": 0.1,
+      "safety_margin_m": 0.02,
+      "corridor_half_width_m": 0.12,
+      "obstacle_min_height_m": 0.05,
+      "obstacle_max_height_m": 1.45,
+      "primitive_brake_distance_m": 0.37,
+      "depth_min_m": 0.0,
+      "depth_max_m": 10.0,
+      "normalize_depth": false
+    },
+    "endpoint_geometry": {
+      "no_sliding_endpoint_tolerance_m": 0.001
+    },
+    "navmesh_receding_oracle": {
+      "no_sliding_endpoint_tolerance_m": 0.001,
+      "sample_spacing_m": 0.125,
+      "minimum_boundary_clearance_m": 0.02
+    },
+    "gates": {
+      "severe_exposure_reduction_min": 0.7,
+      "free_grazing_completion_min": 0.8,
+      "free_grazing_progress_retention_min": 0.9,
+      "overall_forward_primitive_retention_min": 0.5,
+      "maximum_restore_error_m": 1E-06
+    },
+    "g710_anchor": {
+      "result_sha256": "3bdac8e1878a5c19d36de1c0c3924c67f4ba7fc07aef3ab0463d74de37d609f6",
+      "rows_sha256": "c6d24549bb3c113d8887b1565088089fc398431e9e44efcee413e17e7bf62c8a"
+    }
+  }
+}

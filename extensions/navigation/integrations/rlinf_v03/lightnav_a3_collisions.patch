@@ -1,0 +1,14 @@
+diff --git a/habitat_server/lightnav_habitat/vlnce.py b/habitat_server/lightnav_habitat/vlnce.py
+index 035f251..7f199c4 100644
+--- a/habitat_server/lightnav_habitat/vlnce.py
++++ b/habitat_server/lightnav_habitat/vlnce.py
+@@ -64 +64,4 @@ def _inject_nav_measurements(config: Any, success_distance: float) -> None:
+-    from habitat.config.default_structured_configs import MeasurementConfig
++    from habitat.config.default_structured_configs import (
++        CollisionsMeasurementConfig,
++        MeasurementConfig,
++    )
+@@ -75,0 +79,3 @@ def _inject_nav_measurements(config: Any, success_distance: float) -> None:
++    measurements.collisions = OmegaConf.structured(
++        CollisionsMeasurementConfig()
++    )

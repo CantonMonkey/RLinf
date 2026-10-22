@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "stage": "G7.21 preregistered train-only atomic-guard safety-transfer diagnostic",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "predecessor": {
+    "stage": "G7.20 atomic candidate guard",
+    "accepted_local_commit": "8ee7e9101250d802f5c310597aab22bd8f8a786b",
+    "manifest_sha256": "0286ffdcb1a42da579c76eeb6600d4123bb6edb242c1d7ec506836fb7d1a311d",
+    "result_sha256": {
+      "s1": "6e2a14e1cfe1e063ce457974b0bafc78f053dccaa210c2e9cde2e163bd22cc6f",
+      "s2": "8613961e2f6475ce4bafbca007796a2ba8f4f512f5bb912d0b671b457f83974b",
+      "s3": "e22260cb3b103bc5812832cbeabd41a59efb49428bb944bf7d5b26c26b984a8e"
+    },
+    "evidence_recompute_sha256": "e62a3522779f17fb013914a1affb45c557bb64240408d2149a1f5666df382ca8",
+    "claim": "atomic guard correctness accepted; second-update trigger repeatability rejected",
+    "review_trace": ".aris/traces/result-to-claim/2026-09-28_run15"
+  },
+  "selection": {
+    "method": "In seed order and role order decision then audit, sort train episodes by sha256(g721|seed|role|index|episode_id|scene), take the first four while excluding G7.18-G7.20 scenes and enforcing global scene disjointness.",
+    "fields_used": ["index", "episode_id", "scene"],
+    "outcome_or_policy_fields_used": false,
+    "seeds": [2026092811, 2026092812, 2026092813],
+    "episodes_per_role": 4,
+    "role_order": ["decision", "audit"],
+    "global_scene_disjoint": true,
+    "replacement_after_collection": false,
+    "excluded_scenes": [
+      "i5noydFURQK", "e9zR4mvMWw7", "vyrNrziPKCB", "VFuaQ6m2Qom",
+      "kEZ7cmS4wCh", "dhjEzFoUFzH", "GdvgFV5R1Z5", "JF19kD82Mey",
+      "ur6pFq6Qu1A", "cV4RVeZvu5T", "VVfe2KiqLaN", "ULsKaCPVFJR",
+      "aayBHfsNo7d", "82sE5b5pLXE", "PX4nDJXEHrG", "rPc6DW4iMge",
+      "mJXqzFtmKg4", "r1Q1Z4BcV1o", "VzqfbhrpDEA", "B6ByNegPMKs"
+    ]
+  },
+  "policy_observation_keys": [
+    "rgb", "instruction_utf8", "instruction_utf8_mask", "scene_utf8",
+    "scene_utf8_mask", "episode_utf8", "episode_utf8_mask", "env_id",
+    "episode_serial", "episode_step", "episode_start", "previous_actions",
+    "previous_action_mask", "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh", "navigable", "oracle_action", "oracle_waypoint", "shortest_path",
+    "geodesic_distance", "distance_to_goal", "future_collision", "future_outcome",
+    "severity_label", "success", "spl"
+  ],
+  "protocol": {
+    "split": "train",
+    "arms": {
+      "2026092811": {
+        "decision": [
+          {"index": 5398, "episode_id": "5408", "scene": "Uxmj2M2itWa"},
+          {"index": 5483, "episode_id": "5493", "scene": "EDJbREhghzL"},
+          {"index": 1123, "episode_id": "1124", "scene": "1pXnuDYAj8r"},
+          {"index": 7950, "episode_id": "7963", "scene": "D7N2EKCX4Sj"}
+        ],
+        "audit": [
+          {"index": 1546, "episode_id": "1550", "scene": "PuKPg4mmafe"},
+          {"index": 10147, "episode_id": "10166", "scene": "ac26ZMwG7aT"},
+          {"index": 4266, "episode_id": "4276", "scene": "qoiz87JEwZ2"},
+          {"index": 774, "episode_id": "775", "scene": "V2XKFyX4ASd"}
+        ]
+      },
+      "2026092812": {
+        "decision": [
+          {"index": 4628, "episode_id": "4638", "scene": "b8cTxDM8gDG"},
+          {"index": 8953, "episode_id": "8966", "scene": "pRbA3pwrgk9"},
+          {"index": 2800, "episode_id": "2804", "scene": "p5wJjkQkbXX"},
+          {"index": 5217, "episode_id": "5227", "scene": "E9uDoFAP3SH"}
+        ],
+        "audit": [
+          {"index": 169, "episode_id": "170", "scene": "5q7pvUzZiYa"},
+          {"index": 2627, "episode_id": "2631", "scene": "JmbYfDe2QKZ"},
+          {"index": 5487, "episode_id": "5497", "scene": "759xd9YjKW5"},
+          {"index": 8526, "episode_id": "8539", "scene": "sKLMLpTHeUy"}
+        ]
+      },
+      "2026092813": {
+        "decision": [
+          {"index": 8029, "episode_id": "8042", "scene": "S9hNv5qa7GM"},
+          {"index": 1810, "episode_id": "1814", "scene": "r47D5H71a5s"},
+          {"index": 1657, "episode_id": "1661", "scene": "2n8kARJN3HM"},
+          {"index": 7722, "episode_id": "7732", "scene": "uNb9QFRL6hY"}
+        ],
+        "audit": [
+          {"index": 10099, "episode_id": "10118", "scene": "sT4fr6TAbpF"},
+          {"index": 5603, "episode_id": "5613", "scene": "ZMojNkEp431"},
+          {"index": 8827, "episode_id": "8840", "scene": "gTV8FGcVJC9"},
+          {"index": 7, "episode_id": "8", "scene": "7y3sRwLe3Va"}
+        ]
+      }
+    },
+    "sampling": {
+      "method": "one ordinary stochastic policy sample per reached decision",
+      "decision_seed_domain": "existing stable_seed(base_seed, g718, g721_decision, episode_id, decision_index)",
+      "audit_seed_domain": "existing stable_seed(base_seed, g718, g721_audit, episode_id, decision_index)",
+      "sample_calls_per_decision": 1,
+      "target_mode_scan": false,
+      "mode_filter_or_resample": false,
+      "recovery_override": false
+    },
+    "collection_contract": {
+      "max_rows": 12,
+      "min_rows": 8,
+      "insufficient_rows": "protocol_invalid_without_replacement"
+    },
+    "audit_contract": {
+      "max_rows": 12,
+      "min_rows": 8,
+      "collected_at_state_zero": true,
+      "evaluated_once_at_final_accepted_state": true,
+      "may_affect_commit_stop_or_checkpoint": false,
+      "ratio_max_deviation": 0.5,
+      "structured_kl_max": 0.1
+    },
+    "max_decisions_per_episode": 3,
+    "max_primitives_per_episode": 12,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "learning_rate": 0.00001,
+    "value_learning_rate": 0.00001,
+    "preupdate_ratio_max_deviation": 0.03,
+    "postupdate_ratio_max_deviation": 0.5,
+    "postupdate_distribution_kl_max": 0.1,
+    "postupdate_functional_change_min": 0.00000001,
+    "candidate_update_limit": 3,
+    "stop_candidate_loop_after_first_rejection": true,
+    "trigger_index_is_descriptive": true,
+    "accepted_update_count_is_descriptive": true,
+    "continuation_probe": {
+      "generated_before_each_candidate_from_previous_accepted_state": true,
+      "restore_before_candidate_must_be_exact": true,
+      "components": ["python_rng", "numpy_rng", "torch_cpu_rng", "torch_cuda_rng", "fixed_first_decision_replay"],
+      "rejected_candidate_probe_must_equal_reference": true,
+      "restore_after_probe_must_be_exact": true
+    },
+    "optimizer_initial_contract": {
+      "optimizer_class": "AdamW",
+      "state_entry_count": 19,
+      "parameter_group_count": 2,
+      "learning_rates": [0.00001, 0.00001],
+      "state_keys": ["exp_avg", "exp_avg_sq", "step"],
+      "moment_parameter_count": 1003592,
+      "max_abs_exp_avg": 0.0,
+      "max_abs_exp_avg_sq": 0.0,
+      "step_values": [1.0]
+    },
+    "reward_path_collision_and_collection_outcomes_are_descriptive_only": true,
+    "outcome_based_seed_update_threshold_or_checkpoint_selection": false,
+    "behavior_evaluation_episode_count": 0,
+    "val_unseen_episode_count": 0
+  },
+  "decision_rule": {
+    "protocol_valid": "all fixed source, collection, update, atomic-restore, continuation and immutability guards pass",
+    "seed_safety_transfer_member": "protocol valid and final accepted state remains within fixed ratio and KL bounds on the disjoint nonselective audit batch",
+    "stage_safety_transfer_supported": "all three preregistered seeds are protocol valid and audit members",
+    "audit_failure": "report safety-transfer failure without changing the committed state or rerunning the seed",
+    "posthoc_seed_or_trigger_targeting": false
+  },
+  "required_reports": [
+    "decision_and_audit_collection_hash_identity_and_descriptive_metrics",
+    "per_candidate_ratio_kl_gradient_commit_and_complete_state_hashes",
+    "per_rejection_exact_restore_and_continuation_probe_equivalence",
+    "final_disjoint_audit_ratio_and_structured_kl",
+    "trigger_index_and_accepted_update_count_distribution"
+  ],
+  "model_load": true,
+  "rl_update": true,
+  "navigation_evaluation": false,
+  "controller_comparison": false,
+  "robot_execution": false,
+  "g8_ready": false
+}

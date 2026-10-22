@@ -1,0 +1,31 @@
+model_type: streamvln_categorical
+model_path: ""
+policy_setup: streamvln_frozen_categorical
+
+# Deployment paths are explicit environment inputs; the repository does not
+# bind this config to one workstation or one server checkout.
+stream_python: ${oc.env:STREAMVLN_PYTHON}
+stream_source: ${oc.env:STREAMVLN_SOURCE}
+server_script: ${oc.env:STREAMVLN_POLICY_SERVER}
+base_model: ${oc.env:STREAMVLN_BASE_MODEL}
+tokenizer: ${oc.env:STREAMVLN_TOKENIZER}
+vision_tower: ${oc.env:STREAMVLN_VISION_TOWER}
+expected_source_commit: 85cda3bc4574953cb9eee467c4d3448f8ef228f9
+actor_device: ${oc.env:STREAMVLN_DEVICE,cuda:0}
+
+image_size: 64
+instruction_bytes: 512
+scene_bytes: 384
+episode_bytes: 64
+action_dim: 1
+discrete_n_actions: 4
+num_action_chunks: 4
+temperature: 1.0
+context_tokens: 4096
+seed: 20260905
+startup_timeout_s: 300
+request_timeout_s: 180
+precision: "32"
+add_value_head: false
+is_lora: false
+lora_rank: 32

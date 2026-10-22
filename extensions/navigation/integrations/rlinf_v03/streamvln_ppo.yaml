@@ -1,0 +1,30 @@
+model_type: streamvln_ppo
+model_path: ""
+policy_setup: streamvln_ppo_g3
+
+stream_source: ${oc.env:STREAMVLN_SOURCE}
+base_model: ${oc.env:STREAMVLN_BASE_MODEL}
+tokenizer: ${oc.env:STREAMVLN_TOKENIZER}
+vision_tower: ${oc.env:STREAMVLN_VISION_TOWER}
+expected_source_commit: ${oc.env:STREAMVLN_SOURCE_COMMIT}
+adapter_checkpoint: null
+trainable: true
+
+action_dim: 1
+discrete_n_actions: 4
+num_action_chunks: 4
+temperature: 1.0
+context_tokens: 512
+seed: 20260926
+
+# First correctness update: last four Qwen2 decoder layers, q/v only.
+lora_rank: 8
+lora_alpha: 16
+lora_layers: [24, 25, 26, 27]
+lora_targets: [q_proj, v_proj]
+
+precision: "bf16"
+add_value_head: true
+is_lora: false
+# LoRA is created inside streamvln_ppo_policy with exact language-only paths;
+# false disables RLinf's generic broad PEFT wrapper.

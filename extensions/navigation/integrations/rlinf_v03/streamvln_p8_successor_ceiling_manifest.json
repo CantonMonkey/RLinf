@@ -1,0 +1,406 @@
+{
+  "ceiling_run_seed": 2026092901,
+  "claim_boundary": {
+    "does_not_establish_bc_readiness": true,
+    "does_not_establish_rl_benefit": true,
+    "does_not_open_g9": true,
+    "tests_executor_ceiling_and_exact_keep_only": true
+  },
+  "created": "2026-09-29",
+  "dataset": {
+    "episodes": {
+      "expert": [
+        {
+          "episode_id": "560",
+          "index": 559,
+          "scene": "Uxmj2M2itWa"
+        },
+        {
+          "episode_id": "6660",
+          "index": 6650,
+          "scene": "cV4RVeZvu5T"
+        },
+        {
+          "episode_id": "763",
+          "index": 762,
+          "scene": "5LpN3gDmAk7"
+        },
+        {
+          "episode_id": "5484",
+          "index": 5474,
+          "scene": "gTV8FGcVJC9"
+        },
+        {
+          "episode_id": "6595",
+          "index": 6585,
+          "scene": "29hnd4uzFmX"
+        },
+        {
+          "episode_id": "3144",
+          "index": 3137,
+          "scene": "8WUmhLawc2A"
+        },
+        {
+          "episode_id": "7793",
+          "index": 7783,
+          "scene": "vyrNrziPKCB"
+        },
+        {
+          "episode_id": "1371",
+          "index": 1367,
+          "scene": "ac26ZMwG7aT"
+        }
+      ],
+      "keep": [
+        {
+          "episode_id": "560",
+          "index": 559,
+          "scene": "Uxmj2M2itWa"
+        },
+        {
+          "episode_id": "6660",
+          "index": 6650,
+          "scene": "cV4RVeZvu5T"
+        }
+      ]
+    },
+    "role_scene_rule": "distinct within each role; KEEP is the matched first-two subset of expert",
+    "runtime_resampling": false,
+    "train_json_bytes": 1878590,
+    "train_json_path": "/cache/navigation-example/datasets/r2r/train/train.json.gz",
+    "train_json_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea"
+  },
+  "deployment": {
+    "canonical_streamvln_namespace": "rlinf.envs.streamvln",
+    "group": "ma-group",
+    "implementation_files": [
+      {
+        "bytes": 65695,
+        "deployment_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_ceiling.py",
+        "sha256": "8e066334d2e1e78b51fce1cd974252eb67e4d669d9bf9e6078b493a127a87eef",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/run_streamvln_p8_successor_ceiling.py"
+      },
+      {
+        "bytes": 5789,
+        "deployment_relative_path": "rlinf/envs/__init__.py",
+        "sha256": "873b0e3c585e9addb9be9773b3b9593514cd5f5c06e5d9810b0a891b79fe3b3b",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/envs_init_vln.py"
+      },
+      {
+        "bytes": 74,
+        "deployment_relative_path": "rlinf/envs/vln/__init__.py",
+        "sha256": "0d515c331e9d682f843168e58d8c625acc722ed71460fb72df9c39b573ef729f",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/vln_init.py"
+      },
+      {
+        "bytes": 115899,
+        "deployment_relative_path": "rlinf/envs/vln/vln_env.py",
+        "sha256": "9d40cca53d43659c0ddcfc4b8d60892b70cbde41b1d31efc976fb510e9a13e49",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/vln_env.py"
+      },
+      {
+        "bytes": 227,
+        "deployment_relative_path": "rlinf/envs/streamvln/__init__.py",
+        "sha256": "81eaed09c97607badc9388311739e2b48f51e5ebb8b512dd0fc5e377bc326702",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_init.py"
+      },
+      {
+        "bytes": 11642,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_env.py",
+        "sha256": "f9096dc2414f72274649d7aa2a7b142f08fdbeee8e6f1700808a8033147010df",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_env.py"
+      },
+      {
+        "bytes": 13562,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_executor_contract.py",
+        "sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_executor_contract.py"
+      },
+      {
+        "bytes": 13554,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_frame.py",
+        "sha256": "580a90c6f967fdc73d866adece25e5edf937a58dc9cee0647b0aad91e1d7d814",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_frame.py"
+      },
+      {
+        "bytes": 41480,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_keep.py",
+        "sha256": "6886efbc9f738f350e755ec9d29b7b9812871ff14bee6e020cf9c2dc5f281632",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_keep.py"
+      },
+      {
+        "bytes": 18230,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_action.py",
+        "sha256": "8017250f7e1d06bfa948dd401be0b2d09c0bcd093272912be0ae27e929e40795",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_action.py"
+      },
+      {
+        "bytes": 6556,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_executor.py",
+        "sha256": "6f4f41ff1527bb95cb2c86547f694396b74a9abf56f2710973850c20ca6260d1",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_executor.py"
+      },
+      {
+        "bytes": 8523,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_env.py",
+        "sha256": "b18d7304f4f0a00bd6034c808d6b4184726425df7cc641e4fcac1cdf3f16a6c7",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_env.py"
+      },
+      {
+        "bytes": 24292,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_runtime.py",
+        "sha256": "a311c6daf1206b1d0cb1908fbe25507845b3dbcccb713ffe48866a26ef3d3741",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_runtime.py"
+      },
+      {
+        "bytes": 65037,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_adapter.py",
+        "sha256": "63853c51a16fbba0afb54be27017308f0a639d11168e42cef0bc1a86c552aeb6",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_adapter.py"
+      },
+      {
+        "bytes": 16709,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_topology.py",
+        "sha256": "7ab6fc1671dfe19a8a95c6cb9fee2d347b1561adfc261122513b3380443c79a7",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_topology.py"
+      },
+      {
+        "bytes": 31853,
+        "deployment_relative_path": "scripts/habitat_r2r_service.py",
+        "sha256": "0a9b3b986bfa753372051adf90029dd84e039c502ebbfa779f3d63a8e2901cee",
+        "source_relative_path": "rlinf-nav/scripts/habitat_r2r_service.py"
+      },
+      {
+        "bytes": 15630,
+        "deployment_relative_path": "scripts/habitat_r2r_rgb_instruction_smoke.py",
+        "sha256": "4f62a2fb0f213f737d6e6fca68f32dbf824add446a45a383ab7160a8196a10a8",
+        "source_relative_path": "rlinf-nav/scripts/habitat_r2r_rgb_instruction_smoke.py"
+      },
+      {
+        "bytes": 36353,
+        "deployment_relative_path": "P8_RELEASE_ARTIFACT_MANIFEST.json",
+        "sha256": "2a0074e4909c587793aa757d768434e2a88cd1e29cd91c232197dff9860c9bc7",
+        "source_relative_path": "P8_RELEASE_ARTIFACT_MANIFEST.json"
+      }
+    ],
+    "legacy_top_level_module_targets": [],
+    "owner": "navcloud",
+    "require_remote_sha256_readback": true,
+    "transport": "scp -O"
+  },
+  "execution_order": [
+    "expert",
+    "keep_after_expert_pass_only"
+  ],
+  "gates": {
+    "expert": {
+      "episode_count": 8,
+      "max_physical_steps_per_episode": 160,
+      "minimum_successes": 5,
+      "minimum_successful_stops": 1
+    },
+    "keep": {
+      "episode_count": 2,
+      "max_physical_steps_per_episode": 40,
+      "minimum_comparisons_per_episode": 1,
+      "required_mismatch_count": 0
+    }
+  },
+  "paths": {
+    "asset_root": "/cache/navigation-example",
+    "checkpoint": "/cache/navigation-example/models/StreamVLN_Video_qwen_1_5_r2r_rxr_envdrop_scalevln_v1_3-f1f76c66083c",
+    "deployment_root": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8-successor",
+    "egl_vendor_json": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+    "habitat_env_lib": "/srv/navigation/envs/habitat-cpu-egl/lib",
+    "habitat_sim_python": "/srv/navigation/repos/habitat-sim-cpu-egl/src_python",
+    "streamvln_source": "/srv/navigation/repos/StreamVLN-upstream-g4",
+    "tokenizer": "/cache/navigation-example/hf/hub/models--lmms-lab--LLaVA-Video-7B-Qwen2/snapshots/013210b3aff822f1558b166d39c1046dd109520f",
+    "vision_tower": "/cache/navigation-example/hf/hub/models--google--siglip-so400m-patch14-384/snapshots/9fdffc58afc957d1a03a25b10dba0329ab15c2a3"
+  },
+  "release": {
+    "adapter_checkpoint": null,
+    "checkpoint_kind": "original released clean-e48",
+    "release_manifest_canonical_sha256": "09a344903944942210a342f5defe8708523ecd74be98ec6be9b896334da471ac",
+    "release_manifest_deployment_path": "P8_RELEASE_ARTIFACT_MANIFEST.json",
+    "release_manifest_raw_sha256": "2a0074e4909c587793aa757d768434e2a88cd1e29cd91c232197dff9860c9bc7",
+    "successor_contract_sha256": "2448c533fe47cc067af999d1fb7cd6ec9efb868af4bb2ebc31a2d2d18b30de87"
+  },
+  "runtime": {
+    "egl_vendor_json": {
+      "bytes": 105,
+      "path": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+      "sha256": "cd3881df4227c13ca7f9cfe6c78820f21d5f7a00a41b299214f6f827e63be369"
+    },
+    "habitat_child": {
+      "cuda_visible_devices": "",
+      "packages": {
+        "gym": "0.23.0",
+        "habitat-lab": "0.2.4",
+        "numpy": "1.26.4"
+      },
+      "python_path": "/srv/navigation/envs/habitat-cpu-egl/bin/python3.9",
+      "python_sha256": "19ea30fb0b3b8f5b2677ce88e5b8bbca1849584c5d2ebeb2306221a1714f4096",
+      "python_version": "3.9.19",
+      "software_egl": true
+    },
+    "habitat_sim_patch": {
+      "bytes": 3817,
+      "path": "/srv/navigation/repos/habitat-sim-cpu-egl/src/esp/gfx/WindowlessContext.cpp",
+      "sha256": "ba40fe63b9d4f09b37803489132bea08e9cec806a43a3d2498378f81c28f9550"
+    },
+    "official_frame": {
+      "expert_waypoint_lookahead_m": 1.0,
+      "forward_step_m": 0.25,
+      "metric_depth": true,
+      "rgb_height": 480,
+      "rgb_hfov_deg": 79,
+      "rgb_width": 640,
+      "success_distance_m": 3.0,
+      "turn_angle_deg": 15.0
+    },
+    "parent": {
+      "device": "cuda:0",
+      "packages": {
+        "Pillow": "11.2.1",
+        "depth-camera-filtering": "0.1",
+        "gym": "0.23.0",
+        "numpy": "1.26.1",
+        "omegaconf": "2.3.0",
+        "torch": "2.1.2",
+        "transformers": "4.45.1"
+      },
+      "python_path": "/opt/conda/envs/streamvln/bin/python",
+      "python_sha256": "831e907dfecc2dfa3b66d6724f3ebd2a68f2cdd72466aa75c2179c54edd52e24",
+      "python_symlink_target": "python3.9",
+      "python_version": "3.9.23",
+      "ray_required": false,
+      "visible_gpu_count": 1
+    }
+  },
+  "scene_assets": [
+    {
+      "glb": {
+        "bytes": 46894716,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.glb",
+        "sha256": "29090774f72d0e43e46aca30fccbc0542dc1b47e04ec65d19caf98a1b8a2ad0d"
+      },
+      "navmesh": {
+        "bytes": 100072,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.navmesh",
+        "sha256": "e82cb53f35f3715b611daab691fb7fba43933b9a223d9f5f61987a9da885649a"
+      },
+      "scene": "Uxmj2M2itWa"
+    },
+    {
+      "glb": {
+        "bytes": 48850000,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.glb",
+        "sha256": "21029b47efca46272c0fc295395d23eba18293bf6bba68d14b00f1791ed3f9a8"
+      },
+      "navmesh": {
+        "bytes": 44496,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.navmesh",
+        "sha256": "23edd222ea37d468aac94337b2b6596ebc8e06396f69d66197917b4a67dd3a2f"
+      },
+      "scene": "cV4RVeZvu5T"
+    },
+    {
+      "glb": {
+        "bytes": 47538736,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.glb",
+        "sha256": "d9fc7825af92ec6a9332ce1e53eec52bc88d8b260b6d55c8d9765b4b0f61ef07"
+      },
+      "navmesh": {
+        "bytes": 92564,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.navmesh",
+        "sha256": "d47e18202de93a1ed389d47399f56c89a6aab541921179ff3c26e035e9c619e8"
+      },
+      "scene": "5LpN3gDmAk7"
+    },
+    {
+      "glb": {
+        "bytes": 174602772,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.glb",
+        "sha256": "5a4a1eec5bf36b85bde796a60ac8e34f62eccd39d42950abdbe284c16c2f1372"
+      },
+      "navmesh": {
+        "bytes": 205552,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.navmesh",
+        "sha256": "921879f2cc7d23f9bfc53a908b0ce218244d44b472ab8211a96baf222e191980"
+      },
+      "scene": "gTV8FGcVJC9"
+    },
+    {
+      "glb": {
+        "bytes": 36222428,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.glb",
+        "sha256": "272bfe8831bada774e52cd3f0383a29bf7339f75ca88fa5bae34b3e19d46dec7"
+      },
+      "navmesh": {
+        "bytes": 29764,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.navmesh",
+        "sha256": "19f1db6f2ee6f5b264e60f428b8740d5ca712fd150280c151ed8c512de6d7e50"
+      },
+      "scene": "29hnd4uzFmX"
+    },
+    {
+      "glb": {
+        "bytes": 63857012,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.glb",
+        "sha256": "d652bd05699b2ab481f4c474b0dbdc0ba8422cdc8d1310182fb25a9497b153ff"
+      },
+      "navmesh": {
+        "bytes": 57452,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.navmesh",
+        "sha256": "f497eae96ab14f2bc5488f981d7eff5e8b49959ebb506f88cbd4c9966277ce49"
+      },
+      "scene": "8WUmhLawc2A"
+    },
+    {
+      "glb": {
+        "bytes": 156216880,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.glb",
+        "sha256": "e5664788a3b74353b89ec20c106114d5a4c25ce19a11f0b017d7d3cdfd0f001b"
+      },
+      "navmesh": {
+        "bytes": 331248,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.navmesh",
+        "sha256": "6387dcca1277d4e3f5f14ae71efa4c1594b78e737fa8382ddc7b88d4731de663"
+      },
+      "scene": "vyrNrziPKCB"
+    },
+    {
+      "glb": {
+        "bytes": 80345592,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.glb",
+        "sha256": "c559db98909210d5e337618cb1d90abae5268558e7d31d14d4df59eff56bf0e4"
+      },
+      "navmesh": {
+        "bytes": 120132,
+        "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.navmesh",
+        "sha256": "5d7bcc71677e5dedb729a9f2bae2be7f5b0297a3b36c61970a146cc28eadfe12"
+      },
+      "scene": "ac26ZMwG7aT"
+    }
+  ],
+  "schema_name": "streamvln_p8_successor_live_ceiling",
+  "schema_version": 1,
+  "scope": {
+    "forbid_backward": true,
+    "forbid_bc": true,
+    "forbid_optimizer": true,
+    "forbid_ppo": true,
+    "forbid_remote_push": true,
+    "forbid_ttt_or_secondary_checkpoint": true,
+    "forbid_validation_split_reads": true,
+    "split": "train"
+  },
+  "selection_seed": 2026092811,
+  "source": {
+    "generated_pycache_excluded_from_source_manifest": true,
+    "habitat_sim_commit": "f179b584bcd713c5a2a998132211e2cae881d6d1",
+    "rlinf_base_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "streamvln_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "streamvln_tracked_changes_forbidden": true
+  }
+}

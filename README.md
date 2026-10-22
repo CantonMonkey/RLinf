@@ -1,3 +1,6 @@
+> **CantonMonkey navigation branch:** see [NAVIGATION.md](NAVIGATION.md) for the
+> imported navigation extension, source provenance and deployment instructions.
+
 <div align="center">
   <img src="https://github.com/RLinf/misc/raw/main/pic/logo_white.svg" alt="RLinf-logo" width="600"/>
 </div>

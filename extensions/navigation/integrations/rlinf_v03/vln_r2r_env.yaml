@@ -1,0 +1,31 @@
+# One Habitat R2R episode per simulator process. The service reads the
+# pre-existing MP3D/R2R cache; it does not modify those shared assets.
+env_type: vln
+seed: 7
+group_size: 1
+total_num_envs: null
+auto_reset: false
+ignore_terminations: false
+rollout_epoch: 1
+max_episode_steps: 8
+max_steps_per_rollout_epoch: 8
+
+python_bin: /srv/navigation/envs/habitat-cpu-egl/bin/python
+server_script: /srv/navigation/repos/rlinf-nav/scripts/habitat_r2r_service.py
+asset_root: /cache/navigation-example
+habitat_sim_python: /srv/navigation/repos/habitat-sim-cpu-egl/src_python
+habitat_env_lib: /srv/navigation/envs/habitat-cpu-egl/lib
+egl_vendor_json: /usr/share/glvnd/egl_vendor.d/50_mesa.json
+
+# Both roles must override these. Train and val_unseen use different MP3D scenes.
+dataset_split: null
+episode_index: null
+rgb_size: 64
+max_instruction_tokens: 200
+success_distance_m: 3.0
+
+video_cfg:
+  save_video: false
+  info_on_video: false
+  fps: 6
+  video_base_dir: /srv/navigation/videos/vln-r2r-v03

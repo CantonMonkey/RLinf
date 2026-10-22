@@ -1,0 +1,756 @@
+diff --git a/src/lightnav/inference/engine.py b/src/lightnav/inference/engine.py
+index 2ede376..8bb9086 100644
+--- a/src/lightnav/inference/engine.py
++++ b/src/lightnav/inference/engine.py
+@@ -2,6 +2,8 @@
+ 
+ from __future__ import annotations
+ 
++import hashlib
++import json
+ import os
+ import time
+ from dataclasses import dataclass, field
+@@ -24,6 +26,19 @@ class VitResult:
+     timings: dict = field(default_factory=dict)
+ 
+ 
++@dataclass(frozen=True)
++class ContextualPrefixHidden:
++    """Detached final-layer HF prefix state requested for offline RL training."""
++
++    hidden: "torch.Tensor"  # CPU [valid_prefix_tokens, hidden], source dtype
++    attention_mask: "torch.Tensor"  # CPU bool [full_prefix_tokens]
++    valid_token_indices: "torch.Tensor"  # CPU int64 [valid_prefix_tokens]
++    input_ids: "torch.Tensor"  # CPU int64 [full_prefix_tokens]
++    video_grid_thw: "torch.Tensor | None"  # CPU int64 [videos, 3]
++    source_dtype: str
++    model_identity: dict[str, Any]
++
++
+ def _get_sampling_params() -> dict[str, float | int | bool]:
+     """Read VLN_EVAL_TEMPERATURE / VLN_EVAL_TOP_P / VLN_EVAL_TOP_K / VLN_EVAL_TRAJ_TOP1 env vars.
+ 
+@@ -97,6 +112,7 @@ class VLNInferenceEngine:
+         self._embeds_pin_bufs: dict[int, torch.Tensor] = {}
+         self._traj_allowed_token_ids: list[int] | None = None
+         self._last_generate_timings: dict[str, float] = {}
++        self._hf_model_identity: dict[str, Any] | None = None
+ 
+     def _get_traj_allowed_token_ids(self) -> list[int]:
+         """IDs of {<traj_*>, <tpos_*>, <act_l*>, <apos_*>, <opos_*>, <pos_*>, eos} present
+@@ -294,15 +310,60 @@ class VLNInferenceEngine:
+         ``pool_enable and pool_spatial > 1`` and the clip has >2 frames, mirroring
+         the training-time prompt selection.
+         """
+-        if task_type == "vlnce_traj":
+-            sample = build_vln_traj_sample(video_tensor, instruction, frame_ids, self.bundle)
+-            return self.generate(sample, max_new_tokens)
++        sample = self._build_sample_from_frames(
++            video_tensor, instruction, frame_ids=frame_ids, task_type=task_type
++        )
++        return self.generate(sample, max_new_tokens)
+ 
+-        if task_type != "tracking":
+-            raise ValueError(f"Unknown task_type: {task_type}")
++    def _build_sample_from_frames(
++        self,
++        video_tensor: torch.Tensor,
++        instruction: str,
++        *,
++        frame_ids: list[int] | None,
++        task_type: str,
++    ) -> dict[str, Any]:
++        if task_type == "vlnce_traj":
++            return build_vln_traj_sample(video_tensor, instruction, frame_ids, self.bundle)
++        if task_type == "tracking":
++            return build_tracking_sample(video_tensor, instruction, frame_ids, self.bundle)
++        raise ValueError(f"Unknown task_type: {task_type}")
+ 
+-        sample = build_tracking_sample(video_tensor, instruction, frame_ids, self.bundle)
+-        return self.generate(sample, max_new_tokens)
++    def generate_from_frames_with_contextual_prefix(
++        self,
++        video_tensor: torch.Tensor,
++        instruction: str,
++        predict_horizon: int = 1,
++        frame_ids: list[int] | None = None,
++        max_new_tokens: int | None = None,
++        task_type: str = "tracking",
++    ) -> tuple[str, float, ContextualPrefixHidden]:
++        """HF reference path: generate first, then read final-layer prefix hidden.
++
++        The same sample, processor output, prompt, and history feed both operations.
++        The feature forward is deliberately after ``model.generate`` and uses
++        ``use_cache=False`` so requesting a feature cannot alter the trajectory.
++        ``predict_horizon`` remains an interface-stability no-op, as in
++        :meth:`generate_from_frames`.
++        """
++        del predict_horizon
++        if self.backend != "hf":
++            raise RuntimeError("contextual_prefix_hidden_v1 is supported only by the hf backend")
++        sample = self._build_sample_from_frames(
++            video_tensor, instruction, frame_ids=frame_ids, task_type=task_type
++        )
++        inputs = self.bundle.data_processor.process_sample(
++            sample,
++            add_generation_prompt=True,
++            validate_video_shapes=False,
++        )
++        result = self._generate_hf(
++            inputs,
++            max_new_tokens or self.max_new_tokens,
++            capture_contextual_prefix=True,
++        )
++        assert len(result) == 3
++        return result
+ 
+     def _prepare_inputs(
+         self,
+@@ -354,7 +415,9 @@ class VLNInferenceEngine:
+         self,
+         inputs: dict[str, Any],
+         max_new_tokens: int,
+-    ) -> tuple[str, float]:
++        *,
++        capture_contextual_prefix: bool = False,
++    ) -> tuple[str, float] | tuple[str, float, ContextualPrefixHidden]:
+         prep_t0 = time.monotonic()
+         gen = self._prepare_inputs(inputs)
+         prepare_inputs_ms = (time.monotonic() - prep_t0) * 1000
+@@ -437,14 +500,111 @@ class VLNInferenceEngine:
+         decode_t0 = time.monotonic()
+         text = self.bundle.tokenizer.decode(new_tokens, skip_special_tokens=False)
+         decode_ms = (time.monotonic() - decode_t0) * 1000
+-        self._last_generate_timings = {
++        timings = {
+             "data_prep_ms": prepare_inputs_ms,
+             "prepare_inputs_ms": prepare_inputs_ms,
+             "llm_ms": latency_ms,
+             "decode_ms": decode_ms,
+         }
++        contextual_prefix = None
++        if capture_contextual_prefix:
++            feature_t0 = time.monotonic()
++            contextual_prefix = self._extract_contextual_prefix_hidden(gen)
++            timings["contextual_prefix_forward_ms"] = (time.monotonic() - feature_t0) * 1000.0
++        self._last_generate_timings = timings
++        if contextual_prefix is not None:
++            return text, latency_ms, contextual_prefix
+         return text, latency_ms
+ 
++    def _model_identity(self) -> dict[str, Any]:
++        if self._hf_model_identity is not None:
++            return dict(self._hf_model_identity)
++        model = self.bundle.model
++        config = getattr(model, "config", None)
++        basis = {
++            "model_class": f"{type(model).__module__}.{type(model).__qualname__}",
++            "config_class": None
++            if config is None
++            else f"{type(config).__module__}.{type(config).__qualname__}",
++            "name_or_path": str(getattr(config, "_name_or_path", "") or ""),
++            "commit_hash": str(getattr(config, "_commit_hash", "") or ""),
++        }
++        canonical = json.dumps(basis, sort_keys=True, separators=(",", ":")).encode("utf-8")
++        self._hf_model_identity = {
++            "algorithm": "sha256",
++            "value": hashlib.sha256(canonical).hexdigest(),
++            "basis": basis,
++        }
++        return dict(self._hf_model_identity)
++
++    @torch.no_grad()
++    def _extract_contextual_prefix_hidden(
++        self, gen: dict[str, torch.Tensor]
++    ) -> ContextualPrefixHidden:
++        """Run a no-cache HF prefix forward and detach only attention-valid rows."""
++        model = self.bundle.model
++        # Reuse the exact position-id preparation used by ``generate``.  Recent
++        # Qwen3-VL releases require ``mm_token_type_ids`` when position ids are
++        # absent, while this checkpoint's processor path intentionally omits
++        # them and generation falls back to text positions for every RoPE axis.
++        # Calling the model's generation helper preserves that baseline instead
++        # of introducing a different multimodal-position convention only for
++        # the exported hidden state.
++        prepare_positions = getattr(model, "_prepare_position_ids_for_generation", None)
++        forward_inputs = dict(gen)
++        has_multimodal_grid = any(
++            gen.get(name) is not None for name in ("image_grid_thw", "video_grid_thw")
++        )
++        if callable(prepare_positions):
++            position_ids = prepare_positions(gen["input_ids"], dict(gen))
++            if not isinstance(position_ids, torch.Tensor):
++                raise RuntimeError("HF generation position-id preparation returned no tensor")
++            forward_inputs["position_ids"] = position_ids
++        elif has_multimodal_grid:
++            raise RuntimeError("multimodal HF model lacks generation position-id preparation")
++        with torch.inference_mode():
++            outputs = model(
++                **forward_inputs,
++                output_hidden_states=True,
++                use_cache=False,
++                return_dict=True,
++            )
++        hidden_states = getattr(outputs, "hidden_states", None)
++        if not hidden_states:
++            raise RuntimeError("HF model did not return hidden_states for the prefix forward")
++        final_hidden = hidden_states[-1]
++        if final_hidden.ndim != 3 or final_hidden.shape[0] != 1:
++            raise RuntimeError(
++                "expected final prefix hidden shape [1, seq, hidden], got "
++                f"{tuple(final_hidden.shape)}"
++            )
++        input_ids = gen["input_ids"][0]
++        attention_mask = gen.get("attention_mask")
++        if attention_mask is None:
++            mask = torch.ones(input_ids.shape[0], dtype=torch.bool, device=input_ids.device)
++        else:
++            mask = attention_mask[0].to(dtype=torch.bool)
++        if final_hidden.shape[1] != mask.numel() or input_ids.numel() != mask.numel():
++            raise RuntimeError(
++                "prefix hidden/input/mask length mismatch: "
++                f"hidden={final_hidden.shape[1]} input={input_ids.numel()} mask={mask.numel()}"
++            )
++        valid_indices = mask.nonzero(as_tuple=False).flatten()
++        if valid_indices.numel() == 0:
++            raise RuntimeError("prefix attention mask contains no valid tokens")
++        video_grid = gen.get("video_grid_thw")
++        return ContextualPrefixHidden(
++            hidden=final_hidden[0].index_select(0, valid_indices).detach().cpu(),
++            attention_mask=mask.detach().cpu(),
++            valid_token_indices=valid_indices.detach().to(device="cpu", dtype=torch.int64),
++            input_ids=input_ids.detach().to(device="cpu", dtype=torch.int64),
++            video_grid_thw=None
++            if video_grid is None
++            else video_grid.detach().to(device="cpu", dtype=torch.int64),
++            source_dtype=str(final_hidden.dtype).removeprefix("torch."),
++            model_identity=self._model_identity(),
++        )
++
+     def _vit_forward_from_inputs(self, inputs: dict[str, Any]) -> "VitResult":
+         """ViT forward + post-ViT pool from ALREADY-processed inputs. Cache bypassed.
+ 
+diff --git a/src/lightnav/serving/tracking_service.py b/src/lightnav/serving/tracking_service.py
+index 701c8dc..72a2022 100644
+--- a/src/lightnav/serving/tracking_service.py
++++ b/src/lightnav/serving/tracking_service.py
+@@ -16,6 +16,7 @@ import numpy as np
+ 
+ from lightnav.inference.samples import build_tracking_sample, build_vln_traj_sample
+ from lightnav.serving.batcher import MicroBatchScheduler
++from lightnav.serving.feature_artifacts import CONTEXTUAL_PREFIX_REQUEST
+ from lightnav.serving.protocol import decode_prediction_signals
+ from lightnav.tracking import TrackingAgent
+ 
+@@ -26,6 +27,7 @@ logger = logging.getLogger(__name__)
+ class _PredictRequest:
+     session: TrackingAgent
+     submitted_at: float
++    feature_request: str | None = None
+ 
+ 
+ @dataclass(frozen=True)
+@@ -42,6 +44,8 @@ class TrackingPrediction:
+     # The model's own output text for this step, e.g.
+     # "<apos_500><opos_900><act_l0_1><act_l1_2><act_l2_3>".
+     raw_text: str = ""
++    # Small content-addressed reference; the hidden tensor stays in a local artifact.
++    feature_ref: dict | None = None
+ 
+ 
+ def _mean(values: list[float]) -> float:
+@@ -61,6 +65,7 @@ class BatchedTrackingService:
+         serve_task: str = "tracking",
+         *,
+         rvq_bundle=None,
++        feature_writer=None,
+     ) -> None:
+         if serve_task not in ("tracking", "vln"):
+             raise ValueError(f"serve_task must be 'tracking' or 'vln', got {serve_task!r}")
+@@ -71,6 +76,12 @@ class BatchedTrackingService:
+         self.num_history_frames = num_history_frames
+         self.max_new_tokens = max_new_tokens
+         self.serve_task = serve_task
++        self.feature_writer = feature_writer
++        if feature_writer is not None and getattr(engine, "backend", None) != "hf":
++            raise ValueError("contextual prefix feature requests require an hf engine")
++        self.supported_feature_requests = (
++            (CONTEXTUAL_PREFIX_REQUEST,) if feature_writer is not None else ()
++        )
+         self.scheduler = MicroBatchScheduler(
+             self._infer_batch,
+             max_batch_size=max_batch_size,
+@@ -121,6 +132,7 @@ class BatchedTrackingService:
+         batch_t0 = time.monotonic()
+         sessions = [r.session for r in requests]
+         n = len(sessions)
++        feature_refs: list[dict | None] = [None] * n
+         queue_waits = [(batch_t0 - r.submitted_at) * 1000.0 for r in requests]
+ 
+         if getattr(self.engine, "backend", None) == "hf":
+@@ -132,20 +144,41 @@ class BatchedTrackingService:
+             llm_ms_list: list[float] = []
+             passthrough: list[dict[str, float]] = []
+             texts: list[str] = []
+-            for s in sessions:
++            for idx, (request, s) in enumerate(zip(requests, sessions)):
+                 t_gen = time.monotonic()
+-                text, _ = self.engine.generate_from_frames(
+-                    s._get_video_tensor(),
+-                    s.instruction,
++                generate_kwargs = dict(
+                     predict_horizon=1,
+                     frame_ids=list(s._history_frame_ids),
+                     max_new_tokens=self.max_new_tokens,
+                     task_type=task_type,
+                 )
++                if request.feature_request == CONTEXTUAL_PREFIX_REQUEST:
++                    text, _, feature = self.engine.generate_from_frames_with_contextual_prefix(
++                        s._get_video_tensor(), s.instruction, **generate_kwargs
++                    )
++                    feature_refs[idx] = self.feature_writer.write(feature)
++                elif request.feature_request is None:
++                    text, _ = self.engine.generate_from_frames(
++                        s._get_video_tensor(), s.instruction, **generate_kwargs
++                    )
++                else:
++                    raise ValueError(f"unsupported feature_request: {request.feature_request!r}")
+                 llm_ms_list.append((time.monotonic() - t_gen) * 1000.0)
+                 texts.append(text)
+-                passthrough.append({})
++                passthrough.append(
++                    {
++                        k: float(v)
++                        for k, v in (getattr(self.engine, "_last_generate_timings", {}) or {}).items()
++                    }
++                    if request.feature_request is not None
++                    else {}
++                )
+         else:
++            requested = [r.feature_request for r in requests if r.feature_request is not None]
++            if requested:
++                raise ValueError(
++                    f"feature_request {requested[0]!r} is unsupported by the vllm_local backend"
++                )
+             # 1. Build a sample per session from its current buffer.
+             samples = []
+             build_sample_ms = []
+@@ -212,6 +245,7 @@ class BatchedTrackingService:
+                     apos_id=signals.apos_id,
+                     opos_id=signals.opos_id,
+                     raw_text=raw_text,
++                    feature_ref=feature_refs[idx],
+                     timings_ms=timings,
+                 )
+             )
+@@ -230,7 +264,9 @@ class BatchedTrackingService:
+         )
+         return out
+ 
+-    async def predict(self, session: TrackingAgent) -> TrackingPrediction:
++    async def predict(
++        self, session: TrackingAgent, feature_request: str | None = None
++    ) -> TrackingPrediction:
+         """Enqueue ``session`` for batched inference and await its prediction.
+ 
+         Re-raises the per-session decode error when this session's model output
+@@ -238,7 +274,11 @@ class BatchedTrackingService:
+         """
+         if session._buffer_len == 0:
+             raise RuntimeError("predict called with empty observation buffer")
+-        result = await self.scheduler.submit(_PredictRequest(session, time.monotonic()))
++        if feature_request is not None and feature_request not in self.supported_feature_requests:
++            raise ValueError(f"unsupported feature_request: {feature_request!r}")
++        result = await self.scheduler.submit(
++            _PredictRequest(session, time.monotonic(), feature_request=feature_request)
++        )
+         if isinstance(result, BaseException):
+             raise result
+         return result
+diff --git a/src/lightnav/serving/ws_server.py b/src/lightnav/serving/ws_server.py
+index 0783270..873a562 100644
+--- a/src/lightnav/serving/ws_server.py
++++ b/src/lightnav/serving/ws_server.py
+@@ -13,7 +13,7 @@ Protocol (JSON text frames, one response per request; see docs/PROTOCOL.md):
+     reset {}                                   -> {rc:0, msg:"ok"}
+     next  {seq, image (JPEG b64), instruction} -> {rc:0, seq, actions:{step, actions},
+                                                    stop, visible, latency_ms, timings_ms,
+-                                                   raw_text, [pointing]}
++                                                   raw_text, [pointing], [feature_ref]}
+ 
+ A ``next`` whose instruction is empty or null only buffers the frame and is
+ acknowledged with ``{rc:0, seq, msg:"image received"}``.
+@@ -51,6 +51,12 @@ from websockets.exceptions import ConnectionClosed
+ 
+ from lightnav.inference.config import InferenceConfig
+ from lightnav.inference.engine import build_engine
++from lightnav.serving.feature_artifacts import (
++    CONTEXTUAL_PREFIX_REQUEST,
++    HARD_MAX_ARTIFACT_BYTES,
++    HARD_MAX_PREFIX_TOKENS,
++    ContextualPrefixArtifactWriter,
++)
+ from lightnav.serving.protocol import actions_payload, pointing_payload
+ from lightnav.serving.token_budget import (
+     action_token_count,
+@@ -120,6 +126,42 @@ def _env_flag(name: str, default: bool) -> bool:
+     return value.strip().lower() not in {"0", "false", "no", "off"}
+ 
+ 
++def _validate_feature_args(args: argparse.Namespace) -> None:
++    capability = getattr(args, "feature_request_capability", None)
++    if capability is None:
++        return
++    if capability != CONTEXTUAL_PREFIX_REQUEST:
++        raise ValueError(f"unsupported feature request capability: {capability!r}")
++    if getattr(args, "backend", None) != "hf":
++        raise ValueError(
++            f"{CONTEXTUAL_PREFIX_REQUEST} requires --backend hf; vllm_local is unsupported"
++        )
++    if not str(getattr(args, "feature_artifact_dir", "") or "").strip():
++        raise ValueError("--feature_artifact_dir is required when feature requests are enabled")
++    max_tokens = int(getattr(args, "feature_max_tokens", 4096))
++    max_bytes = int(getattr(args, "feature_max_bytes_mib", 128)) * 1024 * 1024
++    if not 1 <= max_tokens <= HARD_MAX_PREFIX_TOKENS:
++        raise ValueError(
++            f"--feature_max_tokens must be in [1, {HARD_MAX_PREFIX_TOKENS}], got {max_tokens}"
++        )
++    if not 1 <= max_bytes <= HARD_MAX_ARTIFACT_BYTES:
++        raise ValueError(
++            "--feature_max_bytes_mib must resolve inside [1, "
++            f"{HARD_MAX_ARTIFACT_BYTES}] bytes, got {max_bytes}"
++        )
++
++
++def _build_feature_writer(args: argparse.Namespace):
++    _validate_feature_args(args)
++    if getattr(args, "feature_request_capability", None) is None:
++        return None
++    return ContextualPrefixArtifactWriter(
++        Path(args.feature_artifact_dir),
++        max_tokens=int(args.feature_max_tokens),
++        max_bytes=int(args.feature_max_bytes_mib) * 1024 * 1024,
++    )
++
++
+ def _optional_float_env(name: str) -> float | None:
+     raw = os.environ.get(name, "").strip()
+     if not raw:
+@@ -232,6 +274,9 @@ def _success_response(pred, seq: int, latency_ms: float, session, rgb: np.ndarra
+     pointing = pointing_payload(raw_text, width=int(rgb.shape[1]), height=int(rgb.shape[0]))
+     if pointing is not None:
+         data["pointing"] = pointing
++    feature_ref = getattr(pred, "feature_ref", None)
++    if feature_ref is not None:
++        data["feature_ref"] = feature_ref
+     return {"action": "next", "data": data}
+ 
+ 
+@@ -361,7 +406,11 @@ def make_handler(service, recorder=None):
+                         logger.info(
+                             "[%s] client login: %s client_id=%s", SERVER_LOG_TAG, addr, client_id or "-"
+                         )
+-                        await send_response({"action": "login", "data": {"rc": 0, "msg": "ok"}})
++                        login_data: dict[str, object] = {"rc": 0, "msg": "ok"}
++                        supported = list(getattr(service, "supported_feature_requests", ()) or ())
++                        if supported:
++                            login_data["capabilities"] = {"feature_request": supported}
++                        await send_response({"action": "login", "data": login_data})
+ 
+                     elif action == "reset":
+                         ensure_session().reset(instruction="")
+@@ -380,6 +429,21 @@ def make_handler(service, recorder=None):
+                             raise _RequestDispatchError("instruction must be a string")
+                         else:
+                             instruction = instruction_value
++                        feature_request = data.get("feature_request")
++                        if feature_request is not None:
++                            if not isinstance(feature_request, str) or not feature_request:
++                                raise _RequestDispatchError("feature_request must be a non-empty string")
++                            supported = tuple(
++                                getattr(service, "supported_feature_requests", ()) or ()
++                            )
++                            if feature_request not in supported:
++                                raise _RequestDispatchError(
++                                    f"unsupported feature_request: {feature_request!r}"
++                                )
++                            if not instruction:
++                                raise _RequestDispatchError(
++                                    "feature_request requires a non-empty instruction"
++                                )
+                         current_session = ensure_session()
+                         try:
+                             rgb, image_bytes = _decode_jpeg_b64_with_bytes(img_b64)
+@@ -395,7 +459,12 @@ def make_handler(service, recorder=None):
+                         current_session.instruction = instruction
+                         t0 = time.monotonic()
+                         try:
+-                            pred = await service.predict(current_session)
++                            if feature_request is None:
++                                pred = await service.predict(current_session)
++                            else:
++                                pred = await service.predict(
++                                    current_session, feature_request=feature_request
++                                )
+                         except Exception as exc:
+                             logger.warning(
+                                 "[%s] predict failed (seq=%s): %s: %s",
+@@ -502,6 +571,16 @@ def _log_ready(args: argparse.Namespace, recorder=None) -> None:
+             "on" if args.record_images else "off",
+             args.record_dir,
+         )
++    capability = getattr(args, "feature_request_capability", None)
++    if capability is not None:
++        logger.info(
++            "[%s] feature_request capability=%s artifacts=%s max_tokens=%d max_mib=%d",
++            SERVER_LOG_TAG,
++            capability,
++            args.feature_artifact_dir,
++            args.feature_max_tokens,
++            args.feature_max_bytes_mib,
++        )
+ 
+ 
+ async def _warmup(service: BatchedTrackingService, bundle) -> None:
+@@ -536,6 +615,9 @@ async def serve_forever(args: argparse.Namespace) -> None:
+ 
+     from websockets import serve
+ 
++    # Validate and create bounded feature storage before loading model weights.
++    feature_writer = _build_feature_writer(args)
++
+     # Before the engine: a misconfigured --record_dir should fail in seconds, not after
+     # the weights are loaded.
+     recorder = _build_recorder(args)
+@@ -581,6 +663,7 @@ async def serve_forever(args: argparse.Namespace) -> None:
+         max_wait_ms=float(args.max_wait_ms),
+         serve_task=args.task,
+         rvq_bundle=rvq_bundle,
++        feature_writer=feature_writer,
+     )
+     await service.start()
+     ready_file = Path(args.ready_file) if args.ready_file else None
+@@ -723,6 +806,36 @@ def _build_parser() -> argparse.ArgumentParser:
+         help="Skip the one-shot synthetic warmup inference before binding the port.",
+     )
+ 
++    feature = parser.add_argument_group("explicit feature requests")
++    feature.add_argument(
++        "--feature_request_capability",
++        choices=[CONTEXTUAL_PREFIX_REQUEST],
++        default=os.environ.get("LIGHTNAV_FEATURE_REQUEST_CAPABILITY") or None,
++        help=f"Enable the opt-in {CONTEXTUAL_PREFIX_REQUEST!r} protocol capability. "
++        "Disabled by default and supported only by --backend hf. "
++        "Env: LIGHTNAV_FEATURE_REQUEST_CAPABILITY.",
++    )
++    feature.add_argument(
++        "--feature_artifact_dir",
++        default=os.environ.get("LIGHTNAV_FEATURE_ARTIFACT_DIR", ""),
++        help="Local directory for content-addressed feature artifacts; required when the "
++        "capability is enabled. Env: LIGHTNAV_FEATURE_ARTIFACT_DIR.",
++    )
++    feature.add_argument(
++        "--feature_max_tokens",
++        type=int,
++        default=int(os.environ.get("LIGHTNAV_FEATURE_MAX_TOKENS", "4096")),
++        help=f"Reject prefixes over this many valid tokens (hard max {HARD_MAX_PREFIX_TOKENS}). "
++        "Env: LIGHTNAV_FEATURE_MAX_TOKENS.",
++    )
++    feature.add_argument(
++        "--feature_max_bytes_mib",
++        type=int,
++        default=int(os.environ.get("LIGHTNAV_FEATURE_MAX_BYTES_MIB", "128")),
++        help="Reject an artifact payload over this many MiB (hard max 256). "
++        "Env: LIGHTNAV_FEATURE_MAX_BYTES_MIB.",
++    )
++
+     # Local episode recording (docs/VISUALIZATION.md). Off unless --record_dir is set; the
+     # server never renders video online -- run `lightnav-render <record_dir>` afterwards.
+     rec = parser.add_argument_group("recording")
+@@ -828,6 +941,7 @@ def main() -> int:
+     args = parser.parse_args()
+     try:
+         resolve_decoder_args(args)
++        _validate_feature_args(args)
+     except ValueError as exc:
+         parser.error(str(exc))
+ 
+diff --git a/tests/serving/test_ws_server.py b/tests/serving/test_ws_server.py
+index 0b01202..61eb37e 100644
+--- a/tests/serving/test_ws_server.py
++++ b/tests/serving/test_ws_server.py
+@@ -68,11 +68,13 @@ class FakeSession:
+ class FakeService:
+     """``predictions`` are returned (or raised, for exceptions) in order by ``predict``."""
+ 
+-    def __init__(self, predictions=()):
++    def __init__(self, predictions=(), supported_feature_requests=()):
+         self._predictions = list(predictions)
++        self.supported_feature_requests = tuple(supported_feature_requests)
+         self.sessions: list[FakeSession] = []
+         self.client_ids: list = []
+         self.predict_calls = 0
++        self.feature_requests = []
+ 
+     def make_session(self, client_id=None):
+         self.client_ids.append(client_id)
+@@ -80,8 +82,9 @@ class FakeService:
+         self.sessions.append(session)
+         return session
+ 
+-    async def predict(self, session):
++    async def predict(self, session, feature_request=None):
+         self.predict_calls += 1
++        self.feature_requests.append(feature_request)
+         item = self._predictions.pop(0)
+         if isinstance(item, BaseException):
+             raise item
+@@ -107,10 +110,11 @@ def _jpeg_b64(size=(4, 4)) -> str:
+     return base64.b64encode(buf.getvalue()).decode("ascii")
+ 
+ 
+-def _next(seq, instruction="go", size=(4, 4)) -> str:
+-    return json.dumps(
+-        {"action": "next", "data": {"seq": seq, "image": _jpeg_b64(size), "instruction": instruction}}
+-    )
++def _next(seq, instruction="go", size=(4, 4), feature_request=None) -> str:
++    data = {"seq": seq, "image": _jpeg_b64(size), "instruction": instruction}
++    if feature_request is not None:
++        data["feature_request"] = feature_request
++    return json.dumps({"action": "next", "data": data})
+ 
+ 
+ async def _run(messages, service) -> FakeWebSocket:
+@@ -185,7 +189,11 @@ def test_engine_task_mapping_rejects_unknown_tasks():
+ 
+ 
+ def test_parser_defaults(monkeypatch):
+-    for key in ("TASK", "HOST", "PORT", "MAX_BATCH_SIZE", "MAX_WAIT_MS", "ACTION_TOKENIZER_BUNDLE"):
++    for key in (
++        "TASK", "HOST", "PORT", "MAX_BATCH_SIZE", "MAX_WAIT_MS", "ACTION_TOKENIZER_BUNDLE",
++        "LIGHTNAV_FEATURE_REQUEST_CAPABILITY", "LIGHTNAV_FEATURE_ARTIFACT_DIR",
++        "LIGHTNAV_FEATURE_MAX_TOKENS", "LIGHTNAV_FEATURE_MAX_BYTES_MIB",
++    ):
+         monkeypatch.delenv(key, raising=False)
+ 
+     args = ws_server._build_parser().parse_args(
+@@ -200,6 +208,27 @@ def test_parser_defaults(monkeypatch):
+     assert args.num_history_frames is None and args.pool_spatial is None
+     assert args.ready_file is None and args.action_tokenizer_bundle is None
+     assert args.no_warmup is False
++    assert args.feature_request_capability is None and args.feature_artifact_dir == ""
++    assert args.feature_max_tokens == 4096 and args.feature_max_bytes_mib == 128
++
++
++def test_contextual_prefix_capability_is_explicit_hf_only_and_bounded(tmp_path):
++    parser = ws_server._build_parser()
++    argv = [
++        "--model_path", "/path/to/ckpt", "--traj_vocab_path", "/path/to/vocab",
++        "--feature_request_capability", "contextual_prefix_hidden_v1",
++        "--feature_artifact_dir", str(tmp_path),
++    ]
++    args = parser.parse_args([*argv, "--backend", "hf"])
++    ws_server._validate_feature_args(args)
++
++    args = parser.parse_args([*argv, "--backend", "vllm_local"])
++    with pytest.raises(ValueError, match="vllm_local is unsupported"):
++        ws_server._validate_feature_args(args)
++
++    args = parser.parse_args([*argv, "--backend", "hf", "--feature_max_tokens", "8193"])
++    with pytest.raises(ValueError, match="feature_max_tokens"):
++        ws_server._validate_feature_args(args)
+ 
+ 
+ def test_parser_reads_env_defaults(monkeypatch):
+@@ -334,6 +363,38 @@ async def test_success_response_matches_wire_contract():
+     assert service.sessions[0].instruction == "go to the chair"
+ 
+ 
++async def test_explicit_feature_request_advertises_capability_and_returns_ref():
++    request = "contextual_prefix_hidden_v1"
++    feature_ref = {
++        "request": request,
++        "ref": {"kind": "local_manifest", "path": "/features/ab/manifest.json"},
++        "shape": [7, 32],
++        "mask": {"shape": [8], "valid_count": 7, "sha256": "mask"},
++        "hash": {"algorithm": "sha256", "manifest": "manifest", "hidden": "hidden"},
++        "identity": "abc",
++    }
++    service = FakeService(
++        [_pred(feature_ref=feature_ref)], supported_feature_requests=(request,)
++    )
++
++    ws = await _run([json.dumps({"action": "login", "data": {}}), _next(4, "go", feature_request=request)], service)
++
++    assert ws.sent[0]["data"]["capabilities"] == {"feature_request": [request]}
++    assert ws.sent[1]["data"]["feature_ref"] == feature_ref
++    assert service.feature_requests == [request]
++
++
++async def test_feature_request_is_rejected_when_capability_is_disabled():
++    service = FakeService()
++    ws = await _run(
++        [_next(4, "go", feature_request="contextual_prefix_hidden_v1")], service
++    )
++
++    assert ws.sent[0]["data"]["rc"] == 400
++    assert "unsupported feature_request" in ws.sent[0]["data"]["msg"]
++    assert service.predict_calls == 0
++
++
+ async def test_step_counts_every_buffered_frame_since_reset():
+     service = FakeService([_pred()])
+     ws = await _run([_next(1, ""), _next(2, ""), _next(3, "go")], service)
+diff --git a/tests/test_tracking_service.py b/tests/test_tracking_service.py
+index c74ab74..9ece9cc 100644
+--- a/tests/test_tracking_service.py
++++ b/tests/test_tracking_service.py
+@@ -247,6 +247,47 @@ class _HfEngine:
+         return self._text, 5.0
+ 
+ 
++def test_hf_feature_request_keeps_text_and_returns_only_artifact_ref():
++    feature = object()
++    expected_ref = {
++        "request": "contextual_prefix_hidden_v1",
++        "ref": {"kind": "local_manifest", "path": "/tmp/context/manifest.json"},
++        "shape": [3, 4],
++        "mask": {"shape": [3], "valid_count": 3, "sha256": "mask"},
++        "hash": {"algorithm": "sha256", "manifest": "manifest", "hidden": "hidden"},
++        "identity": "identity",
++    }
++
++    class FeatureEngine(_HfEngine):
++        def generate_from_frames_with_contextual_prefix(self, *args, **kwargs):
++            text, latency = self.generate_from_frames(*args, **kwargs)
++            return text, latency, feature
++
++    class Writer:
++        def write(self, value):
++            assert value is feature
++            return expected_ref
++
++    engine = FeatureEngine()
++    service = _service(engine, feature_writer=Writer())
++    request = svc_mod._PredictRequest(
++        _FakeSession("a"),
++        submitted_at=time.monotonic(),
++        feature_request="contextual_prefix_hidden_v1",
++    )
++
++    result = service._infer_batch([request])[0]
++
++    assert result.raw_text == "<traj_1>"
++    assert result.feature_ref == expected_ref
++    assert service.supported_feature_requests == ("contextual_prefix_hidden_v1",)
++
++
++def test_vllm_service_rejects_feature_writer():
++    with pytest.raises(ValueError, match="hf engine"):
++        _service(_FakeEngine(), feature_writer=object())
++
++
+ @pytest.mark.parametrize(
+     ("serve_task", "expected_task_type"), [("tracking", "tracking"), ("vln", "vlnce_traj")]
+ )

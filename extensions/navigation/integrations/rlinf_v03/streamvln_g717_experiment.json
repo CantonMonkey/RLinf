@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "stage": "G7.17 bounded train-only high-level RL plumbing smoke",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "predecessor": {
+    "stage": "G7.16 causal executor contract",
+    "accepted_result_sha256": "e8541234dae71b751b1aa7fd84de89eb3c4f95ab9e63e6762a86fecb869195f6"
+  },
+  "policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh",
+    "navigable",
+    "oracle_action",
+    "oracle_waypoint",
+    "shortest_path",
+    "geodesic_distance",
+    "distance_to_goal",
+    "future_collision",
+    "future_outcome",
+    "severity_label",
+    "success",
+    "spl"
+  ],
+  "plumbing_smoke": {
+    "split": "train",
+    "scene_specs": [
+      {"index": 70, "episode_id": "71", "scene": "i5noydFURQK", "target_mode": "navigate", "target_mode_id": 0},
+      {"index": 3944, "episode_id": "3954", "scene": "e9zR4mvMWw7", "target_mode": "stop", "target_mode_id": 1},
+      {"index": 5052, "episode_id": "5062", "scene": "vyrNrziPKCB", "target_mode": "recover", "target_mode_id": 2}
+    ],
+    "mode_coverage_sampling": {
+      "method": "deterministic seed scan until the preregistered target mode is sampled",
+      "seed_domain": "sha256(base_seed, g717_mode_coverage, episode_id, target_mode, attempt)",
+      "maximum_attempts_per_episode": 4096,
+      "coverage_conditioned_not_unbiased_learning_data": true
+    },
+    "expected_executed_lengths": [4, 1, 4],
+    "expected_end_boundaries": ["truncated", "terminated", "truncated"],
+    "max_episode_steps": 4,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "learning_rate": 0.00001,
+    "value_learning_rate": 0.00001,
+    "optimizer_update_limit": 1,
+    "preupdate_ratio_max_deviation": 0.03,
+    "val_unseen_episode_count": 0
+  },
+  "gates": {
+    "one_original_stream_model_load": true,
+    "frozen_backbone_and_proposal": true,
+    "optimizer_contains_only_high_level_parameters": true,
+    "causal_executor_feedback_parsed": true,
+    "topology_updated_only_from_executor_feedback": true,
+    "navigate_stop_recover_each_replayed_once": true,
+    "executed_prefix_and_reward_collapse_exact": true,
+    "termination_bootstrap_zero": true,
+    "truncation_bootstrap_from_terminal_observation": true,
+    "variable_duration_gae_is_episode_local": true,
+    "preupdate_ratio_near_one": true,
+    "finite_actor_value_entropy_loss": true,
+    "finite_high_level_gradients_only": true,
+    "exactly_one_optimizer_update": true,
+    "high_level_parameters_change": true,
+    "frozen_parameter_sentinels_unchanged": true,
+    "rollout_inputs_unchanged": true,
+    "no_checkpoint_selection": true,
+    "val_unseen_episode_count": 0
+  },
+  "model_load": true,
+  "rl_update": true,
+  "navigation_evaluation": false,
+  "controller_comparison": false,
+  "checkpoint_selection": false,
+  "g8_ready": false
+}

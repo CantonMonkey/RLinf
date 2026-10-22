@@ -1,0 +1,759 @@
+{
+  "architecture": {
+    "edge_feature_dim": 4,
+    "max_waypoint_m": 1.25,
+    "node_feature_dim": 8,
+    "topology_model_dim": 128,
+    "value_head_trainable": false
+  },
+  "claim_boundary": {
+    "original_streamvln_only": true,
+    "ppo": false,
+    "remote_push": false,
+    "robot_execution": false,
+    "train_only": true,
+    "ttt_or_secondary_post_training": false,
+    "val_seen_access": false,
+    "val_unseen_access": false
+  },
+  "created": "2026-09-28",
+  "episodes": {
+    "counts": {
+      "equivalence_episodes": 4,
+      "tiny_train_episodes": 8,
+      "tiny_train_scenes": 8,
+      "train_development_episodes": 8,
+      "train_development_scenes": 8
+    },
+    "equivalence": [
+      {
+        "episode_id": "560",
+        "index": 559,
+        "scene": "Uxmj2M2itWa"
+      },
+      {
+        "episode_id": "6660",
+        "index": 6650,
+        "scene": "cV4RVeZvu5T"
+      },
+      {
+        "episode_id": "763",
+        "index": 762,
+        "scene": "5LpN3gDmAk7"
+      },
+      {
+        "episode_id": "5484",
+        "index": 5474,
+        "scene": "gTV8FGcVJC9"
+      }
+    ],
+    "selected_scene_assets": [
+      {
+        "glb": {
+          "bytes": 46894716,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.glb",
+          "sha256": "29090774f72d0e43e46aca30fccbc0542dc1b47e04ec65d19caf98a1b8a2ad0d"
+        },
+        "navmesh": {
+          "bytes": 100072,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.navmesh",
+          "sha256": "e82cb53f35f3715b611daab691fb7fba43933b9a223d9f5f61987a9da885649a"
+        },
+        "scene": "Uxmj2M2itWa"
+      },
+      {
+        "glb": {
+          "bytes": 48850000,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.glb",
+          "sha256": "21029b47efca46272c0fc295395d23eba18293bf6bba68d14b00f1791ed3f9a8"
+        },
+        "navmesh": {
+          "bytes": 44496,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.navmesh",
+          "sha256": "23edd222ea37d468aac94337b2b6596ebc8e06396f69d66197917b4a67dd3a2f"
+        },
+        "scene": "cV4RVeZvu5T"
+      },
+      {
+        "glb": {
+          "bytes": 47538736,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.glb",
+          "sha256": "d9fc7825af92ec6a9332ce1e53eec52bc88d8b260b6d55c8d9765b4b0f61ef07"
+        },
+        "navmesh": {
+          "bytes": 92564,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.navmesh",
+          "sha256": "d47e18202de93a1ed389d47399f56c89a6aab541921179ff3c26e035e9c619e8"
+        },
+        "scene": "5LpN3gDmAk7"
+      },
+      {
+        "glb": {
+          "bytes": 174602772,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.glb",
+          "sha256": "5a4a1eec5bf36b85bde796a60ac8e34f62eccd39d42950abdbe284c16c2f1372"
+        },
+        "navmesh": {
+          "bytes": 205552,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.navmesh",
+          "sha256": "921879f2cc7d23f9bfc53a908b0ce218244d44b472ab8211a96baf222e191980"
+        },
+        "scene": "gTV8FGcVJC9"
+      },
+      {
+        "glb": {
+          "bytes": 36222428,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.glb",
+          "sha256": "272bfe8831bada774e52cd3f0383a29bf7339f75ca88fa5bae34b3e19d46dec7"
+        },
+        "navmesh": {
+          "bytes": 29764,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.navmesh",
+          "sha256": "19f1db6f2ee6f5b264e60f428b8740d5ca712fd150280c151ed8c512de6d7e50"
+        },
+        "scene": "29hnd4uzFmX"
+      },
+      {
+        "glb": {
+          "bytes": 63857012,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.glb",
+          "sha256": "d652bd05699b2ab481f4c474b0dbdc0ba8422cdc8d1310182fb25a9497b153ff"
+        },
+        "navmesh": {
+          "bytes": 57452,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.navmesh",
+          "sha256": "f497eae96ab14f2bc5488f981d7eff5e8b49959ebb506f88cbd4c9966277ce49"
+        },
+        "scene": "8WUmhLawc2A"
+      },
+      {
+        "glb": {
+          "bytes": 156216880,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.glb",
+          "sha256": "e5664788a3b74353b89ec20c106114d5a4c25ce19a11f0b017d7d3cdfd0f001b"
+        },
+        "navmesh": {
+          "bytes": 331248,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.navmesh",
+          "sha256": "6387dcca1277d4e3f5f14ae71efa4c1594b78e737fa8382ddc7b88d4731de663"
+        },
+        "scene": "vyrNrziPKCB"
+      },
+      {
+        "glb": {
+          "bytes": 80345592,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.glb",
+          "sha256": "c559db98909210d5e337618cb1d90abae5268558e7d31d14d4df59eff56bf0e4"
+        },
+        "navmesh": {
+          "bytes": 120132,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.navmesh",
+          "sha256": "5d7bcc71677e5dedb729a9f2bae2be7f5b0297a3b36c61970a146cc28eadfe12"
+        },
+        "scene": "ac26ZMwG7aT"
+      },
+      {
+        "glb": {
+          "bytes": 75974400,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/mJXqzFtmKg4/mJXqzFtmKg4.glb",
+          "sha256": "8b2103d750640b5b7417bd363441b2935f8f2ff2f6357abe31b9d9630a43273e"
+        },
+        "navmesh": {
+          "bytes": 101660,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/mJXqzFtmKg4/mJXqzFtmKg4.navmesh",
+          "sha256": "2e8d74022efc4c4fb481a231a8ccf99158987629cbdeb0161f9bbbe8c2de305e"
+        },
+        "scene": "mJXqzFtmKg4"
+      },
+      {
+        "glb": {
+          "bytes": 92648580,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/1pXnuDYAj8r/1pXnuDYAj8r.glb",
+          "sha256": "b5ac077e799b57598fc3f1fb44c01e1d89ad6c118ec57a3da4f5426293cd13c2"
+        },
+        "navmesh": {
+          "bytes": 98468,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/1pXnuDYAj8r/1pXnuDYAj8r.navmesh",
+          "sha256": "9e7dc80f3e37340e53b5bb41cdd27a5909cf02af2d0c012660fc3cdda627f9e1"
+        },
+        "scene": "1pXnuDYAj8r"
+      },
+      {
+        "glb": {
+          "bytes": 64138252,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/qoiz87JEwZ2/qoiz87JEwZ2.glb",
+          "sha256": "ebfb8e4371b0223360f77a8c9a9b3f1f632e80713e7ee78c050a4058cf8731e3"
+        },
+        "navmesh": {
+          "bytes": 78072,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/qoiz87JEwZ2/qoiz87JEwZ2.navmesh",
+          "sha256": "e16343adc1a4b7704a7fe84d419d852e54a4c72b98771fe8ee04b0eb2d63a664"
+        },
+        "scene": "qoiz87JEwZ2"
+      },
+      {
+        "glb": {
+          "bytes": 90166128,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/p5wJjkQkbXX/p5wJjkQkbXX.glb",
+          "sha256": "e1f6970c245e66020313bb45daedb43da0254ceffc1d6f9496070fae283d1099"
+        },
+        "navmesh": {
+          "bytes": 145912,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/p5wJjkQkbXX/p5wJjkQkbXX.navmesh",
+          "sha256": "556d8ae0c953d116f6015884903278eb247a04b36ca123a4085277fa0c398210"
+        },
+        "scene": "p5wJjkQkbXX"
+      },
+      {
+        "glb": {
+          "bytes": 201430968,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/E9uDoFAP3SH/E9uDoFAP3SH.glb",
+          "sha256": "6eeed2c0e9f287f44ff4d6e986d7ea1f8088b23fad5e6532d5acac91ed5255d3"
+        },
+        "navmesh": {
+          "bytes": 209592,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/E9uDoFAP3SH/E9uDoFAP3SH.navmesh",
+          "sha256": "8944b48f2e6cacbdd031adb361247361f069072b13193f00eb486b443efdc555"
+        },
+        "scene": "E9uDoFAP3SH"
+      },
+      {
+        "glb": {
+          "bytes": 47777388,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/S9hNv5qa7GM/S9hNv5qa7GM.glb",
+          "sha256": "0de37ae9b2f8c8015b47de1182343744a821d990b0a1e587cf7091296e70f2fe"
+        },
+        "navmesh": {
+          "bytes": 51040,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/S9hNv5qa7GM/S9hNv5qa7GM.navmesh",
+          "sha256": "1bbfe1f0e3899dffdb72f839f773effc3cdfdb5d8dc1d32d5b2400a6cc92241d"
+        },
+        "scene": "S9hNv5qa7GM"
+      },
+      {
+        "glb": {
+          "bytes": 65871396,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Vvot9Ly1tCj/Vvot9Ly1tCj.glb",
+          "sha256": "f03c27277fe5d6cf8ff49fc9e88bbd7f0db2f774520e378a93c83e5df8991213"
+        },
+        "navmesh": {
+          "bytes": 163432,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Vvot9Ly1tCj/Vvot9Ly1tCj.navmesh",
+          "sha256": "03a18135c9cd7b34102b0a6938a8f24b8d4b5f41d37294d808907d01b44259a7"
+        },
+        "scene": "Vvot9Ly1tCj"
+      },
+      {
+        "glb": {
+          "bytes": 141654096,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/VLzqgDo317F/VLzqgDo317F.glb",
+          "sha256": "5fa578dab55ed5b3084fd8bd489239a608e1fa65029cc3ef664ef1e25f7bcc6b"
+        },
+        "navmesh": {
+          "bytes": 137992,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/VLzqgDo317F/VLzqgDo317F.navmesh",
+          "sha256": "e5015c48ef7fa7660a2440c49931cc41828bbf5953a94c3e01f3def369ba6998"
+        },
+        "scene": "VLzqgDo317F"
+      }
+    ],
+    "tiny_train": [
+      {
+        "episode_id": "560",
+        "index": 559,
+        "scene": "Uxmj2M2itWa"
+      },
+      {
+        "episode_id": "6660",
+        "index": 6650,
+        "scene": "cV4RVeZvu5T"
+      },
+      {
+        "episode_id": "763",
+        "index": 762,
+        "scene": "5LpN3gDmAk7"
+      },
+      {
+        "episode_id": "5484",
+        "index": 5474,
+        "scene": "gTV8FGcVJC9"
+      },
+      {
+        "episode_id": "6595",
+        "index": 6585,
+        "scene": "29hnd4uzFmX"
+      },
+      {
+        "episode_id": "3144",
+        "index": 3137,
+        "scene": "8WUmhLawc2A"
+      },
+      {
+        "episode_id": "7793",
+        "index": 7783,
+        "scene": "vyrNrziPKCB"
+      },
+      {
+        "episode_id": "1371",
+        "index": 1367,
+        "scene": "ac26ZMwG7aT"
+      }
+    ],
+    "train_development": [
+      {
+        "episode_id": "4836",
+        "index": 4826,
+        "scene": "mJXqzFtmKg4"
+      },
+      {
+        "episode_id": "10622",
+        "index": 10603,
+        "scene": "1pXnuDYAj8r"
+      },
+      {
+        "episode_id": "6520",
+        "index": 6510,
+        "scene": "qoiz87JEwZ2"
+      },
+      {
+        "episode_id": "7298",
+        "index": 7288,
+        "scene": "p5wJjkQkbXX"
+      },
+      {
+        "episode_id": "2856",
+        "index": 2849,
+        "scene": "E9uDoFAP3SH"
+      },
+      {
+        "episode_id": "6921",
+        "index": 6911,
+        "scene": "S9hNv5qa7GM"
+      },
+      {
+        "episode_id": "5572",
+        "index": 5562,
+        "scene": "Vvot9Ly1tCj"
+      },
+      {
+        "episode_id": "1937",
+        "index": 1933,
+        "scene": "VLzqgDo317F"
+      }
+    ]
+  },
+  "executor": {
+    "action_chunk_size": 4,
+    "action_names": [
+      "STOP",
+      "\u2191",
+      "\u2190",
+      "\u2192"
+    ],
+    "action_token_ids": [
+      50669,
+      76286,
+      71858,
+      51018
+    ],
+    "blocked_forward_threshold": 2,
+    "expert_lookahead_m": 1.0,
+    "forward_step_m": 0.25,
+    "recover_target": "parent",
+    "success_radius_m": 3.0,
+    "topology_node_radius_m": 0.5,
+    "turn_angle_deg": 15.0
+  },
+  "gates": {
+    "a": {
+      "mismatch_count_max": 0,
+      "optimizer_steps": 0,
+      "parameter_hash_unchanged": true
+    },
+    "b": {
+      "consecutive_passes": 2,
+      "navigate_intent_recall_min": 0.9,
+      "sample_replay_ratio_deviation_max": 0.001,
+      "stop_intent_recall_min": 0.9,
+      "stop_token_recall_min": 0.9,
+      "token_top1_accuracy_min": 0.9,
+      "waypoint_mean_l2_m_max": 0.15
+    },
+    "c": {
+      "decision_mode_count_min": 2,
+      "learned_success_count_min": 1,
+      "max_success_deficit_vs_keep_original": 1,
+      "primitive_category_count_min": 2,
+      "recover_alignment_miss_max": 0,
+      "recover_required_when_blocked": true,
+      "single_turn_direction_fraction_max": 0.95,
+      "successful_stop_count_min": 1,
+      "turn_count_for_handedness_check": 20
+    }
+  },
+  "implementation": {
+    "files": [
+      {
+        "logical_name": "integration/build_streamvln_p8_train_diagnostic_manifest.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/build_streamvln_p8_train_diagnostic_manifest.py",
+        "sha256": "8d56f182a76306c2363d99aa57bbf0eac376e69a3b7f72cf06116b1b02d09395"
+      },
+      {
+        "logical_name": "integration/run_streamvln_p8_train_diagnostic.py",
+        "normalization": "manifest_sha_line",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/run_streamvln_p8_train_diagnostic.py",
+        "sha256": "d0c0a9efe38802d9292620bbe90477eb90a4533cc1dae18da759f7f4ea4ae473"
+      },
+      {
+        "logical_name": "integration/streamvln_executor_contract.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_executor_contract.py",
+        "sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd"
+      },
+      {
+        "logical_name": "integration/streamvln_p8_live_diagnostic.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_p8_live_diagnostic.py",
+        "sha256": "9de54aea745819245d2cd703ceb55ed9190f3555123258409235033accafc81a"
+      },
+      {
+        "logical_name": "integration/streamvln_p8_residual_policy.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_p8_residual_policy.py",
+        "sha256": "2e962e32541bacc6bcb01cad0d79a04f5a56ffb4c5de595e306a71baca07b7e6"
+      },
+      {
+        "logical_name": "integration/streamvln_p8_topology.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_p8_topology.py",
+        "sha256": "ad5612d18a71fd166c243a183464524cdafc26ad3c13d9c7391a36e18513cb2c"
+      },
+      {
+        "logical_name": "integration/streamvln_ppo_policy.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_ppo_policy.py",
+        "sha256": "6b8057bf34817c2a0ecd4befd6000e2afadb540c5ef5ab7ccac242ef0798d80d"
+      },
+      {
+        "logical_name": "integration/streamvln_topology.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts/streamvln_topology.py",
+        "sha256": "9a4fc4b5d9d5c58e77d0e0e78f9c514ab5fd9481e15776c3687591dfe557fd36"
+      },
+      {
+        "logical_name": "rlinf/envs/__init__.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/rlinf/envs/__init__.py",
+        "sha256": "8b181ca7f5e323a6c28224455a87740634c69a25773821728563e97094b2ca87"
+      },
+      {
+        "logical_name": "rlinf/envs/streamvln/__init__.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/rlinf/envs/streamvln/__init__.py",
+        "sha256": "c6d542908babb1c0dfc3b45af1bef3f9063ff589de2b592808fdb5b4e14897b2"
+      },
+      {
+        "logical_name": "rlinf/envs/streamvln/streamvln_env.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/rlinf/envs/streamvln/streamvln_env.py",
+        "sha256": "f1b814f9f1a4a57b65e0bb26bdb2f93a9583023cb69fb2e947d50cf399f57b35"
+      },
+      {
+        "logical_name": "rlinf/envs/streamvln/streamvln_executor_contract.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/rlinf/envs/streamvln/streamvln_executor_contract.py",
+        "sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd"
+      },
+      {
+        "logical_name": "rlinf/envs/vln/vln_env.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/rlinf/envs/vln/vln_env.py",
+        "sha256": "2606b3eea3f3a80328bd5c9ed500d07268acce65eafce9b3e59feb83b51cd167"
+      },
+      {
+        "logical_name": "scripts/habitat_r2r_rgb_instruction_smoke.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/scripts/habitat_r2r_rgb_instruction_smoke.py",
+        "sha256": "4f62a2fb0f213f737d6e6fca68f32dbf824add446a45a383ab7160a8196a10a8"
+      },
+      {
+        "logical_name": "scripts/habitat_r2r_service.py",
+        "normalization": "none",
+        "path": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/scripts/habitat_r2r_service.py",
+        "sha256": "2087382bb1214d5d4658960bb76229286eddfc606755267291d1d5f28eaf9999"
+      }
+    ],
+    "manifest_sha_line_replacement": "MANIFEST_SHA256 = \"<NORMALIZED>\""
+  },
+  "irreversibility": {
+    "protocol_changes_allowed_until": "before_first_base_model_load",
+    "scientific_failure_rerun_allowed": false,
+    "unique_live_diagnostic": true
+  },
+  "paths": {
+    "asset_root": "/cache/navigation-example",
+    "base_model": "/cache/navigation-example/models/StreamVLN_Video_qwen_1_5_r2r_rxr_envdrop_scalevln_v1_3-f1f76c66083c",
+    "egl_vendor_json": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+    "habitat_env_lib": "/srv/navigation/envs/habitat-cpu-egl/lib",
+    "habitat_python": "/srv/navigation/envs/habitat-cpu-egl/bin/python3.9",
+    "habitat_server": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/scripts/habitat_r2r_service.py",
+    "habitat_sim_python": "/srv/navigation/repos/habitat-sim-cpu-egl/src_python",
+    "habitat_sim_root": "/srv/navigation/repos/habitat-sim-cpu-egl",
+    "integration_root": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8/p8/scripts",
+    "rlinf_python": "/srv/navigation/envs/rlinf-v03-cu118/bin/python",
+    "rlinf_root": "/srv/navigation/repos/RLinf-v0.3-streamvln-p8",
+    "stream_source": "/srv/navigation/repos/StreamVLN-upstream-g4",
+    "tokenizer": "/cache/navigation-example/hf/hub/models--lmms-lab--LLaVA-Video-7B-Qwen2/snapshots/013210b3aff822f1558b166d39c1046dd109520f",
+    "vision_tower": "/cache/navigation-example/hf/hub/models--google--siglip-so400m-patch14-384/snapshots/9fdffc58afc957d1a03a25b10dba0329ab15c2a3"
+  },
+  "released_inputs": {
+    "adapter_checkpoint": null,
+    "base_model": {
+      "files": [
+        {
+          "bytes": 0,
+          "relative_path": ".complete",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "bytes": 5174,
+          "relative_path": "README.md",
+          "sha256": "0336368f8274a5ed09f54cee8d56a851ecee96026d9f391a6735762c16608a60"
+        },
+        {
+          "bytes": 122,
+          "relative_path": "SOURCE.txt",
+          "sha256": "a2de678fdb31390a03bb4fec5cb7960f08ce20e580dca5b7860b25a48ca4d81c"
+        },
+        {
+          "bytes": 4416,
+          "relative_path": "config.json",
+          "sha256": "58b839efed10e0bca3fb17d411400dceca8c1c27d48b202ed9c48a976414647a"
+        },
+        {
+          "bytes": 243,
+          "relative_path": "generation_config.json",
+          "sha256": "24216e06e770ea4f6ce9f88ab782043391d886c0cf8fae9e775bcf0148febb6e"
+        },
+        {
+          "bytes": 4877660776,
+          "relative_path": "model-00001-of-00004.safetensors",
+          "sha256": "6a1a4fc8ba9ab5e8832d2d23dc6d21d18bf1f84daf03b904409721f93927a87a"
+        },
+        {
+          "bytes": 4932751008,
+          "relative_path": "model-00002-of-00004.safetensors",
+          "sha256": "d7b781ef3772d39537f81fb87a31b5db04118fbf9edcd78dbe60ad2d67d77f49"
+        },
+        {
+          "bytes": 4994571904,
+          "relative_path": "model-00003-of-00004.safetensors",
+          "sha256": "9a79a47a31c62fc2beab869cebf2e7bf956dbf630c14ef6017148fa7e41fe628"
+        },
+        {
+          "bytes": 1255812224,
+          "relative_path": "model-00004-of-00004.safetensors",
+          "sha256": "5e9eb8f127c0ec37b175c266b0cbae3106a591ec3d93698aee500f7735f041fe"
+        },
+        {
+          "bytes": 80769,
+          "relative_path": "model.safetensors.index.json",
+          "sha256": "d1f86714849892ee46d17fd82a90b9f2690e0083d2b2339ccd827673d4c5c2e3"
+        }
+      ],
+      "root": "/cache/navigation-example/models/StreamVLN_Video_qwen_1_5_r2r_rxr_envdrop_scalevln_v1_3-f1f76c66083c"
+    },
+    "tokenizer": {
+      "files": [
+        {
+          "bytes": 100,
+          "relative_path": "added_tokens.json",
+          "sha256": "416774498bd7218f05be8c7faa0b375eccdcacf66cb5ab2766bdeff84e466cf5"
+        },
+        {
+          "bytes": 248,
+          "relative_path": "generation_config.json",
+          "sha256": "eea6735f058019c875227b53de54f34353f01bbdbb0e9d8fc6474567e1334c29"
+        },
+        {
+          "bytes": 1671853,
+          "relative_path": "merges.txt",
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+        },
+        {
+          "bytes": 367,
+          "relative_path": "special_tokens_map.json",
+          "sha256": "f4f79e08d97f4d1c87f8d89264f525c8789da3b73b3bb55d1e12f692f41a7b1b"
+        },
+        {
+          "bytes": 7028015,
+          "relative_path": "tokenizer.json",
+          "sha256": "f7c9b2dba4a296b1aa76c16a34b8225c0c118978400d4bb66bff0902d702f5b8"
+        },
+        {
+          "bytes": 1538,
+          "relative_path": "tokenizer_config.json",
+          "sha256": "b36d4cfd510e8942ba3a5f4733026c5f1697b2810331be4fc9459c672e451e6a"
+        },
+        {
+          "bytes": 2776833,
+          "relative_path": "vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ],
+      "root": "/cache/navigation-example/hf/hub/models--lmms-lab--LLaVA-Video-7B-Qwen2/snapshots/013210b3aff822f1558b166d39c1046dd109520f"
+    },
+    "vision_tower": {
+      "files": [
+        {
+          "bytes": 576,
+          "relative_path": "config.json",
+          "sha256": "adc04928d8fd19a61822584fe0cf2e813e5ebac17f3e49fb1ea096860ae6457b"
+        },
+        {
+          "bytes": 3511950624,
+          "relative_path": "model.safetensors",
+          "sha256": "ea2abad2b7f8a9c1aa5e49a244d5d57ffa71c56f720c94bc5d240ef4d6e1d94a"
+        },
+        {
+          "bytes": 368,
+          "relative_path": "preprocessor_config.json",
+          "sha256": "f59da2f87c3cd079bd4f8f3037e81b277c60c498e279a8020331f67a5a3157e8"
+        }
+      ],
+      "root": "/cache/navigation-example/hf/hub/models--google--siglip-so400m-patch14-384/snapshots/9fdffc58afc957d1a03a25b10dba0329ab15c2a3"
+    }
+  },
+  "runtime": {
+    "context_tokens": 4096,
+    "determinism": {
+      "cublas_workspace_config": ":4096:8",
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": true,
+      "deterministic_sampling": true,
+      "seed_numpy": true,
+      "seed_python": true,
+      "seed_torch_cpu": true,
+      "seed_torch_cuda": true,
+      "torch_use_deterministic_algorithms": false
+    },
+    "deterministic_eval": false,
+    "device": "cuda:0",
+    "habitat_startup_timeout_s": 180.0,
+    "max_primitive_steps": 160,
+    "model_load_count": 1,
+    "temperature": 1.0,
+    "visible_gpu_count": 1
+  },
+  "runtime_identity": {
+    "egl_vendor_json_sha256": "cd3881df4227c13ca7f9cfe6c78820f21d5f7a00a41b299214f6f827e63be369",
+    "habitat": {
+      "packages": {
+        "gym": "0.23.0",
+        "habitat-lab": "0.2.4",
+        "numpy": "1.26.4"
+      },
+      "python_path": "/srv/navigation/envs/habitat-cpu-egl/bin/python3.9",
+      "python_sha256": "19ea30fb0b3b8f5b2677ce88e5b8bbca1849584c5d2ebeb2306221a1714f4096",
+      "python_version": "3.9.19"
+    },
+    "habitat_sim_commit": "f179b584bcd713c5a2a998132211e2cae881d6d1",
+    "rlinf": {
+      "packages": {
+        "numpy": "1.26.4",
+        "omegaconf": "2.3.1",
+        "peft": "0.21.0",
+        "torch": "2.6.0+cu118",
+        "transformers": "4.57.6"
+      },
+      "python_path": "/srv/navigation/envs/rlinf-v03-cu118/bin/python",
+      "python_sha256": "1482b4166a0b5c6a1bf4253cf8637c973b362aa70ca3b556a2d2234f4bff96ec",
+      "python_version": "3.10.6"
+    }
+  },
+  "schema_version": 2,
+  "seeds": {
+    "base_wrapper_init": 2026092811,
+    "residual_init": 2026092812,
+    "selection": 2026092811
+  },
+  "selection_rule": "sha256('p8g8-diagnostic-v1|seed|role|scene|index|episode_id'); one identity per distinct scene",
+  "selection_timing": "before_any_p8_model_load",
+  "selection_uses_outcome_fields": false,
+  "source": {
+    "allowed_splits": [
+      "train"
+    ],
+    "commits": {
+      "habitat_sim": "f179b584bcd713c5a2a998132211e2cae881d6d1",
+      "rlinf": "0505431899574619da86f551bad70b71e0ea2177",
+      "streamvln": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc"
+    },
+    "train_path": "/cache/navigation-example/datasets/r2r/train/train.json.gz",
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_seen_read": false,
+    "val_unseen_read": false
+  },
+  "stage": "P8/G8 train-only causal diagnostic",
+  "training": {
+    "batch_size": 32,
+    "class_weights": {
+      "computed_once_per_phase": true,
+      "method": "inverse_frequency",
+      "normalization": "total_rows_divided_by_present_class_count_times_class_count",
+      "phase_sources": {
+        "final": "deduplicated_expert_plus_dagger_rows",
+        "warmup": "deduplicated_expert_rows"
+      },
+      "row_duplication": false
+    },
+    "consecutive_gate_b_passes": 2,
+    "dagger_max_decisions_per_episode": 20,
+    "duplicate_rows_by_state_hash": false,
+    "expert_max_decisions_per_episode": 32,
+    "final_updates": 1500,
+    "frozen_backbone_precision": "bf16",
+    "learning_rate": 0.0001,
+    "loss": {
+      "intent": {
+        "coefficient": 1.0
+      },
+      "token": {
+        "coefficient": 1.0
+      },
+      "waypoint": {
+        "beta": 1.0,
+        "coefficient": 1.0,
+        "reduction": "mean",
+        "type": "SmoothL1Loss"
+      }
+    },
+    "metric_interval_updates": 25,
+    "optimizer": {
+      "amsgrad": false,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "gradient_clip": null,
+      "scheduler": null,
+      "type": "AdamW"
+    },
+    "ppo_updates": 0,
+    "sampling": {
+      "method": "torch.randint",
+      "replacement": true
+    },
+    "stopping": {
+      "check_interval_updates": 25,
+      "only_stopping_point": true,
+      "rule": "first_two_consecutive_passing_checks"
+    },
+    "trainable_precision": "fp32",
+    "value_head_trainable": false,
+    "warmup_updates": 500,
+    "weight_decay": 0.0
+  }
+}

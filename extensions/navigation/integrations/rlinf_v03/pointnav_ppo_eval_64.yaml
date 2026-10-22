@@ -1,0 +1,26 @@
+# Five official val episodes in van-gogh-room, 64 action steps each. Supply
+# both runner.resume_dir and its actor/model_state_dict/full_weights.pt as
+# runner.ckpt_path before interpreting success/SPL.
+# Habitat-Lab 0.2.4 can segfault on cross-scene reset, so the episode list
+# deliberately stays within one scene. Val 50–54 do not overlap the train file.
+defaults:
+  - pointnav_ppo_smoke
+  - _self_
+
+runner:
+  only_eval: true
+  # Both paths are required: v0.3 only_eval cannot sync actor to rollout.
+  resume_dir: null
+  ckpt_path: null
+  logger:
+    experiment_name: pointnav-eval-64-van-gogh-5episodes
+
+rollout:
+  model: ${actor.model}
+
+env:
+  eval:
+    rollout_epoch: 5
+    max_episode_steps: 64
+    max_steps_per_rollout_epoch: 64
+    episode_indices: [50, 51, 52, 53, 54]

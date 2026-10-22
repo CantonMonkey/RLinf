@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "stage": "G7.20 preregistered atomic candidate-update guard, three-seed confirmation",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "predecessor": {
+    "stage": "G7.19 valid optimizer-contract repair v2",
+    "accepted_local_commit": "eef48f1894c8ce934b2c9aac5868578cae2106a2",
+    "manifest_sha256": "bd86c0c6ebd3597f1d4a2bae7b0a546f3e5dc4ff45676e4cc002f44c8448d423",
+    "result_sha256": "1b846ab7ba9d0948633f4264f363dcc3169b01cb3307632c817ddd92a4d8242a",
+    "run_config_sha256": "2e6869c1764bb5837bce32a12ad0a820b09a47e1bf0aab10a3317eed6d2eb4a5",
+    "causal_outcome": "second_update_trigger_supported",
+    "review_trace": ".aris/traces/result-to-claim/2026-09-28_run14"
+  },
+  "selection": {
+    "method": "For each frozen seed, sort train episodes by sha256(g720|seed|index|episode_id|scene), take the first four while excluding G7.18/G7.19 scenes and enforcing global scene disjointness in seed order.",
+    "fields_used": ["index", "episode_id", "scene"],
+    "outcome_or_policy_fields_used": false,
+    "seeds": [2026092801, 2026092802, 2026092803],
+    "episodes_per_seed": 4,
+    "global_scene_disjoint": true,
+    "replacement_after_collection": false,
+    "excluded_scenes": [
+      "i5noydFURQK", "e9zR4mvMWw7", "vyrNrziPKCB", "VFuaQ6m2Qom",
+      "kEZ7cmS4wCh", "dhjEzFoUFzH", "GdvgFV5R1Z5", "JF19kD82Mey"
+    ]
+  },
+  "policy_observation_keys": [
+    "rgb", "instruction_utf8", "instruction_utf8_mask", "scene_utf8",
+    "scene_utf8_mask", "episode_utf8", "episode_utf8_mask", "env_id",
+    "episode_serial", "episode_step", "episode_start", "previous_actions",
+    "previous_action_mask", "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh", "navigable", "oracle_action", "oracle_waypoint", "shortest_path",
+    "geodesic_distance", "distance_to_goal", "future_collision", "future_outcome",
+    "severity_label", "success", "spl"
+  ],
+  "protocol": {
+    "split": "train",
+    "arms": {
+      "2026092801": [
+        {"index": 4074, "episode_id": "4084", "scene": "ur6pFq6Qu1A"},
+        {"index": 10789, "episode_id": "10808", "scene": "cV4RVeZvu5T"},
+        {"index": 4452, "episode_id": "4462", "scene": "VVfe2KiqLaN"},
+        {"index": 7729, "episode_id": "7739", "scene": "ULsKaCPVFJR"}
+      ],
+      "2026092802": [
+        {"index": 334, "episode_id": "335", "scene": "aayBHfsNo7d"},
+        {"index": 7819, "episode_id": "7829", "scene": "82sE5b5pLXE"},
+        {"index": 5297, "episode_id": "5307", "scene": "PX4nDJXEHrG"},
+        {"index": 7109, "episode_id": "7119", "scene": "rPc6DW4iMge"}
+      ],
+      "2026092803": [
+        {"index": 928, "episode_id": "929", "scene": "mJXqzFtmKg4"},
+        {"index": 8414, "episode_id": "8427", "scene": "r1Q1Z4BcV1o"},
+        {"index": 6708, "episode_id": "6718", "scene": "VzqfbhrpDEA"},
+        {"index": 6406, "episode_id": "6416", "scene": "B6ByNegPMKs"}
+      ]
+    },
+    "sampling": {
+      "method": "one ordinary stochastic policy sample per reached decision",
+      "seed_domain": "existing stable_seed(base_seed, g718, g720_collection, episode_id, decision_index)",
+      "sample_calls_per_decision": 1,
+      "target_mode_scan": false,
+      "mode_filter_or_resample": false,
+      "recovery_override": false
+    },
+    "collection_contract": {
+      "max_rows": 12,
+      "min_rows": 8,
+      "insufficient_rows": "protocol_invalid_without_replacement",
+      "independent_collection_per_seed": true
+    },
+    "max_decisions_per_episode": 3,
+    "max_primitives_per_episode": 12,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "learning_rate": 0.00001,
+    "value_learning_rate": 0.00001,
+    "preupdate_ratio_max_deviation": 0.03,
+    "postupdate_ratio_max_deviation": 0.5,
+    "postupdate_distribution_kl_max": 0.1,
+    "postupdate_functional_change_min": 0.00000001,
+    "candidate_update_limit": 2,
+    "candidate_two_requires_candidate_one_accepted": true,
+    "atomic_state_components": [
+      "high_level_parameters", "optimizer", "scheduler", "grad_scaler",
+      "optimizer_steps", "actor_version", "behavior_version",
+      "python_rng", "numpy_rng", "torch_cpu_rng", "torch_cuda_rng"
+    ],
+    "optimizer_initial_contract": {
+      "optimizer_class": "AdamW",
+      "state_entry_count": 19,
+      "parameter_group_count": 2,
+      "learning_rates": [0.00001, 0.00001],
+      "state_keys": ["exp_avg", "exp_avg_sq", "step"],
+      "moment_parameter_count": 1003592,
+      "max_abs_exp_avg": 0.0,
+      "max_abs_exp_avg_sq": 0.0,
+      "step_values": [1.0]
+    },
+    "candidate_acceptance": {
+      "full_collection_ratio_and_kl": true,
+      "finite_loss_and_grad_norm": true,
+      "nonzero_actor_and_value_gradients": true,
+      "frozen_parameters_unchanged": true,
+      "collection_inputs_unchanged": true,
+      "functional_change_required": true,
+      "all_gates_required": true
+    },
+    "candidate_rejection": {
+      "discard_candidate": true,
+      "restore_previous_accepted_state": true,
+      "all_component_hashes_must_match": true
+    },
+    "reward_path_and_collection_outcomes_are_descriptive_only": true,
+    "outcome_based_seed_update_or_threshold_selection": false,
+    "behavior_evaluation_episode_count": 0,
+    "off_batch_audit_episode_count": 0,
+    "checkpoint_selection": false,
+    "val_unseen_episode_count": 0
+  },
+  "decision_rule": {
+    "per_seed_member": "candidate one accepted and candidate two rejected with exact rollback",
+    "repeatability_supported": "at least two of three preregistered seeds are members and every run passes protocol guards",
+    "otherwise": "retain only atomic-guard implementation evidence and do not claim repeatability",
+    "g719_seed_counts_as_confirmation": false,
+    "outcomes_may_change_seed_threshold_learning_rate_data_or_batch": false
+  },
+  "required_reports": [
+    "per_seed_collection_identity_hash_and_descriptive_metrics",
+    "state_zero_and_each_candidate_ratio_and_structured_kl",
+    "per_candidate_loss_gradient_parameter_and_frozen_scope",
+    "per_candidate_before_after_and_restored_complete_state_hashes",
+    "per_seed_commit_or_reject_reason_and_final_state",
+    "three_seed_repeatability_count"
+  ],
+  "gates": {
+    "fixed_source_data_seed_and_episode_selection": true,
+    "independent_train_only_collection_per_seed": true,
+    "initial_optimizer_eager_zero_contract": true,
+    "full_collection_candidate_evaluation": true,
+    "all_accepted_states_bounded": true,
+    "all_rejected_candidates_exactly_restored": true,
+    "only_high_level_parameters_trainable": true,
+    "reward_and_outcomes_nonselective": true,
+    "no_checkpoint_or_early_selection": true,
+    "val_unseen_episode_count": 0
+  },
+  "model_load": true,
+  "rl_update": true,
+  "navigation_evaluation": false,
+  "controller_comparison": false,
+  "robot_execution": false,
+  "g8_ready": false
+}

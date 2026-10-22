@@ -1,0 +1,648 @@
+{
+  "architecture": {
+    "feature_v1_dim": 7173,
+    "feature_v1_schema_sha256": "4135d429fe39d82ba6e3cd929dc20653d0cce0ffe95e008392fb4b37a894b16b",
+    "feature_v1_schema_version": 1,
+    "feature_v2_dim": 3604,
+    "feature_v2_schema_sha256": "6846e128e948348050924550dfa32d8050c0745b848edce6cac0d3c5be8cb9ba",
+    "feature_v2_schema_version": 2,
+    "hidden_dim": 256,
+    "max_waypoint_m": 1.25,
+    "topology_max_nodes": 161,
+    "topology_model_dim": 128
+  },
+  "claim_boundary": {
+    "bc_candidate_only": true,
+    "bc_promotion": false,
+    "cuda_worker_smoke": false,
+    "g9": false,
+    "one_shot_no_retune": true,
+    "ppo": false,
+    "remote_push": false,
+    "result_to_claim_on_failure": true,
+    "validation_split_access": false
+  },
+  "created": "2026-09-29",
+  "dataset": {
+    "expert_train": [
+      {
+        "episode_id": "560",
+        "index": 559,
+        "scene": "Uxmj2M2itWa"
+      },
+      {
+        "episode_id": "6660",
+        "index": 6650,
+        "scene": "cV4RVeZvu5T"
+      },
+      {
+        "episode_id": "763",
+        "index": 762,
+        "scene": "5LpN3gDmAk7"
+      },
+      {
+        "episode_id": "5484",
+        "index": 5474,
+        "scene": "gTV8FGcVJC9"
+      },
+      {
+        "episode_id": "6595",
+        "index": 6585,
+        "scene": "29hnd4uzFmX"
+      },
+      {
+        "episode_id": "3144",
+        "index": 3137,
+        "scene": "8WUmhLawc2A"
+      },
+      {
+        "episode_id": "7793",
+        "index": 7783,
+        "scene": "vyrNrziPKCB"
+      },
+      {
+        "episode_id": "1371",
+        "index": 1367,
+        "scene": "ac26ZMwG7aT"
+      }
+    ],
+    "selected_scene_assets": [
+      {
+        "glb": {
+          "bytes": 46894716,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.glb",
+          "sha256": "29090774f72d0e43e46aca30fccbc0542dc1b47e04ec65d19caf98a1b8a2ad0d"
+        },
+        "navmesh": {
+          "bytes": 100072,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Uxmj2M2itWa/Uxmj2M2itWa.navmesh",
+          "sha256": "e82cb53f35f3715b611daab691fb7fba43933b9a223d9f5f61987a9da885649a"
+        },
+        "scene": "Uxmj2M2itWa"
+      },
+      {
+        "glb": {
+          "bytes": 48850000,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.glb",
+          "sha256": "21029b47efca46272c0fc295395d23eba18293bf6bba68d14b00f1791ed3f9a8"
+        },
+        "navmesh": {
+          "bytes": 44496,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/cV4RVeZvu5T/cV4RVeZvu5T.navmesh",
+          "sha256": "23edd222ea37d468aac94337b2b6596ebc8e06396f69d66197917b4a67dd3a2f"
+        },
+        "scene": "cV4RVeZvu5T"
+      },
+      {
+        "glb": {
+          "bytes": 47538736,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.glb",
+          "sha256": "d9fc7825af92ec6a9332ce1e53eec52bc88d8b260b6d55c8d9765b4b0f61ef07"
+        },
+        "navmesh": {
+          "bytes": 92564,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/5LpN3gDmAk7/5LpN3gDmAk7.navmesh",
+          "sha256": "d47e18202de93a1ed389d47399f56c89a6aab541921179ff3c26e035e9c619e8"
+        },
+        "scene": "5LpN3gDmAk7"
+      },
+      {
+        "glb": {
+          "bytes": 174602772,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.glb",
+          "sha256": "5a4a1eec5bf36b85bde796a60ac8e34f62eccd39d42950abdbe284c16c2f1372"
+        },
+        "navmesh": {
+          "bytes": 205552,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/gTV8FGcVJC9/gTV8FGcVJC9.navmesh",
+          "sha256": "921879f2cc7d23f9bfc53a908b0ce218244d44b472ab8211a96baf222e191980"
+        },
+        "scene": "gTV8FGcVJC9"
+      },
+      {
+        "glb": {
+          "bytes": 36222428,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.glb",
+          "sha256": "272bfe8831bada774e52cd3f0383a29bf7339f75ca88fa5bae34b3e19d46dec7"
+        },
+        "navmesh": {
+          "bytes": 29764,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/29hnd4uzFmX/29hnd4uzFmX.navmesh",
+          "sha256": "19f1db6f2ee6f5b264e60f428b8740d5ca712fd150280c151ed8c512de6d7e50"
+        },
+        "scene": "29hnd4uzFmX"
+      },
+      {
+        "glb": {
+          "bytes": 63857012,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.glb",
+          "sha256": "d652bd05699b2ab481f4c474b0dbdc0ba8422cdc8d1310182fb25a9497b153ff"
+        },
+        "navmesh": {
+          "bytes": 57452,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/8WUmhLawc2A/8WUmhLawc2A.navmesh",
+          "sha256": "f497eae96ab14f2bc5488f981d7eff5e8b49959ebb506f88cbd4c9966277ce49"
+        },
+        "scene": "8WUmhLawc2A"
+      },
+      {
+        "glb": {
+          "bytes": 156216880,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.glb",
+          "sha256": "e5664788a3b74353b89ec20c106114d5a4c25ce19a11f0b017d7d3cdfd0f001b"
+        },
+        "navmesh": {
+          "bytes": 331248,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/vyrNrziPKCB/vyrNrziPKCB.navmesh",
+          "sha256": "6387dcca1277d4e3f5f14ae71efa4c1594b78e737fa8382ddc7b88d4731de663"
+        },
+        "scene": "vyrNrziPKCB"
+      },
+      {
+        "glb": {
+          "bytes": 80345592,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.glb",
+          "sha256": "c559db98909210d5e337618cb1d90abae5268558e7d31d14d4df59eff56bf0e4"
+        },
+        "navmesh": {
+          "bytes": 120132,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/ac26ZMwG7aT/ac26ZMwG7aT.navmesh",
+          "sha256": "5d7bcc71677e5dedb729a9f2bae2be7f5b0297a3b36c61970a146cc28eadfe12"
+        },
+        "scene": "ac26ZMwG7aT"
+      },
+      {
+        "glb": {
+          "bytes": 75974400,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/mJXqzFtmKg4/mJXqzFtmKg4.glb",
+          "sha256": "8b2103d750640b5b7417bd363441b2935f8f2ff2f6357abe31b9d9630a43273e"
+        },
+        "navmesh": {
+          "bytes": 101660,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/mJXqzFtmKg4/mJXqzFtmKg4.navmesh",
+          "sha256": "2e8d74022efc4c4fb481a231a8ccf99158987629cbdeb0161f9bbbe8c2de305e"
+        },
+        "scene": "mJXqzFtmKg4"
+      },
+      {
+        "glb": {
+          "bytes": 92648580,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/1pXnuDYAj8r/1pXnuDYAj8r.glb",
+          "sha256": "b5ac077e799b57598fc3f1fb44c01e1d89ad6c118ec57a3da4f5426293cd13c2"
+        },
+        "navmesh": {
+          "bytes": 98468,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/1pXnuDYAj8r/1pXnuDYAj8r.navmesh",
+          "sha256": "9e7dc80f3e37340e53b5bb41cdd27a5909cf02af2d0c012660fc3cdda627f9e1"
+        },
+        "scene": "1pXnuDYAj8r"
+      },
+      {
+        "glb": {
+          "bytes": 64138252,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/qoiz87JEwZ2/qoiz87JEwZ2.glb",
+          "sha256": "ebfb8e4371b0223360f77a8c9a9b3f1f632e80713e7ee78c050a4058cf8731e3"
+        },
+        "navmesh": {
+          "bytes": 78072,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/qoiz87JEwZ2/qoiz87JEwZ2.navmesh",
+          "sha256": "e16343adc1a4b7704a7fe84d419d852e54a4c72b98771fe8ee04b0eb2d63a664"
+        },
+        "scene": "qoiz87JEwZ2"
+      },
+      {
+        "glb": {
+          "bytes": 90166128,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/p5wJjkQkbXX/p5wJjkQkbXX.glb",
+          "sha256": "e1f6970c245e66020313bb45daedb43da0254ceffc1d6f9496070fae283d1099"
+        },
+        "navmesh": {
+          "bytes": 145912,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/p5wJjkQkbXX/p5wJjkQkbXX.navmesh",
+          "sha256": "556d8ae0c953d116f6015884903278eb247a04b36ca123a4085277fa0c398210"
+        },
+        "scene": "p5wJjkQkbXX"
+      },
+      {
+        "glb": {
+          "bytes": 201430968,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/E9uDoFAP3SH/E9uDoFAP3SH.glb",
+          "sha256": "6eeed2c0e9f287f44ff4d6e986d7ea1f8088b23fad5e6532d5acac91ed5255d3"
+        },
+        "navmesh": {
+          "bytes": 209592,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/E9uDoFAP3SH/E9uDoFAP3SH.navmesh",
+          "sha256": "8944b48f2e6cacbdd031adb361247361f069072b13193f00eb486b443efdc555"
+        },
+        "scene": "E9uDoFAP3SH"
+      },
+      {
+        "glb": {
+          "bytes": 47777388,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/S9hNv5qa7GM/S9hNv5qa7GM.glb",
+          "sha256": "0de37ae9b2f8c8015b47de1182343744a821d990b0a1e587cf7091296e70f2fe"
+        },
+        "navmesh": {
+          "bytes": 51040,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/S9hNv5qa7GM/S9hNv5qa7GM.navmesh",
+          "sha256": "1bbfe1f0e3899dffdb72f839f773effc3cdfdb5d8dc1d32d5b2400a6cc92241d"
+        },
+        "scene": "S9hNv5qa7GM"
+      },
+      {
+        "glb": {
+          "bytes": 65871396,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Vvot9Ly1tCj/Vvot9Ly1tCj.glb",
+          "sha256": "f03c27277fe5d6cf8ff49fc9e88bbd7f0db2f774520e378a93c83e5df8991213"
+        },
+        "navmesh": {
+          "bytes": 163432,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/Vvot9Ly1tCj/Vvot9Ly1tCj.navmesh",
+          "sha256": "03a18135c9cd7b34102b0a6938a8f24b8d4b5f41d37294d808907d01b44259a7"
+        },
+        "scene": "Vvot9Ly1tCj"
+      },
+      {
+        "glb": {
+          "bytes": 141654096,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/VLzqgDo317F/VLzqgDo317F.glb",
+          "sha256": "5fa578dab55ed5b3084fd8bd489239a608e1fa65029cc3ef664ef1e25f7bcc6b"
+        },
+        "navmesh": {
+          "bytes": 137992,
+          "path": "/cache/navigation-example/scene_datasets/mp3d/VLzqgDo317F/VLzqgDo317F.navmesh",
+          "sha256": "e5015c48ef7fa7660a2440c49931cc41828bbf5953a94c3e01f3def369ba6998"
+        },
+        "scene": "VLzqgDo317F"
+      }
+    ],
+    "train_development": [
+      {
+        "episode_id": "4836",
+        "index": 4826,
+        "scene": "mJXqzFtmKg4"
+      },
+      {
+        "episode_id": "10622",
+        "index": 10603,
+        "scene": "1pXnuDYAj8r"
+      },
+      {
+        "episode_id": "6520",
+        "index": 6510,
+        "scene": "qoiz87JEwZ2"
+      },
+      {
+        "episode_id": "7298",
+        "index": 7288,
+        "scene": "p5wJjkQkbXX"
+      },
+      {
+        "episode_id": "2856",
+        "index": 2849,
+        "scene": "E9uDoFAP3SH"
+      },
+      {
+        "episode_id": "6921",
+        "index": 6911,
+        "scene": "S9hNv5qa7GM"
+      },
+      {
+        "episode_id": "5572",
+        "index": 5562,
+        "scene": "Vvot9Ly1tCj"
+      },
+      {
+        "episode_id": "1937",
+        "index": 1933,
+        "scene": "VLzqgDo317F"
+      }
+    ],
+    "train_path": "/cache/navigation-example/datasets/r2r/train/train.json.gz",
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea"
+  },
+  "executor": {
+    "action_chunk_size": 4,
+    "action_names": [
+      "STOP",
+      "FORWARD",
+      "LEFT",
+      "RIGHT"
+    ],
+    "blocked_forward_threshold": 2,
+    "expert_lookahead_m": 1.0,
+    "recover_is_lower_layer_execution_only": true,
+    "recover_target": "parent"
+  },
+  "implementation": {
+    "files": [
+      {
+        "bytes": 78366,
+        "deployment_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_bc_readiness.py",
+        "sha256": "963fd43e3ff7dc58e222321596b1282d63897ac48ab749b3d45c1f0039f33cc6",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/run_streamvln_p8_successor_bc_readiness.py"
+      },
+      {
+        "bytes": 60634,
+        "deployment_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_causal_probe.py",
+        "sha256": "e7385827f10e9430462b0a866ec2f817d4aacab6ef5f3b148b2e79bd5d7375c8",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/run_streamvln_p8_successor_causal_probe.py"
+      },
+      {
+        "bytes": 65695,
+        "deployment_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_ceiling.py",
+        "sha256": "8e066334d2e1e78b51fce1cd974252eb67e4d669d9bf9e6078b493a127a87eef",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/run_streamvln_p8_successor_ceiling.py"
+      },
+      {
+        "bytes": 102838,
+        "deployment_relative_path": "integrations/rlinf_v03/run_streamvln_p8_successor_feature_v2_ab.py",
+        "sha256": "1ed3d3ba1c39f0cf3704aa017e00a5ba3353bc78b1decc2b1908aa7afb271669",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/run_streamvln_p8_successor_feature_v2_ab.py"
+      },
+      {
+        "bytes": 5789,
+        "deployment_relative_path": "rlinf/envs/__init__.py",
+        "sha256": "873b0e3c585e9addb9be9773b3b9593514cd5f5c06e5d9810b0a891b79fe3b3b",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/envs_init_vln.py"
+      },
+      {
+        "bytes": 227,
+        "deployment_relative_path": "rlinf/envs/streamvln/__init__.py",
+        "sha256": "81eaed09c97607badc9388311739e2b48f51e5ebb8b512dd0fc5e377bc326702",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_init.py"
+      },
+      {
+        "bytes": 3294,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_chunk_ppo.py",
+        "sha256": "9a0416e3fe7b75d2d566e659fd10f8ad7384ee9579db9df44e5d91800614d2b9",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_chunk_ppo.py"
+      },
+      {
+        "bytes": 11642,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_env.py",
+        "sha256": "f9096dc2414f72274649d7aa2a7b142f08fdbeee8e6f1700808a8033147010df",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_env.py"
+      },
+      {
+        "bytes": 13562,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_executor_contract.py",
+        "sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_executor_contract.py"
+      },
+      {
+        "bytes": 95386,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_adapter.py",
+        "sha256": "70215f0abe56de522be94d00ad0adcc8cc7dea4275272915e1a59963175ed71b",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_adapter.py"
+      },
+      {
+        "bytes": 13554,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_frame.py",
+        "sha256": "580a90c6f967fdc73d866adece25e5edf937a58dc9cee0647b0aad91e1d7d814",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_frame.py"
+      },
+      {
+        "bytes": 41480,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_official_keep.py",
+        "sha256": "6886efbc9f738f350e755ec9d29b7b9812871ff14bee6e020cf9c2dc5f281632",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_official_keep.py"
+      },
+      {
+        "bytes": 19348,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_action.py",
+        "sha256": "14179921a8e132f0bb48c76179ec190c88ccfcf0108ada9c36c555c27baa56c6",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_action.py"
+      },
+      {
+        "bytes": 8523,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_env.py",
+        "sha256": "b18d7304f4f0a00bd6034c808d6b4184726425df7cc641e4fcac1cdf3f16a6c7",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_env.py"
+      },
+      {
+        "bytes": 6556,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_executor.py",
+        "sha256": "6f4f41ff1527bb95cb2c86547f694396b74a9abf56f2710973850c20ca6260d1",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_executor.py"
+      },
+      {
+        "bytes": 65433,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_policy.py",
+        "sha256": "554bf617bb828868c10fa6efaa8dce9be3863d634edc186850fd058ff243ab27",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_policy.py"
+      },
+      {
+        "bytes": 28802,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_protocol.py",
+        "sha256": "2555b48627bc67865a7095fee5c8665aed76953aec052c79c761b52553983c94",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_protocol.py"
+      },
+      {
+        "bytes": 29418,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_successor_runtime.py",
+        "sha256": "691141a814858979522670daa0adc3465c5d0d342656dfc71584dc313ee0478f",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_successor_runtime.py"
+      },
+      {
+        "bytes": 16837,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_p8_topology.py",
+        "sha256": "ad5fc74aa7714e24bde1f44c9df9938acae7745e3eee8de35ba863b5e70679f1",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_p8_topology.py"
+      },
+      {
+        "bytes": 16709,
+        "deployment_relative_path": "rlinf/envs/streamvln/streamvln_topology.py",
+        "sha256": "7ab6fc1671dfe19a8a95c6cb9fee2d347b1561adfc261122513b3380443c79a7",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/streamvln_topology.py"
+      },
+      {
+        "bytes": 74,
+        "deployment_relative_path": "rlinf/envs/vln/__init__.py",
+        "sha256": "0d515c331e9d682f843168e58d8c625acc722ed71460fb72df9c39b573ef729f",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/vln_init.py"
+      },
+      {
+        "bytes": 115899,
+        "deployment_relative_path": "rlinf/envs/vln/vln_env.py",
+        "sha256": "9d40cca53d43659c0ddcfc4b8d60892b70cbde41b1d31efc976fb510e9a13e49",
+        "source_relative_path": "rlinf-nav/integrations/rlinf_v03/vln_env.py"
+      },
+      {
+        "bytes": 31853,
+        "deployment_relative_path": "scripts/habitat_r2r_service.py",
+        "sha256": "0a9b3b986bfa753372051adf90029dd84e039c502ebbfa779f3d63a8e2901cee",
+        "source_relative_path": "rlinf-nav/scripts/habitat_r2r_service.py"
+      }
+    ]
+  },
+  "lineage": {
+    "causal_authorize_feature_v2": true,
+    "causal_manifest_canonical_sha256": "5a49481cb924a59a9ec19d92959deb51dbaf8f660fef897a4f312390c3ecd91c",
+    "causal_manifest_raw_sha256": "a027e71d27303021813ea94913d18c37d177aef6a17277f46c29c55ebbd7f87e",
+    "causal_receipt_file_sha256": "98db17588d7ab7539b7f5834b818526ec45898e848016c878881d560e8ebf531",
+    "causal_receipt_sha256": "d19d8687f1f903b506a654289f49d6044616918144b632008200641480149773",
+    "causal_runner_sha256": "e7385827f10e9430462b0a866ec2f817d4aacab6ef5f3b148b2e79bd5d7375c8",
+    "readiness_manifest_canonical_sha256": "d340a3b9c1db5eb80465dc996f93561ecde3ec3ff2f8648fddd0367966421e80",
+    "readiness_manifest_raw_sha256": "61396c099763a3c340ec66056e9fce5244baffc5e6c7ee3fb4f852b984f05ae2"
+  },
+  "protocol": {
+    "collection": {
+      "exact_keep": {
+        "behavior": "official_exact_keep",
+        "decision_budget_per_episode": 20,
+        "episode_count": 8,
+        "physical_budget_per_episode": 80,
+        "reuse_expert_episode_identities": true
+      },
+      "expert": {
+        "behavior": "train_shortest_path_expert",
+        "decision_budget_per_episode": 32,
+        "episode_count": 8,
+        "physical_budget_per_episode": 128
+      },
+      "paired_state_identity": "episode_scene_collection_role_decision_frame_topology_label"
+    },
+    "evaluation": {
+      "learned_arm": {
+        "decision_budget_per_episode": 160,
+        "deterministic": true,
+        "episode_count_per_arm": 8,
+        "passes_per_arm": 1,
+        "physical_budget_per_episode": 160
+      },
+      "matched_exact_keep": {
+        "decision_budget_per_episode": 160,
+        "episode_count": 8,
+        "passes": 1,
+        "physical_budget_per_episode": 160
+      },
+      "teacher_forced_expert": {
+        "decision_budget_per_episode": 160,
+        "episode_count": 8,
+        "physical_budget_per_episode": 160
+      }
+    },
+    "feature_pairing": {
+      "same_labels": true,
+      "same_topology_snapshot": true,
+      "temporal_state": "physical_step_minus_generation_latch_step",
+      "v1": "mean_pooled_visual_instruction_latched_on_v2_generation_ordinal",
+      "v2": "generation_latched_contextual_hidden_plus_current_metric_depth"
+    },
+    "learned_execution": {
+      "fresh_context_age_required": 0,
+      "gate": "apply_successor_feature_v2_keep_gate",
+      "learned_stop_execution": "keep_original",
+      "root_recovery_policy": "keep_original",
+      "waypoint_probability_min": 0.8
+    },
+    "single_model_load": true,
+    "single_process": true,
+    "train_reads": 48
+  },
+  "runtime": {
+    "device": "cuda:0",
+    "egl_vendor_json": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+    "habitat_env_lib": "/srv/navigation/envs/habitat-cpu-egl/lib",
+    "habitat_python": "/srv/navigation/envs/habitat-cpu-egl/bin/python3.9",
+    "habitat_sim_python": "/srv/navigation/repos/habitat-sim-cpu-egl/src_python",
+    "habitat_startup_timeout_s": 180.0,
+    "max_development_primitives_per_episode": 160,
+    "model_load_count": 1,
+    "model_python": "/opt/conda/envs/streamvln/bin/python",
+    "single_process": true
+  },
+  "schema_name": "streamvln_p8_successor_feature_v2_ab_manifest",
+  "schema_version": 1,
+  "seeds": {
+    "learner": 2026092812
+  },
+  "source_contract": {
+    "commits": {
+      "habitat_sim": "f179b584bcd713c5a2a998132211e2cae881d6d1",
+      "rlinf": "0505431899574619da86f551bad70b71e0ea2177",
+      "streamvln": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc"
+    },
+    "data_source_manifest": {
+      "raw_sha256": "499c6c25e3f44d3947d600cf87905d58a545e029bbe59d4c09087e09675e3f07",
+      "relative_path": "integrations/rlinf_v03/streamvln_p8_train_diagnostic_manifest.json",
+      "role": "episode identities, scene assets, optimizer constants and seed only"
+    },
+    "original_streamvln_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "split_contract": {
+    "allowed_splits": [
+      "train"
+    ],
+    "train_only": true,
+    "val_seen_reads": 0,
+    "val_unseen_reads": 0
+  },
+  "stage": "P8 successor train-only matched Feature-v2 A/B",
+  "thresholds": {
+    "closed_loop": {
+      "feature_v2_accepted_override_count_min": 4,
+      "feature_v2_accepted_override_episode_count_min": 2,
+      "feature_v2_forward_nonstop_fraction_min": 0.295,
+      "feature_v2_max_success_deficit_vs_keep": 1,
+      "feature_v2_recover_alignment_miss_count_max": 0,
+      "feature_v2_root_recovery_unavailable_count_max": 0,
+      "feature_v2_success_count_min": 1,
+      "feature_v2_success_delta_vs_v1_min": 2,
+      "feature_v2_successful_episode_with_accepted_override_count_min": 1,
+      "feature_v2_successful_stop_count_min": 1
+    },
+    "teacher_route": {
+      "feature_v2_delta_vs_v1_min": 0.1,
+      "feature_v2_premature_stop_count_max": 1,
+      "feature_v2_route_nonstop_bal_acc_min": 0.65,
+      "feature_v2_stop_recall_min": 0.5
+    },
+    "teacher_sample_min": {
+      "keep_original": 8,
+      "stop": 4,
+      "waypoint": 8
+    },
+    "teacher_waypoint": {
+      "feature_v2_bearing_abs_error_median_deg_max": 15.0,
+      "feature_v2_bearing_abs_error_p90_deg_max": 45.0,
+      "feature_v2_first_action_agreement_min": 0.65,
+      "feature_v2_first_action_delta_vs_v1_min": 0.1,
+      "feature_v2_vector_l2_median_m_max": 0.25,
+      "percentile_method": "nearest_rank"
+    }
+  },
+  "training": {
+    "batch_size": 32,
+    "class_weights": {
+      "computed": "once_per_phase",
+      "method": "inverse_frequency"
+    },
+    "final_updates": 1500,
+    "learning_rate": 0.0001,
+    "loss": {
+      "route": "weighted_cross_entropy",
+      "waypoint": {
+        "beta": 1.0,
+        "type": "SmoothL1Loss"
+      }
+    },
+    "optimizer": {
+      "amsgrad": false,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "type": "AdamW"
+    },
+    "ppo_updates": 0,
+    "same_learner_seed": true,
+    "updates_per_arm": 2000,
+    "value_head_trainable": false,
+    "warmup_updates": 500,
+    "weight_decay": 0.0
+  }
+}

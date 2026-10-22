@@ -1,0 +1,17 @@
+model_type: streamvln_p8_successor
+model_path: ""
+policy_setup: streamvln_p8_successor_v1
+successor_feature_dim: 7173
+successor_hidden_dim: 256
+successor_topology_max_nodes: 161
+successor_topology_model_dim: 128
+successor_blocked_threshold: 2
+successor_max_waypoint_m: 1.25
+successor_initial_log_std: -0.5
+action_dim: 1
+num_action_chunks: 1
+precision: "32"
+add_value_head: true
+is_lora: false
+lora_rank: 1
+load_to_device: true

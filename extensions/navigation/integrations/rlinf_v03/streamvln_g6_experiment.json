@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "rule": "identical fixed G4/G5 scene-disjoint train and val_unseen episodes; train-only oracle and labels; val_unseen is never used for training, tuning, or checkpoint selection",
+    "train_seed": 20260926,
+    "val_unseen_seed": 20260927
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "g4_frozen_anchor": {
+    "sha256": "06af75cdf0870d1f9af1ecd16a98ec3bbc7aefe22bbc9b899159c47b4b28f31f",
+    "role": "external original-StreamVLN action-space anchor; executor-unmatched to G5"
+  },
+  "train": [
+    {
+      "index": 70,
+      "episode_id": "71",
+      "scene": "i5noydFURQK",
+      "source_geodesic_m": 4.938568592071533
+    },
+    {
+      "index": 3944,
+      "episode_id": "3954",
+      "scene": "e9zR4mvMWw7",
+      "source_geodesic_m": 10.62592887878418
+    },
+    {
+      "index": 5052,
+      "episode_id": "5062",
+      "scene": "vyrNrziPKCB",
+      "source_geodesic_m": 5.103242874145508
+    },
+    {
+      "index": 8228,
+      "episode_id": "8241",
+      "scene": "VFuaQ6m2Qom",
+      "source_geodesic_m": 7.610518932342529
+    },
+    {
+      "index": 6384,
+      "episode_id": "6394",
+      "scene": "kEZ7cmS4wCh",
+      "source_geodesic_m": 7.6513776779174805
+    },
+    {
+      "index": 10458,
+      "episode_id": "10477",
+      "scene": "dhjEzFoUFzH",
+      "source_geodesic_m": 10.186869621276855
+    },
+    {
+      "index": 1743,
+      "episode_id": "1747",
+      "scene": "GdvgFV5R1Z5",
+      "source_geodesic_m": 6.556042671203613
+    },
+    {
+      "index": 7270,
+      "episode_id": "7280",
+      "scene": "JF19kD82Mey",
+      "source_geodesic_m": 6.167070388793945
+    }
+  ],
+  "val_unseen": [
+    {
+      "index": 526,
+      "episode_id": "527",
+      "scene": "EU6Fwq7SyZv",
+      "source_geodesic_m": 5.682068347930908
+    },
+    {
+      "index": 1582,
+      "episode_id": "1583",
+      "scene": "pLe4wQe7qrG",
+      "source_geodesic_m": 7.765632152557373
+    },
+    {
+      "index": 1143,
+      "episode_id": "1144",
+      "scene": "x8F5xyUWy9e",
+      "source_geodesic_m": 7.653949737548828
+    },
+    {
+      "index": 1082,
+      "episode_id": "1083",
+      "scene": "TbHJrupSAjP",
+      "source_geodesic_m": 8.459192276000977
+    },
+    {
+      "index": 144,
+      "episode_id": "145",
+      "scene": "zsNo4HB9uLZ",
+      "source_geodesic_m": 7.243781566619873
+    },
+    {
+      "index": 396,
+      "episode_id": "397",
+      "scene": "Z6MFQCViBuw",
+      "source_geodesic_m": 9.98071002960205
+    },
+    {
+      "index": 1498,
+      "episode_id": "1499",
+      "scene": "2azQ1b91cZZ",
+      "source_geodesic_m": 7.761274814605713
+    },
+    {
+      "index": 1233,
+      "episode_id": "1234",
+      "scene": "8194nk5LbLH",
+      "source_geodesic_m": 11.670259475708008
+    }
+  ],
+  "stage": "G6 collision recovery and stable batched PPO"
+}

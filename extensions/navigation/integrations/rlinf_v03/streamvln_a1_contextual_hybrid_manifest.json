@@ -1,0 +1,264 @@
+{
+  "schema_name": "streamvln_a1_contextual_hybrid_manifest",
+  "schema_version": 1,
+  "stage": "A1 train-only contextual topology-waypoint pilot",
+  "created": "2026-09-30",
+  "source_contract": {
+    "original_streamvln_only": true,
+    "ttt_or_secondary_post_training": false,
+    "streamvln_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "readiness_manifest": {
+      "relative_path": "integrations/rlinf_v03/streamvln_p8_successor_bc_readiness_manifest.json",
+      "raw_sha256": "61396c099763a3c340ec66056e9fce5244baffc5e6c7ee3fb4f852b984f05ae2"
+    },
+    "feature_v2_manifest": {
+      "relative_path": "integrations/rlinf_v03/streamvln_p8_successor_feature_v2_ab_manifest.json",
+      "raw_sha256": "e856789f6ab37a8fe079f13c582a77e75a408039b5025753462f18a8a5d209f9"
+    }
+  },
+  "dataset": {
+    "allowed_splits": [
+      "train"
+    ],
+    "train_path": "/cache/navigation-example/datasets/r2r/train/train.json.gz",
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_seen_read": false,
+    "val_unseen_read": false,
+    "episode_source": "exact P8 BC-readiness identities in their frozen order",
+    "episodes": {
+      "train": [
+        {
+          "episode_id": "560",
+          "index": 559,
+          "scene": "Uxmj2M2itWa"
+        },
+        {
+          "episode_id": "6660",
+          "index": 6650,
+          "scene": "cV4RVeZvu5T"
+        },
+        {
+          "episode_id": "763",
+          "index": 762,
+          "scene": "5LpN3gDmAk7"
+        },
+        {
+          "episode_id": "5484",
+          "index": 5474,
+          "scene": "gTV8FGcVJC9"
+        },
+        {
+          "episode_id": "6595",
+          "index": 6585,
+          "scene": "29hnd4uzFmX"
+        },
+        {
+          "episode_id": "3144",
+          "index": 3137,
+          "scene": "8WUmhLawc2A"
+        },
+        {
+          "episode_id": "7793",
+          "index": 7783,
+          "scene": "vyrNrziPKCB"
+        },
+        {
+          "episode_id": "1371",
+          "index": 1367,
+          "scene": "ac26ZMwG7aT"
+        }
+      ],
+      "train_development": [
+        {
+          "episode_id": "4836",
+          "index": 4826,
+          "scene": "mJXqzFtmKg4"
+        },
+        {
+          "episode_id": "10622",
+          "index": 10603,
+          "scene": "1pXnuDYAj8r"
+        },
+        {
+          "episode_id": "6520",
+          "index": 6510,
+          "scene": "qoiz87JEwZ2"
+        },
+        {
+          "episode_id": "7298",
+          "index": 7288,
+          "scene": "p5wJjkQkbXX"
+        },
+        {
+          "episode_id": "2856",
+          "index": 2849,
+          "scene": "E9uDoFAP3SH"
+        },
+        {
+          "episode_id": "6921",
+          "index": 6911,
+          "scene": "S9hNv5qa7GM"
+        },
+        {
+          "episode_id": "5572",
+          "index": 5562,
+          "scene": "Vvot9Ly1tCj"
+        },
+        {
+          "episode_id": "1937",
+          "index": 1933,
+          "scene": "VLzqgDo317F"
+        }
+      ]
+    }
+  },
+  "frozen_prior": {
+    "provider": "StreamVLNContextualFeatureProvider",
+    "source": "clean-e48 official generation adapter Feature-v2",
+    "feature_dim": 3604,
+    "schema_version": 2,
+    "schema_sha256": "6846e128e948348050924550dfa32d8050c0745b848edce6cac0d3c5be8cb9ba",
+    "components": [
+      "contextual_multimodal_hidden_3584",
+      "metric_depth_sector_summary_15",
+      "official_shadow_action_onehot_4",
+      "context_age_1"
+    ],
+    "generation_latched": true,
+    "frozen_detached": true
+  },
+  "action_contract": {
+    "policy": "StreamVLNContextualTopologyWaypointPolicy",
+    "distribution": "masked_categorical_plus_conditional_gaussian_residual",
+    "stop_logprob": "categorical_only",
+    "non_stop_logprob": "categorical_plus_raw_residual_gaussian",
+    "metric_waypoint": "candidate_anchor_plus_bounded_residual",
+    "official_shadow_stop": "force_stop_at_next_physical_boundary",
+    "external_stop_actor_credit": false,
+    "max_candidates": 5,
+    "residual_limit_m": 0.2
+  },
+  "budget": {
+    "seed": 2026093001,
+    "bc_supervision_steps": 1000,
+    "bc_expert_warmup_steps": 500,
+    "bc_dagger_steps": 500,
+    "bc_unique_identity_count": 8,
+    "bc_traversal_count": 16,
+    "bc_collection_passes": [
+      "expert",
+      "dagger"
+    ],
+    "max_primitives_per_episode": 160,
+    "ppo_episode_count": 8,
+    "ppo_update_count": 8,
+    "causal_replay_block_primitives_max": 32,
+    "bc_batch_size": 1,
+    "bc_learning_rate": 0.0001,
+    "bc_weight_decay": 0.0,
+    "bc_waypoint_coef": 2.0
+  },
+  "bc_objective": {
+    "route_term": "candidate_cross_entropy",
+    "continuous_terms": [
+      "raw_diagonal_gaussian_negative_log_likelihood",
+      "metric_waypoint_smooth_l1"
+    ],
+    "total": "route_term_plus_waypoint_coef_times_sum_of_continuous_terms",
+    "waypoint_coef": 2.0,
+    "stop_masks_all_continuous_terms": true
+  },
+  "reward": {
+    "formula": "delta_geodesic_plus_success_minus_step_minus_collision_minus_failed_stop_minus_timeout",
+    "delta_geodesic_coef": 1.0,
+    "success_coef": 10.0,
+    "step_coef": -0.01,
+    "collision_coef": -0.2,
+    "failed_stop_coef": -1.0,
+    "timeout_coef": -1.0,
+    "simulator_truth_is_reward_and_metrics_only": true
+  },
+  "ppo": {
+    "clip_ratio": 0.2,
+    "gamma_per_primitive": 0.99,
+    "gae_lambda": 0.95,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "bc_reference_kl_coef": 0.1,
+    "bc_reference_kl_max": 0.1,
+    "updates_per_episode": 1,
+    "final_checkpoint_update": 8
+  },
+  "gate_a": {
+    "success_count_min": 2,
+    "successful_stop_count_min": 2,
+    "spl_min_exclusive": 0.0,
+    "mean_distance_reduction_m_min": 1.0,
+    "timeout_count_max": 6,
+    "waypoint_episode_count_min": 4,
+    "forward_primitive_fraction_min": 0.1,
+    "left_primitive_fraction_max": 0.8,
+    "right_primitive_fraction_max": 0.8,
+    "candidate_category_count_min": 2,
+    "primitive_category_count_min": 2
+  },
+  "gate_b": {
+    "success_delta_min": 1,
+    "spl_delta_min": 0.0,
+    "mean_navigation_error_improvement_m_min": 0.5,
+    "timeout_delta_max": 0,
+    "changed_executed_trace_count_min": 2,
+    "forward_primitive_fraction_min": 0.1,
+    "left_primitive_fraction_max": 0.8,
+    "right_primitive_fraction_max": 0.8
+  },
+  "training_guard": {
+    "same_bc_initialization": true,
+    "ppo_root_forward": "manager.model",
+    "ppo_fsdp_required": true,
+    "pre_update_ratio_max_abs_deviation": 0.001,
+    "bc_reference_kl_max": 0.1,
+    "checkpoint_restore_exact": true,
+    "required_trainable_groups": [
+      "observation_encoder.projection",
+      "topology_encoder",
+      "context_fusion",
+      "candidate_scorer",
+      "candidate_slot_bias",
+      "residual_mean_head",
+      "residual_log_std",
+      "value_head"
+    ],
+    "frozen_groups": [
+      "original_streamvln_model",
+      "official_generation_state",
+      "navrl_stack_core",
+      "waypoint_compiler"
+    ]
+  },
+  "runtime": {
+    "model_python": "/opt/conda/envs/streamvln/bin/python",
+    "habitat_python": "/srv/navigation/envs/habitat-cpu-egl/bin/python3.9",
+    "habitat_sim_python": "/srv/navigation/repos/habitat-sim-cpu-egl/src_python",
+    "habitat_env_lib": "/srv/navigation/envs/habitat-cpu-egl/lib",
+    "egl_vendor_json": "/usr/share/glvnd/egl_vendor.d/50_mesa.json",
+    "habitat_startup_timeout_s": 180.0,
+    "device": "cuda:0"
+  },
+  "claim_boundary": {
+    "train_only": true,
+    "single_seed_pilot": true,
+    "paper_result": false,
+    "cross_scene_generalization": false,
+    "g9": false,
+    "remote_push": false
+  },
+  "architecture": {
+    "hidden_dim": 128,
+    "topology_max_nodes": 161,
+    "topology_model_dim": 32,
+    "max_candidates": 5,
+    "residual_limit_m": 0.2,
+    "initial_log_std": -0.5
+  }
+}

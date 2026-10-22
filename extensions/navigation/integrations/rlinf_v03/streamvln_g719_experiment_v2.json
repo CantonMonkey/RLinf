@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "stage": "G7.19 fixed zero-one-two update causal stability audit, optimizer-contract repair v2",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "predecessor": {
+    "stage": "G7.18 train-only unbiased learning-signal and short-behavior smoke",
+    "accepted_local_commit": "42566317b3435d753873be6ef277eb142c8ac929",
+    "manifest_sha256": "a985243b5aadf19ee8ab37ac534aa1292d095588f8a49427c984e81656864aab",
+    "result_sha256": "0baac522d5c0d8a4b1814ff61e3b75991e4639cf898196c35b7379695a92e95f",
+    "run_config_sha256": "8ac8243fe40a3ecdbcab8ca600f3d4405a523f80df1f639d35ae3f000530d685",
+    "collection_records_sha256": "de94c1876da52efad1773363d3a6062449ab8db45e1295544645957187a8a8ca",
+    "behavior_zero_update_sha256": "8e9ac420eed0566c9e68754cc15df1cd9ffab9035524c17b33036f7a1398f852",
+    "behavior_two_update_sha256": "08d4123e25fb212447ec9069e50add4307649edab7aa3a2217b5d3567a5fbcbd",
+    "initial_high_level_sha256": "552cbcc40c68a5f57cf6df56b2eeead4154adf7824a16fcf4a16fde39fbf5843",
+    "collection_input_sha256": "05756f740f923bded971b0da8c32fce8606a490bdcf361aed6dd5d7e348ceb02",
+    "review_trace": ".aris/traces/result-to-claim/2026-09-27_run13"
+  },
+  "policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh",
+    "navigable",
+    "oracle_action",
+    "oracle_waypoint",
+    "shortest_path",
+    "geodesic_distance",
+    "distance_to_goal",
+    "future_collision",
+    "future_outcome",
+    "severity_label",
+    "success",
+    "spl"
+  ],
+  "protocol": {
+    "split": "train",
+    "collection_scene_specs": [
+      {
+        "index": 70,
+        "episode_id": "71",
+        "scene": "i5noydFURQK"
+      },
+      {
+        "index": 3944,
+        "episode_id": "3954",
+        "scene": "e9zR4mvMWw7"
+      },
+      {
+        "index": 5052,
+        "episode_id": "5062",
+        "scene": "vyrNrziPKCB"
+      },
+      {
+        "index": 8228,
+        "episode_id": "8241",
+        "scene": "VFuaQ6m2Qom"
+      }
+    ],
+    "behavior_scene_specs": [
+      {
+        "index": 6384,
+        "episode_id": "6394",
+        "scene": "kEZ7cmS4wCh"
+      },
+      {
+        "index": 10458,
+        "episode_id": "10477",
+        "scene": "dhjEzFoUFzH"
+      },
+      {
+        "index": 1743,
+        "episode_id": "1747",
+        "scene": "GdvgFV5R1Z5"
+      },
+      {
+        "index": 7270,
+        "episode_id": "7280",
+        "scene": "JF19kD82Mey"
+      }
+    ],
+    "sampling": {
+      "method": "one ordinary stochastic policy sample per reached decision",
+      "seed_domain": "sha256(base_seed, g718, phase, episode_id, decision_index)",
+      "sample_calls_per_decision": 1,
+      "target_mode_scan": false,
+      "mode_filter_or_resample": false,
+      "recovery_override": false
+    },
+    "collection_contract": {
+      "method": "deterministically recollect and require byte-identical G7.18 serialized records",
+      "expected_rows": 12,
+      "expected_records_sha256": "de94c1876da52efad1773363d3a6062449ab8db45e1295544645957187a8a8ca",
+      "expected_input_sha256": "05756f740f923bded971b0da8c32fce8606a490bdcf361aed6dd5d7e348ceb02"
+    },
+    "update_states": [
+      0,
+      1,
+      2
+    ],
+    "execution_order": [
+      "behavior_zero_update",
+      "collection",
+      "update_one",
+      "behavior_one_update",
+      "update_two",
+      "behavior_two_update"
+    ],
+    "max_decisions_per_episode": 3,
+    "max_primitives_per_episode": 12,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_ratio": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01,
+    "learning_rate": 1E-05,
+    "value_learning_rate": 1E-05,
+    "ppo_full_batch_updates": 2,
+    "preupdate_ratio_max_deviation": 0.03,
+    "postupdate_ratio_max_deviation": 0.5,
+    "postupdate_distribution_kl_max": 0.1,
+    "postupdate_functional_change_min": 1E-08,
+    "behavior_metrics_are_descriptive_only": true,
+    "behavior_based_arm_selection": false,
+    "early_stop": false,
+    "checkpoint_selection": false,
+    "val_unseen_episode_count": 0,
+    "optimizer_initial_contract": {
+      "optimizer_class": "AdamW",
+      "state_entry_count": 19,
+      "parameter_group_count": 2,
+      "learning_rates": [
+        1E-05,
+        1E-05
+      ],
+      "state_keys": [
+        "exp_avg",
+        "exp_avg_sq",
+        "step"
+      ],
+      "moment_parameter_count": 1003592,
+      "max_abs_exp_avg": 0.0,
+      "max_abs_exp_avg_sq": 0.0,
+      "step_values": [
+        1.0
+      ]
+    }
+  },
+  "decision_rule": {
+    "one_pass_two_fail": "second update is the bounded trigger; one-update becomes only a later protocol candidate",
+    "one_fail": "stop and route to update-stability diagnosis",
+    "one_pass_two_pass": "G7.18 violation was not reproduced; do not select an arm",
+    "behavior_outcomes_may_select_arm": false
+  },
+  "required_reports": [
+    "per_state_pre_and_final_sampled_action_ratio",
+    "per_state_structured_distribution_kl",
+    "per_update_loss_gradient_and_actor_version",
+    "per_state_parameter_change_and_optimizer_scope",
+    "frozen_sentinel_and_collection_input_hashes",
+    "per_state_behavior_reward_path_collision_stop_timeout_recover_actions_modes",
+    "paired_zero_one_two_behavior",
+    "exact_initial_optimizer_eager_zero_contract"
+  ],
+  "gates": {
+    "exact_g718_initial_parameter_hash": true,
+    "exact_g718_collection_records_and_inputs": true,
+    "fixed_update_states_zero_one_two": true,
+    "matched_behavior_contract_all_states": true,
+    "causal_feedback_reward_bootstrap_and_gae": true,
+    "preupdate_ratio_near_one": true,
+    "per_update_finite_nonzero_actor_and_value_gradients": true,
+    "per_state_ratio_and_structured_kl_reported": true,
+    "only_high_level_parameters_change": true,
+    "frozen_parameters_and_collection_inputs_unchanged": true,
+    "behavior_metrics_nonselective": true,
+    "no_early_stop_or_checkpoint_selection": true,
+    "val_unseen_episode_count": 0,
+    "exact_initial_optimizer_eager_zero_contract": true
+  },
+  "model_load": true,
+  "rl_update": true,
+  "navigation_evaluation": false,
+  "controller_comparison": false,
+  "robot_execution": false,
+  "g8_ready": false,
+  "repair": {
+    "kind": "optimizer-contract-only",
+    "v1_manifest_sha256": "1453d62dc5f4ceef4a83e1ecdc6d17d3efad552dce4619c2cabf5613c521243f",
+    "v1_result_sha256": "f2832097a6c64f9e506a3e7f8954971bef73b73fa0eb3bf01ce9da267b2b9b78",
+    "v1_run_config_sha256": "9c1ad5041a2e9821251bea8ca9178398aea70dcb76077d6e3ce587325ed10f84",
+    "failed_v1_guard": "optimizer_initial_state_fixed",
+    "reason": "RLinf eagerly materializes AdamW slots during setup with zero moments and step one; v1 incorrectly required an empty state dictionary.",
+    "allowed_change": "Replace only the initial optimizer-state guard with the exact live eager-zero contract.",
+    "forbidden_changes": [
+      "data",
+      "seed",
+      "thresholds",
+      "learning_rates",
+      "update_rule",
+      "update_count",
+      "behavior_contract",
+      "decision_rule"
+    ]
+  }
+}

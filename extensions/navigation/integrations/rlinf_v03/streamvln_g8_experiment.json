@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "goal": "G8",
+  "status": "preregistered_before_model_load_collection_or_update",
+  "created": "2026-09-28",
+  "technical_revision": {
+    "created": "2026-09-28",
+    "timing": "before_any_g8_model_load_collection_or_update",
+    "reason": "replace raw cross-runtime float JSON hashing with integerized endpoint semantics",
+    "action_count_order_and_execution_changed": false
+  },
+  "question": "Does executor-aligned high-level RL improve actual VLN-CE navigation over the identical topology plus continuous-waypoint model trained with BC only?",
+  "source_contract": {
+    "streamvln_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "streamvln_source_kind": "upstream-original",
+    "released_checkpoint_only": true,
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "memory_adapter": false,
+    "ttt": false,
+    "secondary_post_training": false,
+    "lower_executor_fixed_across_arms": true
+  },
+  "policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen",
+    "causal_executor_feedback",
+    "online_topology_features"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh",
+    "navigable",
+    "oracle_action",
+    "oracle_waypoint",
+    "shortest_path",
+    "geodesic_distance",
+    "distance_to_goal",
+    "future_collision",
+    "future_outcome",
+    "severity_label",
+    "success",
+    "spl"
+  ],
+  "action_contract": {
+    "schema": "streamvln_g8_executor_aligned_action_v1",
+    "primitive_chunk": 4,
+    "primitive_ids": {
+      "stop": 0,
+      "forward": 1,
+      "left": 2,
+      "right": 3
+    },
+    "navigate_candidate_count": 26,
+    "navigate_action_ids": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+    "stop_action_id": 26,
+    "recover_action_id": 27,
+    "action_count": 28,
+    "candidate_order_sha256": "1aa80fd3ada6d18fb042b27403bd1b6c74d760273901bcaebfa5c96d0acdf2cd",
+    "navigate_execution": "action id maps to one immutable fixed-four primitive sequence",
+    "stop_execution": "four STOP proposals; physics executes the first STOP",
+    "recover_execution": "deterministic causal parent-backtrack compiler from the current online topology",
+    "ppo_likelihood": "single categorical distribution over 28 executable high-level action ids",
+    "gaussian_waypoint_likelihood": false,
+    "continuous_waypoint_role": "metric regression target and fixed-distance alignment term in navigate logits"
+  },
+  "policy_contract": {
+    "frozen_backbone": true,
+    "trainable_modules": ["state_projection", "topology_encoder", "fusion", "waypoint_head", "mode_head", "candidate_head", "value_head"],
+    "frozen_parameters": ["waypoint_log_std"],
+    "alignment_coefficient_per_m2": 4.0,
+    "navigate_logit": "candidate_head + navigate_mode_logit - 4.0 * squared_distance(candidate_endpoint, waypoint_mean)",
+    "stop_logit": "stop_mode_logit",
+    "recover_logit": "recover_mode_logit",
+    "bc_loss": "action_id_cross_entropy + 2.0 * navigate_waypoint_smooth_l1",
+    "ppo_loss": "clipped categorical PPO + 0.5 * value_loss - 0.01 * categorical_entropy + frozen BC auxiliary",
+    "bc_auxiliary_coefficient_during_rl": 0.1,
+    "clip_ratio": 0.2,
+    "gae_gamma_per_primitive": 0.99,
+    "gae_lambda_per_macro": 0.95,
+    "optimizer_scope_must_equal_declared_trainable_parameters": true
+  },
+  "arms": {
+    "release_reference": "original released StreamVLN with the fixed primitive budget",
+    "topology_waypoint_bc": "G8 architecture after matched BC only",
+    "topology_waypoint_bc_rl": "the identical BC checkpoint followed by RL; this is the primary treatment"
+  },
+  "engineering_gate": {
+    "split": "train_only",
+    "model_load_limit": 1,
+    "bounded_episode_count": 3,
+    "optimizer_update_limit": 1,
+    "required": [
+      "candidate_count_and_order_hash_match",
+      "every_action_id_compiles_deterministically",
+      "sample_and_replay_log_prob_match",
+      "preupdate_ratio_max_deviation_le_0.03",
+      "finite_nonzero_declared_gradients",
+      "zero_frozen_gradients",
+      "checkpoint_roundtrip_exact",
+      "executor_feedback_and_topology_update_validate",
+      "no_val_unseen_access"
+    ],
+    "claim": "engineering correctness only"
+  },
+  "algorithm_gate": {
+    "seeds": [2026092808, 2026092809, 2026092810],
+    "selection_rule": "rank identities with sha256('g8|seed|role|index|episode_id|scene'); use identity fields only and freeze the selection manifest before each algorithm model load",
+    "train_split": "train",
+    "development_split": "val_seen_or_frozen_train_dev_if_val_seen_is_unavailable",
+    "final_split": "val_unseen",
+    "minimum_train_scenes_per_seed": 16,
+    "minimum_train_episodes_per_seed": 32,
+    "minimum_development_episodes_per_seed": 22,
+    "final_val_unseen_schedule": "one frozen shared schedule covering every available val_unseen scene; never used for tuning",
+    "matched_fields": ["initial_bc_checkpoint", "observations", "episode_schedule", "executor", "primitive_budget", "stop_rule", "recover_rule", "sampling_seed_schedule"],
+    "primary_endpoint": "development success_rate",
+    "secondary_endpoints": ["spl", "navigation_error_m", "path_length_m", "collision_count", "blocked_forward_count", "stop_count", "timeout_count", "action_id_distribution", "primitive_distribution", "waypoint_execution_error_m"],
+    "pass_rule": "BC+RL exceeds matched BC success rate in at least two of three seeds and pooled success rate, while pooled SPL does not decrease, timeout does not increase, and executed action distributions are not collapsed",
+    "failure_rule": "report the frozen result once; allow at most one decision-relevant diagnostic inside G8"
+  },
+  "final_claim_gate": {
+    "entry": "engineering and algorithm gates pass with architecture and hyperparameters frozen",
+    "val_unseen_evaluations": 1,
+    "report": ["SR", "SPL", "NE", "path_length", "collisions", "blocked_forward", "STOP", "timeout", "action_id_distribution", "primitive_distribution", "waypoint_execution_error", "per_seed_dispersion"]
+  },
+  "governance": {
+    "no_g7_successor": true,
+    "repairs_remain_inside_g8": true,
+    "maximum_decision_relevant_diagnostics_after_main_failure": 1,
+    "local_commits_only": true,
+    "push": false,
+    "robot_execution": false
+  }
+}

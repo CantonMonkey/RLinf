@@ -1,0 +1,34 @@
+# Habitat stays in an isolated CPU/Mesa process; only RGB and official raw R2R
+# instruction text cross into the StreamVLN policy observation.
+env_type: streamvln
+seed: 7
+group_size: 1
+total_num_envs: null
+auto_reset: false
+ignore_terminations: false
+rollout_epoch: 1
+max_episode_steps: 40
+max_steps_per_rollout_epoch: 40
+
+python_bin: ${oc.env:RLINF_HABITAT_PYTHON}
+server_script: ${oc.env:RLINF_R2R_SERVER}
+asset_root: ${oc.env:VLN_ASSET_ROOT}
+habitat_sim_python: ${oc.env:HABITAT_SIM_PYTHON}
+habitat_env_lib: ${oc.env:HABITAT_ENV_LIB}
+egl_vendor_json: ${oc.env:EGL_VENDOR_JSON,/usr/share/glvnd/egl_vendor.d/50_mesa.json}
+
+dataset_split: null
+episode_index: null
+rgb_size: 64
+max_instruction_tokens: 200
+success_distance_m: 3.0
+instruction_bytes: 512
+scene_bytes: 384
+episode_bytes: 64
+env_id_base: 0
+
+video_cfg:
+  save_video: false
+  info_on_video: false
+  fps: 6
+  video_base_dir: ${oc.env:STREAMVLN_VIDEO_DIR,./videos/streamvln-frozen}

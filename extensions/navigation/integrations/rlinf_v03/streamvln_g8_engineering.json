@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "stage": "G8 bounded executor-aligned engineering gate",
+  "preregistration_sha256": "dbc4b3927ccd308263a6c2ad34b7fbdbf49ffb84d6eae3b5c704fbe6e74609da",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+  "policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen"
+  ],
+  "episodes": [
+    {"index": 70, "episode_id": "71", "scene": "i5noydFURQK", "target_mode": "navigate", "target_mode_id": 0},
+    {"index": 3944, "episode_id": "3954", "scene": "e9zR4mvMWw7", "target_mode": "stop", "target_mode_id": 1},
+    {"index": 5052, "episode_id": "5062", "scene": "vyrNrziPKCB", "target_mode": "recover", "target_mode_id": 2}
+  ],
+  "sampling": {
+    "method": "deterministic seed scan until the preregistered mode class is sampled",
+    "maximum_attempts_per_episode": 4096,
+    "coverage_conditioned_engineering_only": true
+  },
+  "expected_executed_lengths": [4, 1, 4],
+  "expected_end_boundaries": ["truncated", "terminated", "truncated"],
+  "max_episode_steps": 4,
+  "gamma": 0.99,
+  "gae_lambda": 0.95,
+  "clip_ratio": 0.2,
+  "value_coef": 0.5,
+  "entropy_coef": 0.01,
+  "bc_auxiliary_coefficient": 0.1,
+  "learning_rate": 0.00001,
+  "value_learning_rate": 0.00001,
+  "optimizer_update_limit": 1,
+  "preupdate_ratio_max_deviation": 0.03,
+  "model_load_limit": 1,
+  "val_unseen_episode_count": 0,
+  "claim": "engineering_correctness_only"
+}

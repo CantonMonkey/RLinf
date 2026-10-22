@@ -1,0 +1,18 @@
+env_type: pointnav
+seed: 7
+group_size: 1
+total_num_envs: null
+auto_reset: false
+ignore_terminations: false
+rollout_epoch: 1
+max_episode_steps: 8
+max_steps_per_rollout_epoch: 8
+python_bin: /opt/conda/envs/streamvln/bin/python
+server_script: /srv/navigation/repos/rlinf-nav/scripts/pointnav_service.py
+asset_root: /srv/navigation/data
+# Set dataset_split explicitly in each train/eval role config.
+episode_index: 0
+video_cfg:
+  save_video: false
+  info_on_video: false
+  video_base_dir: /srv/navigation/videos/pointnav-v03

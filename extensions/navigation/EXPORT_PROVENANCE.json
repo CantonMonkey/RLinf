@@ -1,0 +1,2925 @@
+{
+  "schema_version": 1,
+  "source_commit": "b9c2af0ef32f41f6065896ee5d6dbf4e494ce169",
+  "source_branch": "navrlt-lightnav-v1",
+  "source_directory": "rlinf-nav",
+  "upstream_repository": "https://github.com/RLinf/RLinf",
+  "upstream_commit": "0505431899574619da86f551bad70b71e0ea2177",
+  "destination_directory": "extensions/navigation",
+  "source_files": 413,
+  "transformation_notes": [
+    "Machine-specific usernames, paths, IP addresses, mount source and GPU UUIDs replaced consistently with deployment examples, including test fixtures.",
+    "Historical manifests and launcher defaults are examples; regenerate all source fingerprints and run receipts before a new live run.",
+    "Original source history, uncommitted patches, results, credentials, datasets and weights are excluded.",
+    "README is rewritten to describe the current extension; added publication metadata and portability edits are recorded separately."
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "source_sha256": "a4248d0c62a228a9f99714e925a650af1584aaced1f87f15496fa2ac3fabda6e",
+      "export_sha256": "a4248d0c62a228a9f99714e925a650af1584aaced1f87f15496fa2ac3fabda6e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "README.md",
+      "source_sha256": "c3da70005c76ea5b2ad5a727836be79c4bf18d33a079697255929860f158d089",
+      "export_sha256": "e138dae4449e31204339bb906be48d3faebfae4a9e833ae8a97a9a61bf70f569",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "integrations/rlinf_v03/README.md",
+      "source_sha256": "425bdbfd5ecf17f4a032e32250d7d860d1d25d97481701bf0b48f09615ed8830",
+      "export_sha256": "a00b93ae6e86d7f09f97127184751dd602d9739b2bd42935f011e7f5b8c4dcae",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "integrations/rlinf_v03/VLN_A800_INSTALL.md",
+      "source_sha256": "15a85e03b3879a5a5d6ac012ae571595b8ec8c44864271316014553c909c76cf",
+      "export_sha256": "f28b4b2124d62c12265a706fc30440bf6ac0636cdef86b00d37f3c3e79e8f6cd",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/VLN_ENV_CONFIG_STAGING.md",
+      "source_sha256": "cd733f4e228fa81b12b77d138f3c65530a349c96a6e2e430ac7e33132833b24e",
+      "export_sha256": "e983f8c86f06090ec0e73f6acaf85c365b4e4cdcc76aeaa2ee4ef0679d7cbf77",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/VLN_PROTOCOL.md",
+      "source_sha256": "22a04b012152941c72d3357176df86d8e2ec655505a08aef4721eb6ec7120caf",
+      "export_sha256": "22a04b012152941c72d3357176df86d8e2ec655505a08aef4721eb6ec7120caf",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/VLN_REGISTRATION.md",
+      "source_sha256": "bf21d728d769676cfbad5670e698cb8f748bac82641ddd5e3b8d1558b3359535",
+      "export_sha256": "a8ef05683c8691a3dcccd622b89813c6161a13ea66f87638345db30a951f5baf",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/aggregate_streamvln_g8_algorithm.py",
+      "source_sha256": "294bbca24bb8e8d2fbc342572b4ef5618796c8e9915b821bcfb28da8168b3370",
+      "export_sha256": "294bbca24bb8e8d2fbc342572b4ef5618796c8e9915b821bcfb28da8168b3370",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/bridge_smoke.py",
+      "source_sha256": "786ce885ad468165a95de0a43d3c662c47e5af501034c0b250286c41dd028177",
+      "export_sha256": "40e386a8c3b515614127121f8d73c380960a6495dd4c38b8bf521db5e0ee9b6e",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/bridge_vln_smoke.py",
+      "source_sha256": "8fc07f1556958b2a68b88632b6f4f078c250f08daa067ad4e6a7c46bce55e151",
+      "export_sha256": "22d160cfd4d40b8a43024d967654b142c363b8a579caac2f48fa466bd90d5186",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/build_lightnav_a2_train_subset.py",
+      "source_sha256": "3913985582f55792b18300d24cd8b3affc8113d2d60874a4c1e2e8ef6f5e275e",
+      "export_sha256": "3913985582f55792b18300d24cd8b3affc8113d2d60874a4c1e2e8ef6f5e275e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/build_lightnav_a3_train_split.py",
+      "source_sha256": "0136252ff17a7251acf6bec0b43298dfeeb9b0185e0cb834bb5c9c38c8880178",
+      "export_sha256": "0136252ff17a7251acf6bec0b43298dfeeb9b0185e0cb834bb5c9c38c8880178",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/build_navigation_rlt_train_split.py",
+      "source_sha256": "99a417232730eb7e1cbe1280ed7394971db7b34f522bde31bc67d5149950f952",
+      "export_sha256": "99a417232730eb7e1cbe1280ed7394971db7b34f522bde31bc67d5149950f952",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/build_streamvln_g8_algorithm_manifest.py",
+      "source_sha256": "c1f83d36504069ee2eced0416c74e7ed41bd46a0b92d3a0dc6364a53a0b439e7",
+      "export_sha256": "c1f83d36504069ee2eced0416c74e7ed41bd46a0b92d3a0dc6364a53a0b439e7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/build_streamvln_p8_train_diagnostic_manifest.py",
+      "source_sha256": "8d56f182a76306c2363d99aa57bbf0eac376e69a3b7f72cf06116b1b02d09395",
+      "export_sha256": "d9b8d13b1cea5273a0abb5a6ac09f9810409151812f4c7882a13a1cb1b3e29d5",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/cluster.py",
+      "source_sha256": "59d68e0e7b692d31431e8a2d09414e9fc816fc052b10ba9b92b014bc395e9491",
+      "export_sha256": "59d68e0e7b692d31431e8a2d09414e9fc816fc052b10ba9b92b014bc395e9491",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/cluster_state_lazy.py",
+      "source_sha256": "59d68e0e7b692d31431e8a2d09414e9fc816fc052b10ba9b92b014bc395e9491",
+      "export_sha256": "59d68e0e7b692d31431e8a2d09414e9fc816fc052b10ba9b92b014bc395e9491",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/config_smoke.py",
+      "source_sha256": "bcfd6877cf942c4b9d51b293b52df7da93256a1a9d1330fd7c39f30a4b9406da",
+      "export_sha256": "54ade70049e4eab47967028e45b55ccc9cb2d910e7918b75f22eb7b9de20948b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "integrations/rlinf_v03/config_validate_smoke.py",
+      "source_sha256": "c2a13ef3fc8925c7879679ca2d73404e7e3a71acec0ba0ddc479037fb531ff99",
+      "export_sha256": "ca06354fc7c4f6d6caeaff53c8d53e049c78e434c4fcfe63426a3053d78fe656",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "integrations/rlinf_v03/config_vln.py",
+      "source_sha256": "2afa09d6f3ec2aab1e41055e0c88bde5a771f980caa35842b9fcf5760d4714d6",
+      "export_sha256": "2afa09d6f3ec2aab1e41055e0c88bde5a771f980caa35842b9fcf5760d4714d6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage1.sh",
+      "source_sha256": "9820995abab0fa4096e38dafa8294c13acffc50b2b7dcad6c4d4797a003c3be6",
+      "export_sha256": "9717d73cb97ec7378250feeb211b02ac74a21ff371e1c0ca995162505c0d1830",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage1_retry004.sh",
+      "source_sha256": "3b136ee6f2b3b38d7dab0f9aa080bf8051cae87ff5c08def2cf3b9bf3ebe9970",
+      "export_sha256": "12c68984e2378285dcf197cda4f7f53dcadbe4c86b4f85985da4148e0dfaffcc",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage1_retry004_checkpoint_obs.sh",
+      "source_sha256": "5d4be2a87f4895d8e9661397e22d39f11376e1d261cd1d157c71a14bf06d85fb",
+      "export_sha256": "eba1980b31a1425fe03434710cbf69fafdd5f95060c16a212a619658fddc0f6d",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage2.sh",
+      "source_sha256": "121d43cffd4c2309cff764eb49c44ac016931d97c63b6140d015f3c7c8fc9316",
+      "export_sha256": "90c57d14cc79735a0fd7c18105cca6618114f2356417b59f48515b3892da5977",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage2_checkpoint_obs.sh",
+      "source_sha256": "e85cb7d8555799370b225444794a87f344b51fbd438028c36e93a5906f0247ac",
+      "export_sha256": "f792f29e4dbeb7bcc8f3645e96488411e66d01b2937da1bc65e7bc37699f0c02",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage2_repair.sh",
+      "source_sha256": "9f345ef7e4cf23d7247f2c7ff8edb79bf6aac26904824c981ea89d80a8ea943b",
+      "export_sha256": "ed5544ff0416f50ed04eb71dee69451b4356784731d5b96c87242711c0ab0131",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/continue_navigation_rlt_a800_stage2_repair_checkpoint_obs.sh",
+      "source_sha256": "fdb4d92e06c2bb9afcc33c73b9fa053d316dbf3c41f12cbdd62d6fe85eec14a4",
+      "export_sha256": "4666d12392609fc54010a60a10aed40704cbb7a58cd40ead0b42934fb213879c",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/embodied_io_struct_vln.py",
+      "source_sha256": "59f52be7680fbed935deaaa7f2ef9cf1c145f693fbc8ef4caf6a9d6957df833a",
+      "export_sha256": "59f52be7680fbed935deaaa7f2ef9cf1c145f693fbc8ef4caf6a9d6957df833a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/envs_init.py",
+      "source_sha256": "058b738a916bbe0dc5cd11c24faf228115f49801e79cdd57918ebebab0b7f3c6",
+      "export_sha256": "058b738a916bbe0dc5cd11c24faf228115f49801e79cdd57918ebebab0b7f3c6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/envs_init_vln.py",
+      "source_sha256": "873b0e3c585e9addb9be9773b3b9593514cd5f5c06e5d9810b0a891b79fe3b3b",
+      "export_sha256": "873b0e3c585e9addb9be9773b3b9593514cd5f5c06e5d9810b0a891b79fe3b3b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/episode_catalog.py",
+      "source_sha256": "95a41710b9392eed19055153582bac666761c96405597db79282a9410f8e6c2c",
+      "export_sha256": "378825f20efafe4904fa265127b9d3b1b19c72a7bc442ff1571fbb5f06717f7f",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/eval_checkpoint_cpu.py",
+      "source_sha256": "fccd1ba154d7dc7032c5edb1d1437b2a00a4085cd6e109304f745983a2d88226",
+      "export_sha256": "0d2cf1847d617caaf6eb09a24dd41771754b9ff2b4d82e997efb7868ecc6cbd5",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/eval_checkpoint_rgbd_cpu.py",
+      "source_sha256": "d309da347c23ec5f9a10cffbb9575595d52ee34f8a4e5d60ce1c0162e777006f",
+      "export_sha256": "1e5c89b1350cad769976794dc51f3a00bef92d692542f3ea46a73167c5b7fcb5",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/eval_streamvln.py",
+      "source_sha256": "f9803523b24c735a6ec31a608f94a08a273d92df3b156c2fec52f49fe543f29a",
+      "export_sha256": "f9803523b24c735a6ec31a608f94a08a273d92df3b156c2fec52f49fe543f29a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/fsdp_actor_worker_gpu_uuid.py",
+      "source_sha256": "e2ee2a879907775c0a285bde83439e081ad44c32e57910686be5bb0668ce6c14",
+      "export_sha256": "e2ee2a879907775c0a285bde83439e081ad44c32e57910686be5bb0668ce6c14",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/gpu_uuid_gate.py",
+      "source_sha256": "53657590ac4608ba26406b243476f2aeccff43c59bd46d5eb56169feca9e9dd5",
+      "export_sha256": "53657590ac4608ba26406b243476f2aeccff43c59bd46d5eb56169feca9e9dd5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/huggingface_worker_vln.py",
+      "source_sha256": "857df32b051872f3e696a909df5081b55bf1278a16ed2c1612c337d4eaf9ad69",
+      "export_sha256": "857df32b051872f3e696a909df5081b55bf1278a16ed2c1612c337d4eaf9ad69",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_lightnav_a3_training_budget_receipt.sh",
+      "source_sha256": "39c7239a9df14e5e2808ccd9fdbcb001c4ca2854dd9a919adba2eca75b679cdb",
+      "export_sha256": "1bb445a2bf8d1fd572411a81bbcca92493b95180cf0ffabcf3849986760b11fd",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_navigation_rlt_stage1_retry004_salvage.sh",
+      "source_sha256": "893cde986d0ff1676bbdf0193fc64a7c5b027ab2954ddc9ec9fe3690fd34723b",
+      "export_sha256": "8d75d5ab7ad123681088d564c3f8e827f57d94e30ca5faebb534527d5182c2d7",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_navigation_rlt_stage2_anticollapse_formal_successor.sh",
+      "source_sha256": "f333f13432552bdb684f0ece2ff9082ba6874ee9ee31b17e0c7c56c5de89e346",
+      "export_sha256": "08c424b9d0485d83d22258852036b1aeb54fe4384e7227cc41bbb561bff3e453",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_navigation_rlt_stage2_anticollapse_smoke.sh",
+      "source_sha256": "ea5f0396f4930a29409129b1f2ec824ac1ab3d402bff548d50ef27a12620cd5e",
+      "export_sha256": "755ed65d0759225fc586b74f0a869c23514aa8ddc97969971a7fa2237cd3181e",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_navigation_rlt_stage2_repair_v1.sh",
+      "source_sha256": "e35646e0ce91c64d72621d2540476b39485da72512238f4014dfa356ab2da888",
+      "export_sha256": "f1c3ffe96dd674e672eb19086eeb35366fec8d054d82a1b6aaec6772d4c9943b",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/launch_navigation_rlt_stage2_repair_v2.sh",
+      "source_sha256": "bf88b76e995d9acc3951715be6fea6353c44c9fd95a625021d8667772594a492",
+      "export_sha256": "a8990ebe171fc43498f86885bee6fcd85b4c0e346406ab83eae147cad306d1bc",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_collisions.patch",
+      "source_sha256": "6d7141a478cc005fbadf687d22e5c1a01ba770db07d0c73eebbe817f03b1a0b8",
+      "export_sha256": "6d7141a478cc005fbadf687d22e5c1a01ba770db07d0c73eebbe817f03b1a0b8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_compare.py",
+      "source_sha256": "8b1eb641d36259564924b009f0695014420e8948b59dccaa8c94b3bfe9d3f278",
+      "export_sha256": "8b1eb641d36259564924b009f0695014420e8948b59dccaa8c94b3bfe9d3f278",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_fsdp_train.py",
+      "source_sha256": "4308717d2dc3995a0430aa9ef37726ec02c88380234cc2aad760df915274661a",
+      "export_sha256": "4308717d2dc3995a0430aa9ef37726ec02c88380234cc2aad760df915274661a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_gpu_monitor.py",
+      "source_sha256": "9e890e8550a3c881a2ad5b87c112f8123b5046231f39b3fd3804653ec553903f",
+      "export_sha256": "9e890e8550a3c881a2ad5b87c112f8123b5046231f39b3fd3804653ec553903f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_obs_archive.py",
+      "source_sha256": "2e42cdb81488a036b3849e22d8f7ef2807c9102d3724e167f48718433cdaf916",
+      "export_sha256": "e3114d4b92b732874b4afaeab9baa2242202a2bdadae4c17a60abc983f5e54ba",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_policy.py",
+      "source_sha256": "a2c579f11ebe0ff2a6eaf71e177f124e1c28f0d0348580305cbb47cdca77c26e",
+      "export_sha256": "a2c579f11ebe0ff2a6eaf71e177f124e1c28f0d0348580305cbb47cdca77c26e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_rollout.py",
+      "source_sha256": "b70ab5f94a953ec74ad09b3fa6e8524d375e8f908baa843a226fa10edda9e533",
+      "export_sha256": "b70ab5f94a953ec74ad09b3fa6e8524d375e8f908baa843a226fa10edda9e533",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_run_manifest.py",
+      "source_sha256": "4b40a891a4571e5e1c3183cdd58b21baa83a7a9f0ffdc1e8625923bf1077f96d",
+      "export_sha256": "4b40a891a4571e5e1c3183cdd58b21baa83a7a9f0ffdc1e8625923bf1077f96d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_training_budget_receipt.py",
+      "source_sha256": "a4b596ed05d6610e7ba859e53f2427108fbf16f9ca746166c66f28d745b929fe",
+      "export_sha256": "175d38847cf3357210092b3f953074b2ecf9093790b10a24d189acf105183a01",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_a3_verify_run_manifest.py",
+      "source_sha256": "e41dda1683ca885109026f5c299e50c93cfb02314413451f8f59fa9b952be324",
+      "export_sha256": "e41dda1683ca885109026f5c299e50c93cfb02314413451f8f59fa9b952be324",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_l0_native_probe.py",
+      "source_sha256": "d633d40032608e61755ef84d6c6615ba8ea71453bb940ce77707e87dd5104abc",
+      "export_sha256": "d633d40032608e61755ef84d6c6615ba8ea71453bb940ce77707e87dd5104abc",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/lightnav_navigation_rlt_context.patch",
+      "source_sha256": "f0116b9d39a2c2d08a3e624721ec539ae6ad2b075c945ccd0b6083b8017f6afb",
+      "export_sha256": "f0116b9d39a2c2d08a3e624721ec539ae6ad2b075c945ccd0b6083b8017f6afb",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/mlp_init.py",
+      "source_sha256": "e5d3a921c11de9d3b0c75991344442a046515fd1a2e6bb6b439ba0ba6d65c8e1",
+      "export_sha256": "e5d3a921c11de9d3b0c75991344442a046515fd1a2e6bb6b439ba0ba6d65c8e1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/mlp_policy.py",
+      "source_sha256": "497ca1615cc63812fa9a95dfc29cee10156e78c4b4772a58ffdfdd19c7a8c759",
+      "export_sha256": "497ca1615cc63812fa9a95dfc29cee10156e78c4b4772a58ffdfdd19c7a8c759",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/models_init_vln.py",
+      "source_sha256": "c46b35e27bfac64bf10ca5e1b6fb308c74f62b1b84d6c5c2d6802937dd41a48c",
+      "export_sha256": "c46b35e27bfac64bf10ca5e1b6fb308c74f62b1b84d6c5c2d6802937dd41a48c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_action.py",
+      "source_sha256": "ac1475710ab38689487cab25e737e672225d7abaca3711959565451a00890d24",
+      "export_sha256": "ac1475710ab38689487cab25e737e672225d7abaca3711959565451a00890d24",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_checkpoint_obs_archive.py",
+      "source_sha256": "c49ddbb03f83d0ff515a9171ac745b82d3f0d12acf1ad247294213b4baf7119f",
+      "export_sha256": "e6dea0ad3bbf32e48e0dbd089acd494227492fd5b619db4bf0909b519aa96a83",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_compare.py",
+      "source_sha256": "e44978491148fbfa18b48fbe520dc4dd28e376517e144218be5fa193e85bb960",
+      "export_sha256": "e44978491148fbfa18b48fbe520dc4dd28e376517e144218be5fa193e85bb960",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_eval.py",
+      "source_sha256": "143ba2027d5cd1bceb8ed12cd29cb26fdcaa6df37f514bb26a64e3b25751a78a",
+      "export_sha256": "143ba2027d5cd1bceb8ed12cd29cb26fdcaa6df37f514bb26a64e3b25751a78a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_final_report.py",
+      "source_sha256": "8780558732e2a55b320503084073c2a77644dfeabe46be65cfec256a19d0f665",
+      "export_sha256": "8780558732e2a55b320503084073c2a77644dfeabe46be65cfec256a19d0f665",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_fsdp_train.py",
+      "source_sha256": "1660cc508f43911a08203714ce9741a819509dede431fd651b290f50ca5edd29",
+      "export_sha256": "1660cc508f43911a08203714ce9741a819509dede431fd651b290f50ca5edd29",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_lightnav_parity.py",
+      "source_sha256": "16d0c2b86c5a18fba19fc2bbdc57abed267c9e3193d7e74b055b4b862170c5df",
+      "export_sha256": "16d0c2b86c5a18fba19fc2bbdc57abed267c9e3193d7e74b055b4b862170c5df",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_obs_archive.py",
+      "source_sha256": "7ca631bba3187abf28cd02bf4d277ba0fa1acdcbba727518eacd5f858936bdba",
+      "export_sha256": "4039b07b131052da2a9b8184498950e16e2de615ce03d2b9e938f0f4cc0bb998",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_parallel.py",
+      "source_sha256": "e4f836017e27e4ae69d72231999e20dd1163f3a349ed72c187e59a91654b981f",
+      "export_sha256": "e4f836017e27e4ae69d72231999e20dd1163f3a349ed72c187e59a91654b981f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_policy.py",
+      "source_sha256": "4dc7b09c169f430147646b73ddb3c9c273f872f2c541c7cff6bec58c25ec26c9",
+      "export_sha256": "4dc7b09c169f430147646b73ddb3c9c273f872f2c541c7cff6bec58c25ec26c9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_post_training.py",
+      "source_sha256": "f51d87f54b77bb6584282a11998344656c9d829c9bdaa882cd1b4f9c680af7d1",
+      "export_sha256": "f51f6f3d75609e0f89bced1e3dc6791cabc0ec14ac719db8723238b2c3e507e0",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_prepare_training.py",
+      "source_sha256": "a4712715b43fcffc5d567f4ff2b670ffa0147bd9cb9befd2447075a3c28b26d7",
+      "export_sha256": "a4712715b43fcffc5d567f4ff2b670ffa0147bd9cb9befd2447075a3c28b26d7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_promote_replay.py",
+      "source_sha256": "dc955a3cf82cd5e0b9d9b12bf39235587a5c23cde26582ce61681d747c4c687d",
+      "export_sha256": "dc955a3cf82cd5e0b9d9b12bf39235587a5c23cde26582ce61681d747c4c687d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_relocate_replay.py",
+      "source_sha256": "88fde9513ccc926d931bf90f5abbe05c7824f192472258983cb6aef3be29bc5b",
+      "export_sha256": "88fde9513ccc926d931bf90f5abbe05c7824f192472258983cb6aef3be29bc5b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_remote_runtime_finalizer.py",
+      "source_sha256": "bd7d322227b57ad45fa500c1583952b8b4f3aaf56a09e71253e4bf5d61defc8c",
+      "export_sha256": "bd7d322227b57ad45fa500c1583952b8b4f3aaf56a09e71253e4bf5d61defc8c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_replay.py",
+      "source_sha256": "f8fdfd33568bbdb83047c6372181c6c71822381ee049b30d32aea267e5743c94",
+      "export_sha256": "f8fdfd33568bbdb83047c6372181c6c71822381ee049b30d32aea267e5743c94",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_rollout.py",
+      "source_sha256": "d6ee0a644625d4564f45a07a7c2f21f668887ff4cc5bdd583111c0fe7b916c9b",
+      "export_sha256": "d6ee0a644625d4564f45a07a7c2f21f668887ff4cc5bdd583111c0fe7b916c9b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_run_manifest.py",
+      "source_sha256": "733e2a105bddc4e6eede835e01597f4d7cc76ebf32e94f39fa9e44e52f4755ef",
+      "export_sha256": "733e2a105bddc4e6eede835e01597f4d7cc76ebf32e94f39fa9e44e52f4755ef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_stage1_gate.py",
+      "source_sha256": "4e198f38acf778a262fe511a7f5ad8a4f38dc9781705aa99b2c17507053d2725",
+      "export_sha256": "4e198f38acf778a262fe511a7f5ad8a4f38dc9781705aa99b2c17507053d2725",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_stage2_repair_bundle.py",
+      "source_sha256": "cef3c76b809f069f3f3347613495b6e6b69093512565080483ad2b033d518b7b",
+      "export_sha256": "cef3c76b809f069f3f3347613495b6e6b69093512565080483ad2b033d518b7b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/navigation_rlt_storage_guard.py",
+      "source_sha256": "2cc42194509297c11d31d475244147372ce6c5ae474a02c36f3932cebfd3df67",
+      "export_sha256": "890bfb63af2e79bc2175eb0440cf76398865c085a73540a00ac63509f4716b34",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/node_preflight.py",
+      "source_sha256": "4b46e3b1cd7dec4c2616919ed63070d9ac1c0a862a35b85730af058c468d193d",
+      "export_sha256": "4b46e3b1cd7dec4c2616919ed63070d9ac1c0a862a35b85730af058c468d193d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/nvidia_gpu.py",
+      "source_sha256": "f846c2b43ce161b09c574f53a953c4d96be3f0d4ec8706a7e199c25690af2ca2",
+      "export_sha256": "f846c2b43ce161b09c574f53a953c4d96be3f0d4ec8706a7e199c25690af2ca2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/pointnav_env.py",
+      "source_sha256": "0d2e070b285a093fa4d32fc428b7325984a16b5cc95b9392718e74f2ed27451f",
+      "export_sha256": "0d2e070b285a093fa4d32fc428b7325984a16b5cc95b9392718e74f2ed27451f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/pointnav_env.yaml",
+      "source_sha256": "a21687a1cd91c77631a8a26ea1e1aa50204012284f0005d67a443f6074a9033d",
+      "export_sha256": "119ae41d24fa8d45d0c968e6e425a337630a4a6a67ff83ad4fb2c5013ac3693f",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/pointnav_init.py",
+      "source_sha256": "9ca80a5fa9e79fcfbd0a88ffa03576dadd2a19b77122c22e573b748089df9c74",
+      "export_sha256": "9ca80a5fa9e79fcfbd0a88ffa03576dadd2a19b77122c22e573b748089df9c74",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/pointnav_ppo_eval_64.yaml",
+      "source_sha256": "2ec046897129b7e8076e336b3fc4d32c60b8ba51c6d316665682c9d35664561e",
+      "export_sha256": "2ec046897129b7e8076e336b3fc4d32c60b8ba51c6d316665682c9d35664561e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/pointnav_ppo_smoke.yaml",
+      "source_sha256": "47a060077fcfab488a362cde603833c52339557bdd04f352dd98394d577de9f5",
+      "export_sha256": "d0c64ff1a0dfcf31d85565ef2922887033bc22732718ea99ed548089647783c6",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/policy_smoke.py",
+      "source_sha256": "a48da4015a4353f759835af0cff3219a8d03c3c0fa278c5d50c50e401b1adcc9",
+      "export_sha256": "a48da4015a4353f759835af0cff3219a8d03c3c0fa278c5d50c50e401b1adcc9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/recompute_streamvln_g721.py",
+      "source_sha256": "3b075cc0ad062a3666dbd565c2b3fc95c785c2051891112bebf62877b231d58e",
+      "export_sha256": "3b075cc0ad062a3666dbd565c2b3fc95c785c2051891112bebf62877b231d58e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/recompute_streamvln_g722.py",
+      "source_sha256": "e81aadd8cda0caf2e0b78920e4c69c0a0862c792cc8bd5499bd9d5f02ada7ff6",
+      "export_sha256": "e81aadd8cda0caf2e0b78920e4c69c0a0862c792cc8bd5499bd9d5f02ada7ff6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/recompute_streamvln_g723.py",
+      "source_sha256": "a4f827b413702c93d96750400fc77315fbf1c36f336bc185c9a7c65e55fb7411",
+      "export_sha256": "a4f827b413702c93d96750400fc77315fbf1c36f336bc185c9a7c65e55fb7411",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_lightnav_a2_habitat.sh",
+      "source_sha256": "e2d8c1da356efe7f940d7a39a9f5fe99fbf85a853dcfa9e65fd60d2f7fcb3880",
+      "export_sha256": "ceaa16d456191454b90f3eb283a7d7381b24e7f1e4b3512d53a34067fc24b496",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_lightnav_a2_habitat_ebk180.sh",
+      "source_sha256": "155c06b965509a05725d0b841fffae857644be36a8cc71b6f637d287b47c1d21",
+      "export_sha256": "c4a105a426fdf409981378ed35a8baeb28960240bb3ecb7448aa9aa873391ce7",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_lightnav_a3_a800.sh",
+      "source_sha256": "8578b7f30d16e094571ce619519c18d8393404ac44629be6820205632b31a3c4",
+      "export_sha256": "824f0f35ed01124b8241a7adbd8ed5e69b301456582be094fabdd82885e6b25b",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_lightnav_a3_ebk_phase.sh",
+      "source_sha256": "b64e1f27352b4d0a8642e09fd5748ddf4e86177b93718fc03904517255aaedc9",
+      "export_sha256": "da6c1970d5ac4cd240a0eca22fba3396758e9f5e5499b17d12c558bda94616c3",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_lightnav_a3_habitat_ebk180.sh",
+      "source_sha256": "8c3a8b5de9dafe00d8d8e5389c32bff7ec5aecb0ad132213a3c0e748cd098d76",
+      "export_sha256": "8f80d2298eaa0b58c7fe77d155c0e8be901e9f51c418154b08ed2c9f8415b7db",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_navigation_rlt_a800.sh",
+      "source_sha256": "ad5996d605a71a9f7a2fc2f6af099fe0ee91ce11393eb945f097110b502ae2ba",
+      "export_sha256": "f7980e14ab450b279dc9f140960b6209b5c4344fffcb0acc7dcdc77e0f3c52dd",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_navigation_rlt_a800_stage2_repair.sh",
+      "source_sha256": "5a05fc885d207778d6e77e9113a34c5921c040d73e9f20ba7e8949ba870f8f09",
+      "export_sha256": "fc3452cf48e2f479e00b7ffebe0594fe8d850c41cf9f1469892e17a77780c6d0",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_navigation_rlt_ebk_eval.sh",
+      "source_sha256": "1b8e980b4176f0f12678a97d99a284766c66fef988230908038ea397e0ceba50",
+      "export_sha256": "a2d66d11a8f83105dbe874e1a82a702998072e6e88bfc6484bea8e6c4ffc03a7",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_navigation_rlt_ebk_worker.sh",
+      "source_sha256": "0be6264177aa017c6682b32ddb7f227b5614ad77fe409ea5124f14097c75ecf5",
+      "export_sha256": "509640230038e1074f4b47cfb67110a452781be8f0b4f400c53c3a65f509b055",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_navigation_rlt_lightnav_ebk.sh",
+      "source_sha256": "59a7435adf6e82bb5cc2b0a5347532dd375c3e075506276b42195b5b23ab0d26",
+      "export_sha256": "86951501a78ad69419c76f8c75a49c0034d7f262b9f3540890f4ee98a206f123",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_pointnav_ray_smoke_4090.py",
+      "source_sha256": "5cbdc9d10056f9b6b8b631332082c52eef58384c489f81923f4e75610b1a9ca7",
+      "export_sha256": "965b8ac4eff559ebe33026ac767ffb6ef2be539776ebc45ca36008bd380ad924",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_pointnav_ray_smoke_a800.py",
+      "source_sha256": "1b78a1f27b9a851bb2ee7e1f1418986a8da5a5c9739655dfc261b145419b58d6",
+      "export_sha256": "8a16ffd856887e05d25a096f14ae89a68347fc61d2cd6706266fe61e50bc8317",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_a1_contextual_hybrid.py",
+      "source_sha256": "9add2358d56195bd519da12cca91e8040ba7b50eb9434e7bd37161d8b4bb26c2",
+      "export_sha256": "9add2358d56195bd519da12cca91e8040ba7b50eb9434e7bd37161d8b4bb26c2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_atomic_guard_g720.py",
+      "source_sha256": "539118ab13db743a39854292f0c36e8baf44f52915264fa8db6179935b0771f3",
+      "export_sha256": "539118ab13db743a39854292f0c36e8baf44f52915264fa8db6179935b0771f3",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g7.py",
+      "source_sha256": "8c6ae974e1e87890b583e44a908c93cbf1fd5d6be693678b20b04026c65a328c",
+      "export_sha256": "8c6ae974e1e87890b583e44a908c93cbf1fd5d6be693678b20b04026c65a328c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g71.py",
+      "source_sha256": "d816c591b650340d5de23284c3c2064df9640ae24f835de368b5048e4b7655fc",
+      "export_sha256": "d816c591b650340d5de23284c3c2064df9640ae24f835de368b5048e4b7655fc",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g72.py",
+      "source_sha256": "c248236553bad258183c6d865bb8cf99c172734f28dd8b47bbf874d962f10e60",
+      "export_sha256": "c248236553bad258183c6d865bb8cf99c172734f28dd8b47bbf874d962f10e60",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g73.py",
+      "source_sha256": "80574a18d2b13cc91c11305d590e5d5cd98d220acffb03c63673f910bec72cef",
+      "export_sha256": "80574a18d2b13cc91c11305d590e5d5cd98d220acffb03c63673f910bec72cef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g74.py",
+      "source_sha256": "a63287f6d800f2a78123f57e2ef0d3fa6a7ccbcabd97910926d5799ab5751ed8",
+      "export_sha256": "a63287f6d800f2a78123f57e2ef0d3fa6a7ccbcabd97910926d5799ab5751ed8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_candidates_g75.py",
+      "source_sha256": "44c0c1981fd2b8f75651564b8e1579ce567f5c40dd7f65f8b3635358f8261abc",
+      "export_sha256": "44c0c1981fd2b8f75651564b8e1579ce567f5c40dd7f65f8b3635358f8261abc",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_contract_g716.py",
+      "source_sha256": "283f3971c7728c285fda81239d38ba3f6ccbd4204a94c0f18b5463e2595f7930",
+      "export_sha256": "283f3971c7728c285fda81239d38ba3f6ccbd4204a94c0f18b5463e2595f7930",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_depth_g78.py",
+      "source_sha256": "034b18dd26be01b838fc684840d2779904b74e6e62df576e14520a51d1416f66",
+      "export_sha256": "034b18dd26be01b838fc684840d2779904b74e6e62df576e14520a51d1416f66",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_executor_boundary_g723.py",
+      "source_sha256": "7f867535ab4e2f26daea63353ee8cbe87d4d988b3a21aaaea55cb5e34a59d4ef",
+      "export_sha256": "7f867535ab4e2f26daea63353ee8cbe87d4d988b3a21aaaea55cb5e34a59d4ef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_g8_algorithm.py",
+      "source_sha256": "df36a863ebdf656595b2cdcf23c8c498d512d50273b28ee35c8e9122663b650f",
+      "export_sha256": "df36a863ebdf656595b2cdcf23c8c498d512d50273b28ee35c8e9122663b650f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_g8_engineering.py",
+      "source_sha256": "06b239c017398446fdc9e436e95f0e69c009376829f823a5053212e734be2228",
+      "export_sha256": "06b239c017398446fdc9e436e95f0e69c009376829f823a5053212e734be2228",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_g8_release_reference.py",
+      "source_sha256": "2dd7e25bbb089aea682c3575240b3a3d2618bf44e7e737285e8c20c1d9e378f9",
+      "export_sha256": "2dd7e25bbb089aea682c3575240b3a3d2618bf44e7e737285e8c20c1d9e378f9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_geometry_g711.py",
+      "source_sha256": "61adcbc27090556e212fa361cb532a503c5ee323d116901cabfc7ead531ac719",
+      "export_sha256": "61adcbc27090556e212fa361cb532a503c5ee323d116901cabfc7ead531ac719",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_ground_support_g713.py",
+      "source_sha256": "740b212cceffa89c3a9450160ae013a8060f7f3fa5f5faa8959436cce0fd1348",
+      "export_sha256": "740b212cceffa89c3a9450160ae013a8060f7f3fa5f5faa8959436cce0fd1348",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_learning_g718.py",
+      "source_sha256": "3f878e48d40b7412081a00bfe482671e585291b76a6a94c8c8d5d7330bef59b2",
+      "export_sha256": "3f878e48d40b7412081a00bfe482671e585291b76a6a94c8c8d5d7330bef59b2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_macro_audit_g79.py",
+      "source_sha256": "97a6d2225482b581e3f434392a4ce23d1e93ff31e4056ba0ad8add2c5d5a0a67",
+      "export_sha256": "97a6d2225482b581e3f434392a4ce23d1e93ff31e4056ba0ad8add2c5d5a0a67",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_matched_behavior_g722.py",
+      "source_sha256": "fca7ed75638c10ea1e2173b556f257bc0ea98db3d602531fd0baf1619ef7519a",
+      "export_sha256": "fca7ed75638c10ea1e2173b556f257bc0ea98db3d602531fd0baf1619ef7519a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_oracle_g712.py",
+      "source_sha256": "5c7661c6887d7cb3875becd9d1e53e65dc3ffb5338515bcfbf6064ea62957468",
+      "export_sha256": "5c7661c6887d7cb3875becd9d1e53e65dc3ffb5338515bcfbf6064ea62957468",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_outcome_g715.py",
+      "source_sha256": "4b83296ae652c8e73f22d261e13c09f9720c6212a1b36693d21f360af87886b9",
+      "export_sha256": "4b83296ae652c8e73f22d261e13c09f9720c6212a1b36693d21f360af87886b9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_a800_parity.py",
+      "source_sha256": "5d5f1673d5e954f6d30e4b8087203e389a8ee9a0db76b682c9a7653784eeb64b",
+      "export_sha256": "5d5f1673d5e954f6d30e4b8087203e389a8ee9a0db76b682c9a7653784eeb64b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_successor_bc_readiness.py",
+      "source_sha256": "963fd43e3ff7dc58e222321596b1282d63897ac48ab749b3d45c1f0039f33cc6",
+      "export_sha256": "d6c097763b6332536f4bc52460193d4ed94d8ceae14f8a143c8bbf217bc8ae8e",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_successor_causal_probe.py",
+      "source_sha256": "e7385827f10e9430462b0a866ec2f817d4aacab6ef5f3b148b2e79bd5d7375c8",
+      "export_sha256": "e7385827f10e9430462b0a866ec2f817d4aacab6ef5f3b148b2e79bd5d7375c8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_successor_ceiling.py",
+      "source_sha256": "8e066334d2e1e78b51fce1cd974252eb67e4d669d9bf9e6078b493a127a87eef",
+      "export_sha256": "8e066334d2e1e78b51fce1cd974252eb67e4d669d9bf9e6078b493a127a87eef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_successor_feature_v2_ab.py",
+      "source_sha256": "1ed3d3ba1c39f0cf3704aa017e00a5ba3353bc78b1decc2b1908aa7afb271669",
+      "export_sha256": "1ed3d3ba1c39f0cf3704aa017e00a5ba3353bc78b1decc2b1908aa7afb271669",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_p8_train_diagnostic.py",
+      "source_sha256": "a99e5484231d971aef95065cbd5f2102027d934bb150b842efe733ac315b3cab",
+      "export_sha256": "a99e5484231d971aef95065cbd5f2102027d934bb150b842efe733ac315b3cab",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_passability_g76.py",
+      "source_sha256": "e4d594f784243852ae6cea09da2e0a12f0d8446e76471bf4701f8b6f298a8c73",
+      "export_sha256": "e4d594f784243852ae6cea09da2e0a12f0d8446e76471bf4701f8b6f298a8c73",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_passability_g77.py",
+      "source_sha256": "904a65ea4d086ccec0f12745db9e306985f053877d8bfe7c7860f25a9b9e8b78",
+      "export_sha256": "904a65ea4d086ccec0f12745db9e306985f053877d8bfe7c7860f25a9b9e8b78",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_plumbing_g717.py",
+      "source_sha256": "93b5780b70fa4db4e933af8157efe925b96fa7475c1c7d0d5957407ed3cac073",
+      "export_sha256": "93b5780b70fa4db4e933af8157efe925b96fa7475c1c7d0d5957407ed3cac073",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_ppo_g3.py",
+      "source_sha256": "d11ee390bf8bc84500ff40d07cca481346e21f47258d7828c6cb8d5b0a4ed0e7",
+      "export_sha256": "d11ee390bf8bc84500ff40d07cca481346e21f47258d7828c6cb8d5b0a4ed0e7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_ppo_g4.py",
+      "source_sha256": "eb90c6b2e6a3b60ad0d8430edcdff9c310f62ed42f3aab53f7fc312af39a6e42",
+      "export_sha256": "eb90c6b2e6a3b60ad0d8430edcdff9c310f62ed42f3aab53f7fc312af39a6e42",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_recovery_g6.py",
+      "source_sha256": "36dc651245f3890c2cfc2e9e867a771a21dcc9999770a8a8114441ddb6e5611e",
+      "export_sha256": "36dc651245f3890c2cfc2e9e867a771a21dcc9999770a8a8114441ddb6e5611e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_safety_transfer_g721.py",
+      "source_sha256": "14b167bb631de9c142d456d854609792ccee1a70e1877e0c6d9114470d06a5f4",
+      "export_sha256": "14b167bb631de9c142d456d854609792ccee1a70e1877e0c6d9114470d06a5f4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_severity_g710.py",
+      "source_sha256": "ccf687b89beaa1f257a431d70deaa01709e047c32ae980791f4d89666cfe8799",
+      "export_sha256": "ccf687b89beaa1f257a431d70deaa01709e047c32ae980791f4d89666cfe8799",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_stability_g719.py",
+      "source_sha256": "e1e3506b285b071ed27cabf1b71e06919c274835d39eaef0f9e6cb081aedcf5e",
+      "export_sha256": "e1e3506b285b071ed27cabf1b71e06919c274835d39eaef0f9e6cb081aedcf5e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_stability_g719_v2.py",
+      "source_sha256": "e29c710cd850a918e0e10182cbab8e1782e2e0c6c8fc27e187cfb58eb5d72a48",
+      "export_sha256": "e29c710cd850a918e0e10182cbab8e1782e2e0c6c8fc27e187cfb58eb5d72a48",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_topology_g5.py",
+      "source_sha256": "27274f70e60913429b589a28c604c3dcf5b3831ca804081d4368eff12976eaaf",
+      "export_sha256": "27274f70e60913429b589a28c604c3dcf5b3831ca804081d4368eff12976eaaf",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_streamvln_visibility_g714.py",
+      "source_sha256": "8a0ae9ad77fdd2a786603a25a26eb70ada0ae861064a31e2cd05dcda916ca74e",
+      "export_sha256": "8a0ae9ad77fdd2a786603a25a26eb70ada0ae861064a31e2cd05dcda916ca74e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_topology_waypoint_stack_s2.py",
+      "source_sha256": "c7e86acc565e68cfd551f1ce62b70f9813bc9d3cf62b0010c51aecf17586dbea",
+      "export_sha256": "1d1b2ca2064cdbfc6de2c61312fd4b4630394613937b1fff42f1147ada601ee4",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/run_vln_ray_smoke_a800.py",
+      "source_sha256": "ef1ce4dbe59134f31417722dd8974a9cdae71d995bac12ccad01a1ce9890508b",
+      "export_sha256": "4fe0c59c96a0cb6c6bb307985915b7a68d756367d7d5367b727d8715152e764d",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/smoke_streamvln_depth_g78.py",
+      "source_sha256": "05013d09c342b7a546fd1389df24e990289e11c3fa687a4487941bc3fe4049a5",
+      "export_sha256": "05013d09c342b7a546fd1389df24e990289e11c3fa687a4487941bc3fe4049a5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_a1_contextual_hybrid_manifest.json",
+      "source_sha256": "b7c300d13648a90b75a8a572ca6a013a7c8babdd9760c30f22aa86ac29730a18",
+      "export_sha256": "3b3ee07b24370a1e220141c150ca0a25e0f1d1ad31761ff3081ac59e4121aba0",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_a1_fsdp_model.py",
+      "source_sha256": "374db4aac2040243114dde59cfa190f342b2834e341ccd0102847a262f2af103",
+      "export_sha256": "374db4aac2040243114dde59cfa190f342b2834e341ccd0102847a262f2af103",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_a1_live_provider.py",
+      "source_sha256": "0eaa746991616ac4472cb7e2a86fa34bb05b1b43121332239dff27350e1a3dc8",
+      "export_sha256": "0eaa746991616ac4472cb7e2a86fa34bb05b1b43121332239dff27350e1a3dc8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_atomic_state.py",
+      "source_sha256": "c90442b5e306c03febe58cf1ab7bfe2462f59f30ef2d1fc21c61fcec14d6824c",
+      "export_sha256": "c90442b5e306c03febe58cf1ab7bfe2462f59f30ef2d1fc21c61fcec14d6824c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_candidates.py",
+      "source_sha256": "43ae4b9e825266272036f573b2d42d564495a740e3d31926db28f3be7b4f03fd",
+      "export_sha256": "43ae4b9e825266272036f573b2d42d564495a740e3d31926db28f3be7b4f03fd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_candidates_g71.py",
+      "source_sha256": "8a10286363d8f69e1130cc137786ac76d9c04cc69adb5fea1e8d5d6dd09477f4",
+      "export_sha256": "8a10286363d8f69e1130cc137786ac76d9c04cc69adb5fea1e8d5d6dd09477f4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_candidates_g73.py",
+      "source_sha256": "2bad1c120e4f04d932f875a7822ffe17fe18dc510ff7f9b5f2eb412d503da936",
+      "export_sha256": "2bad1c120e4f04d932f875a7822ffe17fe18dc510ff7f9b5f2eb412d503da936",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_candidates_g74.py",
+      "source_sha256": "47315dc62f732d518f07d508c15a3bed1010ed9ee02ca647206301a50732745c",
+      "export_sha256": "47315dc62f732d518f07d508c15a3bed1010ed9ee02ca647206301a50732745c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_candidates_g75.py",
+      "source_sha256": "4f7a07f51232ebc38cbb874f8a0a18d5c824f328dacd9a4669a89643817cc496",
+      "export_sha256": "4f7a07f51232ebc38cbb874f8a0a18d5c824f328dacd9a4669a89643817cc496",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_categorical_init.py",
+      "source_sha256": "02317958a665e162ddeb52f12eb758dd5537c1862b7fa7be67c61d5f0411658f",
+      "export_sha256": "02317958a665e162ddeb52f12eb758dd5537c1862b7fa7be67c61d5f0411658f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_chunk_ppo.py",
+      "source_sha256": "9a0416e3fe7b75d2d566e659fd10f8ad7384ee9579db9df44e5d91800614d2b9",
+      "export_sha256": "9a0416e3fe7b75d2d566e659fd10f8ad7384ee9579db9df44e5d91800614d2b9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_context.py",
+      "source_sha256": "c6ae26edc115809b3688139e628726d9041f6513253fa8eb7ac6e7e5a954e077",
+      "export_sha256": "c6ae26edc115809b3688139e628726d9041f6513253fa8eb7ac6e7e5a954e077",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_contextual_topology_waypoint.py",
+      "source_sha256": "d07d0f84b742a3363dcee7a071ed6e82a6d9e791aa48c3835bc0b4d8e3257ede",
+      "export_sha256": "d07d0f84b742a3363dcee7a071ed6e82a6d9e791aa48c3835bc0b4d8e3257ede",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_depth_g78.py",
+      "source_sha256": "2b2060ac72377b432d43ff3dc32567065fa01b16eb74e8381fc83855889bd882",
+      "export_sha256": "2b2060ac72377b432d43ff3dc32567065fa01b16eb74e8381fc83855889bd882",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_env.py",
+      "source_sha256": "f9096dc2414f72274649d7aa2a7b142f08fdbeee8e6f1700808a8033147010df",
+      "export_sha256": "f9096dc2414f72274649d7aa2a7b142f08fdbeee8e6f1700808a8033147010df",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_env.yaml",
+      "source_sha256": "a0444416f2d5f295c31e05425c7c1d455ced32762b80d1310a3d21c0bf5aeeb0",
+      "export_sha256": "a0444416f2d5f295c31e05425c7c1d455ced32762b80d1310a3d21c0bf5aeeb0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_executor_contract.py",
+      "source_sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd",
+      "export_sha256": "c937e5f35be465c7121ba750bedd47b42593b1b0e80e4fb8e9707172134694bd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_frozen_eval.yaml",
+      "source_sha256": "89581cb0de30025f474acfbb7a640d6752b4774d74ff4b7e47c57abe0a403969",
+      "export_sha256": "89581cb0de30025f474acfbb7a640d6752b4774d74ff4b7e47c57abe0a403969",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g4_experiment.json",
+      "source_sha256": "66370b7999936bfc4ad73406deeefe92e2e487c7269bacf02f6d8b606c53c3b5",
+      "export_sha256": "66370b7999936bfc4ad73406deeefe92e2e487c7269bacf02f6d8b606c53c3b5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g5_experiment.json",
+      "source_sha256": "87b4ea90359767de27d10f44265ade80443f1d19042618a0d18c2aac73d9fb5f",
+      "export_sha256": "87b4ea90359767de27d10f44265ade80443f1d19042618a0d18c2aac73d9fb5f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g6_experiment.json",
+      "source_sha256": "4f4d4374370e0ef2bd33bd8533a68511358072479a06b210c1af3f628997ba12",
+      "export_sha256": "4f4d4374370e0ef2bd33bd8533a68511358072479a06b210c1af3f628997ba12",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g710_experiment.json",
+      "source_sha256": "983a2a3753e904493c716a8bf91f562ac38833862888292a74f54755f6c72606",
+      "export_sha256": "983a2a3753e904493c716a8bf91f562ac38833862888292a74f54755f6c72606",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g711_experiment.json",
+      "source_sha256": "7e80b650ae515b0331d91ce67891560650ebdf817215080db9b8e6f0494b7ce0",
+      "export_sha256": "7e80b650ae515b0331d91ce67891560650ebdf817215080db9b8e6f0494b7ce0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g712_experiment.json",
+      "source_sha256": "5145294e17784b9d14039d0c802883b143b758e06c226c8ad7bd427458d161f9",
+      "export_sha256": "5145294e17784b9d14039d0c802883b143b758e06c226c8ad7bd427458d161f9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g713_experiment.json",
+      "source_sha256": "c14092614d0ad7bc8630957e0b236b3d64f7e1f6173d20357950da288d387413",
+      "export_sha256": "c14092614d0ad7bc8630957e0b236b3d64f7e1f6173d20357950da288d387413",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g714_experiment.json",
+      "source_sha256": "d7faaa8573f62687e874aec40a1067c756966faf58ad79a8ac642555277b2d83",
+      "export_sha256": "d7faaa8573f62687e874aec40a1067c756966faf58ad79a8ac642555277b2d83",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g715_experiment.json",
+      "source_sha256": "d7014c667025f40c90681cc8851697e6a2d06e4616bd28b4e50d7bf6c120a522",
+      "export_sha256": "d7014c667025f40c90681cc8851697e6a2d06e4616bd28b4e50d7bf6c120a522",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g716_contract.json",
+      "source_sha256": "3a60baace9865f6df88c2b8369bd988ddced5b64624306b307d5b175676ba15c",
+      "export_sha256": "3a60baace9865f6df88c2b8369bd988ddced5b64624306b307d5b175676ba15c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g717_experiment.json",
+      "source_sha256": "f8937a8845dad1488b714c4862210b1e4b0eb460dbc87726f5c6bf9f2f1f0838",
+      "export_sha256": "f8937a8845dad1488b714c4862210b1e4b0eb460dbc87726f5c6bf9f2f1f0838",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g718_experiment.json",
+      "source_sha256": "a985243b5aadf19ee8ab37ac534aa1292d095588f8a49427c984e81656864aab",
+      "export_sha256": "a985243b5aadf19ee8ab37ac534aa1292d095588f8a49427c984e81656864aab",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g719_experiment.json",
+      "source_sha256": "1453d62dc5f4ceef4a83e1ecdc6d17d3efad552dce4619c2cabf5613c521243f",
+      "export_sha256": "1453d62dc5f4ceef4a83e1ecdc6d17d3efad552dce4619c2cabf5613c521243f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g719_experiment_v2.json",
+      "source_sha256": "bd86c0c6ebd3597f1d4a2bae7b0a546f3e5dc4ff45676e4cc002f44c8448d423",
+      "export_sha256": "bd86c0c6ebd3597f1d4a2bae7b0a546f3e5dc4ff45676e4cc002f44c8448d423",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g71_experiment.json",
+      "source_sha256": "22fb22bc57b4d8553ab13e8e5764a36d2e8420639045586f1d8b614ff7b59e4c",
+      "export_sha256": "22fb22bc57b4d8553ab13e8e5764a36d2e8420639045586f1d8b614ff7b59e4c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g720_experiment.json",
+      "source_sha256": "0286ffdcb1a42da579c76eeb6600d4123bb6edb242c1d7ec506836fb7d1a311d",
+      "export_sha256": "0286ffdcb1a42da579c76eeb6600d4123bb6edb242c1d7ec506836fb7d1a311d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g721_experiment.json",
+      "source_sha256": "daea9d8c8891e24550008069ff1f820ce649f02ab45c6aab45886729da53cdda",
+      "export_sha256": "daea9d8c8891e24550008069ff1f820ce649f02ab45c6aab45886729da53cdda",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g722_experiment.json",
+      "source_sha256": "3fe63b7afc3f40ed8086c6da6c38496df4a3780360387f324491f8f04751efdd",
+      "export_sha256": "3fe63b7afc3f40ed8086c6da6c38496df4a3780360387f324491f8f04751efdd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g723_experiment.json",
+      "source_sha256": "59af15397be0d6642474459ad74e21da4fb7896a28c76ea4e9f6da7326cc8297",
+      "export_sha256": "59af15397be0d6642474459ad74e21da4fb7896a28c76ea4e9f6da7326cc8297",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g72_experiment.json",
+      "source_sha256": "b98f94182762698dfbb9d7b33619f6d74d9c8e0b9fb7def55d8c0404d19bcdae",
+      "export_sha256": "b98f94182762698dfbb9d7b33619f6d74d9c8e0b9fb7def55d8c0404d19bcdae",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g73_experiment.json",
+      "source_sha256": "1c36205daaf939498d248b5148ff8f5df0bf20bf09e2cce8fccd479c3ece213e",
+      "export_sha256": "1c36205daaf939498d248b5148ff8f5df0bf20bf09e2cce8fccd479c3ece213e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g74_experiment.json",
+      "source_sha256": "cfb913784202c41e51f90ebc5b598b3229c6111722de953932d4796bdf50aa65",
+      "export_sha256": "cfb913784202c41e51f90ebc5b598b3229c6111722de953932d4796bdf50aa65",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g75_experiment.json",
+      "source_sha256": "83a03ba0044520cea8af116544728473e3fb3b5603e06dd768c9fc453c6331c0",
+      "export_sha256": "83a03ba0044520cea8af116544728473e3fb3b5603e06dd768c9fc453c6331c0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g76_experiment.json",
+      "source_sha256": "500cea0990d5b07ebc0add287995a9c4b4179fe7ce3adbc9639665a9ec0fdc60",
+      "export_sha256": "500cea0990d5b07ebc0add287995a9c4b4179fe7ce3adbc9639665a9ec0fdc60",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g77_experiment.json",
+      "source_sha256": "8f10bb158cbd2dfb4e4abb1cf9e712ca33f9c718c20e6b13a5a41805d8513bd3",
+      "export_sha256": "8f10bb158cbd2dfb4e4abb1cf9e712ca33f9c718c20e6b13a5a41805d8513bd3",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g78_experiment.json",
+      "source_sha256": "7572196f669d2c70437e5ae938db2588a11b11f49dca24348d16662bbc893e86",
+      "export_sha256": "7572196f669d2c70437e5ae938db2588a11b11f49dca24348d16662bbc893e86",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g79_experiment.json",
+      "source_sha256": "ae517f550e9a16f7e5385974f2435f57cf4cc4e502b41289ca13887c560e381c",
+      "export_sha256": "ae517f550e9a16f7e5385974f2435f57cf4cc4e502b41289ca13887c560e381c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g7_experiment.json",
+      "source_sha256": "81434aa52dd721ba40f186d6e76b87c817247295814d4abd9ef81ec56f58b70b",
+      "export_sha256": "81434aa52dd721ba40f186d6e76b87c817247295814d4abd9ef81ec56f58b70b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g8_action.py",
+      "source_sha256": "61f93ad20e63b0b43c71f033dfa2c946fefcd5a4a84b8fca4991360d47637500",
+      "export_sha256": "61f93ad20e63b0b43c71f033dfa2c946fefcd5a4a84b8fca4991360d47637500",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g8_algorithm_manifest.json",
+      "source_sha256": "59b414d83ab30e38cb4fb2c5bce14b8408bed5f2a23cfeb41aeb84570cb2331a",
+      "export_sha256": "3d8462657008a182b2af1ee63af9e0d0d138f5fa17ec0dbca133b7746bfa3e9b",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g8_engineering.json",
+      "source_sha256": "5308c9609e302be81801870cf391c8978a046c09ee91c26cfab1c2932751863e",
+      "export_sha256": "5308c9609e302be81801870cf391c8978a046c09ee91c26cfab1c2932751863e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g8_experiment.json",
+      "source_sha256": "dbc4b3927ccd308263a6c2ad34b7fbdbf49ffb84d6eae3b5c704fbe6e74609da",
+      "export_sha256": "dbc4b3927ccd308263a6c2ad34b7fbdbf49ffb84d6eae3b5c704fbe6e74609da",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_g8_policy.py",
+      "source_sha256": "ebbf7fa7bd8e3cf1cfbd68dfc3992c11407febd989ddc8636d8b5bf6d53f18ca",
+      "export_sha256": "ebbf7fa7bd8e3cf1cfbd68dfc3992c11407febd989ddc8636d8b5bf6d53f18ca",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_geometry_g711.py",
+      "source_sha256": "e5cde91f3c785636d204dc30ffd7d68360270ce243d1cf4b08c71eff1f93e929",
+      "export_sha256": "e5cde91f3c785636d204dc30ffd7d68360270ce243d1cf4b08c71eff1f93e929",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_ground_support_g713.py",
+      "source_sha256": "c0b5e426b788abe4ab95ce6c062cb71ec96edb3854628604cc38d64e48fb4e23",
+      "export_sha256": "c0b5e426b788abe4ab95ce6c062cb71ec96edb3854628604cc38d64e48fb4e23",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_init.py",
+      "source_sha256": "81eaed09c97607badc9388311739e2b48f51e5ebb8b512dd0fc5e377bc326702",
+      "export_sha256": "81eaed09c97607badc9388311739e2b48f51e5ebb8b512dd0fc5e377bc326702",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_macro_audit_g79.py",
+      "source_sha256": "2fbc308bc408283b51f96f49be6173ee8c73302517f0dcf195fe68def904a77a",
+      "export_sha256": "2fbc308bc408283b51f96f49be6173ee8c73302517f0dcf195fe68def904a77a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_oracle_g712.py",
+      "source_sha256": "69f79da0df76bf717eb8722537c12eba942cb18c17295f19f027d8e1e2b1de7c",
+      "export_sha256": "69f79da0df76bf717eb8722537c12eba942cb18c17295f19f027d8e1e2b1de7c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_outcome_g715.py",
+      "source_sha256": "1445779af8c366b38148b20b3d93bd6c628d3fc52fb2b2cf5a05749113b599c2",
+      "export_sha256": "1445779af8c366b38148b20b3d93bd6c628d3fc52fb2b2cf5a05749113b599c2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_clean_e48_reference.py",
+      "source_sha256": "7ab88cc0b0a2f6222a91d05184978a1e1e3e5db509eda3aef53ade830e1aa85d",
+      "export_sha256": "7ab88cc0b0a2f6222a91d05184978a1e1e3e5db509eda3aef53ade830e1aa85d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_live_diagnostic.py",
+      "source_sha256": "9de54aea745819245d2cd703ceb55ed9190f3555123258409235033accafc81a",
+      "export_sha256": "9de54aea745819245d2cd703ceb55ed9190f3555123258409235033accafc81a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_official_adapter.py",
+      "source_sha256": "70215f0abe56de522be94d00ad0adcc8cc7dea4275272915e1a59963175ed71b",
+      "export_sha256": "70215f0abe56de522be94d00ad0adcc8cc7dea4275272915e1a59963175ed71b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_official_frame.py",
+      "source_sha256": "580a90c6f967fdc73d866adece25e5edf937a58dc9cee0647b0aad91e1d7d814",
+      "export_sha256": "580a90c6f967fdc73d866adece25e5edf937a58dc9cee0647b0aad91e1d7d814",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_official_keep.py",
+      "source_sha256": "6886efbc9f738f350e755ec9d29b7b9812871ff14bee6e020cf9c2dc5f281632",
+      "export_sha256": "6886efbc9f738f350e755ec9d29b7b9812871ff14bee6e020cf9c2dc5f281632",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_residual_policy.py",
+      "source_sha256": "2e962e32541bacc6bcb01cad0d79a04f5a56ffb4c5de595e306a71baca07b7e6",
+      "export_sha256": "2e962e32541bacc6bcb01cad0d79a04f5a56ffb4c5de595e306a71baca07b7e6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_action.py",
+      "source_sha256": "14179921a8e132f0bb48c76179ec190c88ccfcf0108ada9c36c555c27baa56c6",
+      "export_sha256": "14179921a8e132f0bb48c76179ec190c88ccfcf0108ada9c36c555c27baa56c6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_actor.py",
+      "source_sha256": "2dc0e89e90386f7ea2be0824244197df9d313d1fa7d544299366ce9bcf04db6a",
+      "export_sha256": "2dc0e89e90386f7ea2be0824244197df9d313d1fa7d544299366ce9bcf04db6a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_bc_readiness_manifest.json",
+      "source_sha256": "61396c099763a3c340ec66056e9fce5244baffc5e6c7ee3fb4f852b984f05ae2",
+      "export_sha256": "58d2b3eb8e77aac5dcc507beeaa8f6877dbe215239e2dd869854c326658b6de6",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_bc_smoke.yaml",
+      "source_sha256": "d007b7e1c0337e0956408e1ddc1cdf0d0ca64e41148e3f8ad931e39df1946b7b",
+      "export_sha256": "d007b7e1c0337e0956408e1ddc1cdf0d0ca64e41148e3f8ad931e39df1946b7b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_causal_probe_manifest.json",
+      "source_sha256": "a027e71d27303021813ea94913d18c37d177aef6a17277f46c29c55ebbd7f87e",
+      "export_sha256": "a027e71d27303021813ea94913d18c37d177aef6a17277f46c29c55ebbd7f87e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_ceiling_manifest.json",
+      "source_sha256": "92366598b65fd3a20d1532f1d4369946d0091c8733e3a79ac29dd8b9b06de5cf",
+      "export_sha256": "ec3eadb939d509e09817c36ffd1bb1e78a65eba51aa357c2a561b261c5d78fea",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_env.py",
+      "source_sha256": "b18d7304f4f0a00bd6034c808d6b4184726425df7cc641e4fcac1cdf3f16a6c7",
+      "export_sha256": "b18d7304f4f0a00bd6034c808d6b4184726425df7cc641e4fcac1cdf3f16a6c7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_executor.py",
+      "source_sha256": "6f4f41ff1527bb95cb2c86547f694396b74a9abf56f2710973850c20ca6260d1",
+      "export_sha256": "6f4f41ff1527bb95cb2c86547f694396b74a9abf56f2710973850c20ca6260d1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_feature_v2_ab_manifest.json",
+      "source_sha256": "e856789f6ab37a8fe079f13c582a77e75a408039b5025753462f18a8a5d209f9",
+      "export_sha256": "4045ef783a37b8f778b15af945140d3087ad5c2faaaecd5e414db27af989df94",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_policy.py",
+      "source_sha256": "554bf617bb828868c10fa6efaa8dce9be3863d634edc186850fd058ff243ab27",
+      "export_sha256": "554bf617bb828868c10fa6efaa8dce9be3863d634edc186850fd058ff243ab27",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_policy.yaml",
+      "source_sha256": "6a94b85d07b91be1eb84d9d6ac260f8fb4faf47db5b2f236e3c3ae9016fd1e67",
+      "export_sha256": "6a94b85d07b91be1eb84d9d6ac260f8fb4faf47db5b2f236e3c3ae9016fd1e67",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_protocol.py",
+      "source_sha256": "2555b48627bc67865a7095fee5c8665aed76953aec052c79c761b52553983c94",
+      "export_sha256": "2555b48627bc67865a7095fee5c8665aed76953aec052c79c761b52553983c94",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_runtime.py",
+      "source_sha256": "691141a814858979522670daa0adc3465c5d0d342656dfc71584dc313ee0478f",
+      "export_sha256": "691141a814858979522670daa0adc3465c5d0d342656dfc71584dc313ee0478f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_successor_workers.py",
+      "source_sha256": "dc41acad16b15775675179b145adf90a28453ebe9f5a45f39cac2a29e752139b",
+      "export_sha256": "dc41acad16b15775675179b145adf90a28453ebe9f5a45f39cac2a29e752139b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_topology.py",
+      "source_sha256": "ad5fc74aa7714e24bde1f44c9df9938acae7745e3eee8de35ba863b5e70679f1",
+      "export_sha256": "ad5fc74aa7714e24bde1f44c9df9938acae7745e3eee8de35ba863b5e70679f1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_p8_train_diagnostic_manifest.json",
+      "source_sha256": "499c6c25e3f44d3947d600cf87905d58a545e029bbe59d4c09087e09675e3f07",
+      "export_sha256": "857b5f589f040e3f941187e6326b0b88cceffd69579ea62f9819549a093f708c",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_passability_g76.py",
+      "source_sha256": "84d771235d21e4efaaf23d5948095364edaa5de6fb43a99901f3f478ea30c131",
+      "export_sha256": "84d771235d21e4efaaf23d5948095364edaa5de6fb43a99901f3f478ea30c131",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_policy.py",
+      "source_sha256": "86557388dac70ed1b21a2abdd83df887c253b6969bec4df4137b4196b3a727e7",
+      "export_sha256": "86557388dac70ed1b21a2abdd83df887c253b6969bec4df4137b4196b3a727e7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_policy.yaml",
+      "source_sha256": "9847130f279e33a527cbdd387bd6853d73fb14aab763add4c15576f7456e4e0a",
+      "export_sha256": "9847130f279e33a527cbdd387bd6853d73fb14aab763add4c15576f7456e4e0a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_policy_server.py",
+      "source_sha256": "6658130ca3eb90768b35764c0f52b9f114e18979c2c5ad5723d7251ac9528395",
+      "export_sha256": "6658130ca3eb90768b35764c0f52b9f114e18979c2c5ad5723d7251ac9528395",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_ppo.yaml",
+      "source_sha256": "e8f0be171656fe4555a4ae6f28a2f14a6c14ee82b2dd954757da592c1e5bcfe8",
+      "export_sha256": "e8f0be171656fe4555a4ae6f28a2f14a6c14ee82b2dd954757da592c1e5bcfe8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_ppo_init.py",
+      "source_sha256": "89b2dba3f5bf177bb8cac00b6dd66041bb0accb77206e2487d5f0bf89ea528d8",
+      "export_sha256": "89b2dba3f5bf177bb8cac00b6dd66041bb0accb77206e2487d5f0bf89ea528d8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_ppo_policy.py",
+      "source_sha256": "6b8057bf34817c2a0ecd4befd6000e2afadb540c5ef5ab7ccac242ef0798d80d",
+      "export_sha256": "6b8057bf34817c2a0ecd4befd6000e2afadb540c5ef5ab7ccac242ef0798d80d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_recovery.py",
+      "source_sha256": "1abfa86a6bb19b6c0d4bcf89fdf71809926ee5ca421c840094a99450e7baeaec",
+      "export_sha256": "1abfa86a6bb19b6c0d4bcf89fdf71809926ee5ca421c840094a99450e7baeaec",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_recovery_policy.py",
+      "source_sha256": "184233c5de1f37318163ac6155c367314b8b84e0d516a98ed3e27d153552fbd9",
+      "export_sha256": "184233c5de1f37318163ac6155c367314b8b84e0d516a98ed3e27d153552fbd9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_replay.py",
+      "source_sha256": "96e14534147c5baa891c7569ba583ef072c71729fd339ff02dffa7835af6805b",
+      "export_sha256": "96e14534147c5baa891c7569ba583ef072c71729fd339ff02dffa7835af6805b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_severity_g710.py",
+      "source_sha256": "106318af2c463b2ffc5ceb7c9ee5173512a9b835538ce99b29543afd5d89c150",
+      "export_sha256": "106318af2c463b2ffc5ceb7c9ee5173512a9b835538ce99b29543afd5d89c150",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_topological_policy.py",
+      "source_sha256": "b1e0d8d272fd439fc5c4a874c81e5fa691b3ee6864f71cc46a5df764366d14bb",
+      "export_sha256": "b1e0d8d272fd439fc5c4a874c81e5fa691b3ee6864f71cc46a5df764366d14bb",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_topology.py",
+      "source_sha256": "7ab6fc1671dfe19a8a95c6cb9fee2d347b1561adfc261122513b3380443c79a7",
+      "export_sha256": "7ab6fc1671dfe19a8a95c6cb9fee2d347b1561adfc261122513b3380443c79a7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/streamvln_visibility_g714.py",
+      "source_sha256": "84432e185dc72a40b6f20b5ecc80dfe66ba1e87c550114750d80563e2934395d",
+      "export_sha256": "84432e185dc72a40b6f20b5ecc80dfe66ba1e87c550114750d80563e2934395d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/test_gpu_allowlist.py",
+      "source_sha256": "2975d4bcac20f7ce2ac16a1f35674b08ffdf88af80f01dc9ab646f7d26d444d4",
+      "export_sha256": "2975d4bcac20f7ce2ac16a1f35674b08ffdf88af80f01dc9ab646f7d26d444d4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/test_gpu_uuid_gate.py",
+      "source_sha256": "b790f38e9b76c699ef0699bcf605761e271bb1d1e168dff3226c57b31dfe3066",
+      "export_sha256": "840abcd3b977b300333ea5af18e2d57acf670db156ffdd524299f9b7fcf5ed2c",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/topology_waypoint_stack.py",
+      "source_sha256": "ff9935ae84e47692d2a9f52daf43ed5af77d4aea4f083e5d734d393d1c6e21dd",
+      "export_sha256": "ff9935ae84e47692d2a9f52daf43ed5af77d4aea4f083e5d734d393d1c6e21dd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/train_embodied_agent.py",
+      "source_sha256": "bc025ef1a06099b52a53f66f846147323a1c09a263015a8e503f1ee760314fa4",
+      "export_sha256": "bc025ef1a06099b52a53f66f846147323a1c09a263015a8e503f1ee760314fa4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/train_embodied_agent_pre_vln.py",
+      "source_sha256": "9dace8f320cad2ccb0958e0b608c0c46e2616b9eed9720b10690a3115b07059a",
+      "export_sha256": "9dace8f320cad2ccb0958e0b608c0c46e2616b9eed9720b10690a3115b07059a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/train_pointnav_ppo_cpu.py",
+      "source_sha256": "4a91eb5e2ba29c746bdc04e59f71fdbf7e5f5749348a33d4ca7c9bee56ae14bb",
+      "export_sha256": "0f7fa2a6b9c15292bc8b7b1cd84340f95664463b813fb032c9da28bd1286a4a7",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/verify_checkpoint_rgbd_alignment.py",
+      "source_sha256": "ae3661a9ee6832b018741e368389c7f3136d0036454a062cc80c9966c7f096bb",
+      "export_sha256": "8753882eed17215ab9de6a181246eacd876be72bae859e48b6a6d3bdefdc0696",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_asset_preflight.py",
+      "source_sha256": "95916b9a5a37074933785e78df598229515be8350aa7d0c50e03faf310ba440f",
+      "export_sha256": "95916b9a5a37074933785e78df598229515be8350aa7d0c50e03faf310ba440f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_env.py",
+      "source_sha256": "9d40cca53d43659c0ddcfc4b8d60892b70cbde41b1d31efc976fb510e9a13e49",
+      "export_sha256": "9d40cca53d43659c0ddcfc4b8d60892b70cbde41b1d31efc976fb510e9a13e49",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_init.py",
+      "source_sha256": "0d515c331e9d682f843168e58d8c625acc722ed71460fb72df9c39b573ef729f",
+      "export_sha256": "0d515c331e9d682f843168e58d8c625acc722ed71460fb72df9c39b573ef729f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_policy.py",
+      "source_sha256": "08bd0fef5ed335dc99498abb7ed49376fa2e51419faf03574b28d7e765c77d86",
+      "export_sha256": "08bd0fef5ed335dc99498abb7ed49376fa2e51419faf03574b28d7e765c77d86",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_policy.yaml",
+      "source_sha256": "275005f8b4659d734afa3c0da830b4e39996b687216b994585754ea2b9d23f33",
+      "export_sha256": "275005f8b4659d734afa3c0da830b4e39996b687216b994585754ea2b9d23f33",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_r2r_env.yaml",
+      "source_sha256": "1ca9c5569ee943b93ae1061d6a0601b9ec58d5c70d17c1f03c31fe27de2f9ac1",
+      "export_sha256": "4b4c67cf3bb7e90983ba36d4e3406700a8110dba639a627e52b9ef8b1c6aa872",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_r2r_ppo_eval.yaml",
+      "source_sha256": "1550e2dc44b3f1de67cac9e4bccb7d87467d8b0a59c423788468f9c943f836a8",
+      "export_sha256": "1550e2dc44b3f1de67cac9e4bccb7d87467d8b0a59c423788468f9c943f836a8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_r2r_ppo_smoke.yaml",
+      "source_sha256": "22bebf7951259a3e2fc67cbb282bd3a2a337c35ac812f8b1ee31d3eee6033d55",
+      "export_sha256": "312504176dd06ab5bd29db0ce9ced5441bdca00b0514b6925f7a26862ef4141c",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_stack_adapters.py",
+      "source_sha256": "729543a721fecd3b96297d6dfeaf10a241adf387eed39309325dd4955ebb76c7",
+      "export_sha256": "729543a721fecd3b96297d6dfeaf10a241adf387eed39309325dd4955ebb76c7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/vln_stack_ppo.py",
+      "source_sha256": "8d7d0b98ad31dd49197e38fa8b23afaed0c1da90a15ae168975ddb5f9b5440a1",
+      "export_sha256": "8d7d0b98ad31dd49197e38fa8b23afaed0c1da90a15ae168975ddb5f9b5440a1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "integrations/rlinf_v03/worker_uuid_preflight.py",
+      "source_sha256": "d961b55867f6d04257f1c03cd7058cde446ca6f32fdf50edabd0927a2c749b99",
+      "export_sha256": "80f8878596383d3524accde7aa7b10a0f3cf371c4894d5c4c2216242b49b0387",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/__init__.py",
+      "source_sha256": "51bd86cec20ad3f5cae020cefd5a4a41ddeb260d777ae9ef400f9cedc7414076",
+      "export_sha256": "51bd86cec20ad3f5cae020cefd5a4a41ddeb260d777ae9ef400f9cedc7414076",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/contracts.py",
+      "source_sha256": "a57f5b77fde99d91cc2a40a3ccbb300fd0d4fc4c7585bf765aba008270a536f2",
+      "export_sha256": "a57f5b77fde99d91cc2a40a3ccbb300fd0d4fc4c7585bf765aba008270a536f2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/envs/__init__.py",
+      "source_sha256": "3f2306540429727d3de5a6a6dcd0d6b33c7d68f95e79852e79b01716826be090",
+      "export_sha256": "3f2306540429727d3de5a6a6dcd0d6b33c7d68f95e79852e79b01716826be090",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/envs/base.py",
+      "source_sha256": "dd14c60624a6c7b829d29db00c1146b2f652b6c7e8bafc0c599a926c4d27270d",
+      "export_sha256": "dd14c60624a6c7b829d29db00c1146b2f652b6c7e8bafc0c599a926c4d27270d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/envs/grid_mock.py",
+      "source_sha256": "c3404551773ca955f69e8f0a3757375e5b61032e17ef0ac161de3967bb7e7f0c",
+      "export_sha256": "c3404551773ca955f69e8f0a3757375e5b61032e17ef0ac161de3967bb7e7f0c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/episode.py",
+      "source_sha256": "a86e711c7af76589c923b748231f9c6ba06bda50625bf26a0f0d1a8bb3e1eb19",
+      "export_sha256": "a86e711c7af76589c923b748231f9c6ba06bda50625bf26a0f0d1a8bb3e1eb19",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/metrics.py",
+      "source_sha256": "23d2dd7d4b9efb45f05dc47ab0db01cf0f88eb9650d7591de1719db4d2da0518",
+      "export_sha256": "23d2dd7d4b9efb45f05dc47ab0db01cf0f88eb9650d7591de1719db4d2da0518",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/policies/__init__.py",
+      "source_sha256": "8ce701f1967f504485ced83fa94d34fb3b01ecd7b47b65f51dfdf295572e60ba",
+      "export_sha256": "8ce701f1967f504485ced83fa94d34fb3b01ecd7b47b65f51dfdf295572e60ba",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/policies/base.py",
+      "source_sha256": "4f25b804bd2a1e184bb43ea4c75a861a4a05e1685e22a7d1984d38c99457d161",
+      "export_sha256": "4f25b804bd2a1e184bb43ea4c75a861a4a05e1685e22a7d1984d38c99457d161",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/rewards.py",
+      "source_sha256": "d7ff1aad0ca196372a8dfe88f1f275a6b2962969f05bb3677ff0e3dbda4111b9",
+      "export_sha256": "d7ff1aad0ca196372a8dfe88f1f275a6b2962969f05bb3677ff0e3dbda4111b9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/__init__.py",
+      "source_sha256": "0ada2a8aa1a87abb33b588d26ca3977e593ae6c9889956bc9502d92cce8df0ca",
+      "export_sha256": "0ada2a8aa1a87abb33b588d26ca3977e593ae6c9889956bc9502d92cce8df0ca",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/checkpoint.py",
+      "source_sha256": "f3d6699c9a8381db2206834687275b1caeaec351362cc9cee51855121f7a2abd",
+      "export_sha256": "f3d6699c9a8381db2206834687275b1caeaec351362cc9cee51855121f7a2abd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/collector.py",
+      "source_sha256": "eac4c1bdf67f181569c12a429039f218a786bfca8e070a90caa8622bc509bc64",
+      "export_sha256": "eac4c1bdf67f181569c12a429039f218a786bfca8e070a90caa8622bc509bc64",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/contracts.py",
+      "source_sha256": "eee76a0066793ff20c7c2e6ad009d080269c524a0e7013bac411ea2f5f5100cb",
+      "export_sha256": "eee76a0066793ff20c7c2e6ad009d080269c524a0e7013bac411ea2f5f5100cb",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/execution.py",
+      "source_sha256": "263d69d984c8fa1c2b83fb5a0b714abdadd4897784f3fce7f574ce9a192d06bf",
+      "export_sha256": "263d69d984c8fa1c2b83fb5a0b714abdadd4897784f3fce7f574ce9a192d06bf",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/interfaces.py",
+      "source_sha256": "3a11c3659744682041533289f441cf6e3725204d85a949a1013e35f8056d21ec",
+      "export_sha256": "3a11c3659744682041533289f441cf6e3725204d85a949a1013e35f8056d21ec",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/legacy.py",
+      "source_sha256": "e664351faec1250cc92cd9978f8d9339b7cd50240b01899d6090607d0a851b1b",
+      "export_sha256": "e664351faec1250cc92cd9978f8d9339b7cd50240b01899d6090607d0a851b1b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/ppo.py",
+      "source_sha256": "33d7904ef500edd17b518fcd7d6dada6a43ccbb207e38a163b571a0483e01d9d",
+      "export_sha256": "33d7904ef500edd17b518fcd7d6dada6a43ccbb207e38a163b571a0483e01d9d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "navrl/stack/returns.py",
+      "source_sha256": "a59e96c7895692517a061e1b113f3f90733f1983805c88bf88e64ee1ea60ce31",
+      "export_sha256": "a59e96c7895692517a061e1b113f3f90733f1983805c88bf88e64ee1ea60ce31",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/HABITAT_RGB_OFFSCREEN.md",
+      "source_sha256": "8062c7a442de1017e4d863e0d2563cbb0b61012d6f6dc9f62c65fc2b020e4a66",
+      "export_sha256": "47b2e275fc96cdfb009529b92ca10a47906337bb052bebc3f4c109f283402057",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/__init__.py",
+      "source_sha256": "cd4b3020082cee2bd82859cbcab9286a1a10a8d8bc7bbc6fc2d80f55fde9fa03",
+      "export_sha256": "cd4b3020082cee2bd82859cbcab9286a1a10a8d8bc7bbc6fc2d80f55fde9fa03",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_lab_pointnav_no_renderer_smoke.py",
+      "source_sha256": "744031057adb425ae57fbfeb041aba2e2cde94b31e4a9d2a57dc088834b50059",
+      "export_sha256": "744031057adb425ae57fbfeb041aba2e2cde94b31e4a9d2a57dc088834b50059",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_lab_pointnav_random_rollout.py",
+      "source_sha256": "1e0f0f8a72409259115bbf0891eab7357187ebfa5850669db9260b6236e4f5f1",
+      "export_sha256": "1e0f0f8a72409259115bbf0891eab7357187ebfa5850669db9260b6236e4f5f1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_no_renderer_smoke.py",
+      "source_sha256": "f92eb5159899e1817fcf87f6b4fcc9dabfc37e58a26308c38658b249c5034cef",
+      "export_sha256": "f92eb5159899e1817fcf87f6b4fcc9dabfc37e58a26308c38658b249c5034cef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_aligned_passability_service.py",
+      "source_sha256": "20550749da48b30b0e59c89d878f660859c5bfbfcc0722bae317663990c41d21",
+      "export_sha256": "20550749da48b30b0e59c89d878f660859c5bfbfcc0722bae317663990c41d21",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_depth_passability_service.py",
+      "source_sha256": "bcb738c1e44555b893677c96ce4ec89156a3f49b2b12cf99d851e8b5f5d5c7c9",
+      "export_sha256": "bcb738c1e44555b893677c96ce4ec89156a3f49b2b12cf99d851e8b5f5d5c7c9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_geometry_controller_service.py",
+      "source_sha256": "be471d1e21d5b4a27787b757e7b998efc15789911ee04166fe9fdecdafda58f0",
+      "export_sha256": "be471d1e21d5b4a27787b757e7b998efc15789911ee04166fe9fdecdafda58f0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_ground_support_service.py",
+      "source_sha256": "f48e9b01737f10c400d5915b72421ff484915eedb40cb256ba54b7506034ab19",
+      "export_sha256": "f48e9b01737f10c400d5915b72421ff484915eedb40cb256ba54b7506034ab19",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_macro_audit_service.py",
+      "source_sha256": "3ea84fe2d0748fbcdd1621e3207d69283822c2d963435ec05c7865afc0edee1b",
+      "export_sha256": "3ea84fe2d0748fbcdd1621e3207d69283822c2d963435ec05c7865afc0edee1b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_outcome_service.py",
+      "source_sha256": "03daa58d7c210e8320296b3648328af36dc877fe63852e1b8ba1bf7472c8909c",
+      "export_sha256": "03daa58d7c210e8320296b3648328af36dc877fe63852e1b8ba1bf7472c8909c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_passability_service.py",
+      "source_sha256": "1045908b590950b6c5a69565dad46007400c759ea82adae89196090b7e411ac6",
+      "export_sha256": "1045908b590950b6c5a69565dad46007400c759ea82adae89196090b7e411ac6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_rgb_instruction_smoke.py",
+      "source_sha256": "4f62a2fb0f213f737d6e6fca68f32dbf824add446a45a383ab7160a8196a10a8",
+      "export_sha256": "4f62a2fb0f213f737d6e6fca68f32dbf824add446a45a383ab7160a8196a10a8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_service.py",
+      "source_sha256": "0a9b3b986bfa753372051adf90029dd84e039c502ebbfa779f3d63a8e2901cee",
+      "export_sha256": "0a9b3b986bfa753372051adf90029dd84e039c502ebbfa779f3d63a8e2901cee",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_severity_audit_service.py",
+      "source_sha256": "3ada996f76b21a4e1f4971244c175aebd47e785e62937eb7a349b674ed9de3c7",
+      "export_sha256": "3ada996f76b21a4e1f4971244c175aebd47e785e62937eb7a349b674ed9de3c7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_r2r_visibility_service.py",
+      "source_sha256": "f6192f5225f08f24d7bd085c13e59c0c040813c1dc0c9188e6271f265f32f2da",
+      "export_sha256": "f6192f5225f08f24d7bd085c13e59c0c040813c1dc0c9188e6271f265f32f2da",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_rgb_offscreen_acceptance.py",
+      "source_sha256": "27ccd077c507fbf62cd3107d17f72b44af7a02c215ee6ac7702b50817adfc748",
+      "export_sha256": "27ccd077c507fbf62cd3107d17f72b44af7a02c215ee6ac7702b50817adfc748",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_rgbd_pointnav_acceptance.py",
+      "source_sha256": "b63f0a0414ccf4ad8ddc388511b9b5f1b7eee4b881601ee844af2ff62f0c95a1",
+      "export_sha256": "b63f0a0414ccf4ad8ddc388511b9b5f1b7eee4b881601ee844af2ff62f0c95a1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_rgbd_policy_service.py",
+      "source_sha256": "125c0527842327fd1acd2ab79e5c6aa01f0fd21168875df261dd136ba5f9c54d",
+      "export_sha256": "125c0527842327fd1acd2ab79e5c6aa01f0fd21168875df261dd136ba5f9c54d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/habitat_rgbd_train_service.py",
+      "source_sha256": "4eb4445683d265803a3249024fe14ef6690f9afafa480f4b10b1bbb2b69f534f",
+      "export_sha256": "4eb4445683d265803a3249024fe14ef6690f9afafa480f4b10b1bbb2b69f534f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/merge_habitat_pointnav_rollout.py",
+      "source_sha256": "c21491812874a5523e7c2f8938d0c9d23952e8f57c110761b8e5621d903d0068",
+      "export_sha256": "c21491812874a5523e7c2f8938d0c9d23952e8f57c110761b8e5621d903d0068",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/mujoco_cpu_smoke.py",
+      "source_sha256": "d88cb48c92e9d37a5a557fa68e5b6c2f2c6d6e9ce1e3f26a433110ec5639a1cd",
+      "export_sha256": "d88cb48c92e9d37a5a557fa68e5b6c2f2c6d6e9ce1e3f26a433110ec5639a1cd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/pointnav_service.py",
+      "source_sha256": "0f7ba912940a43bef1d65ab681df3bdb7f93dba11d57c7051c28160f2f95519d",
+      "export_sha256": "0f7ba912940a43bef1d65ab681df3bdb7f93dba11d57c7051c28160f2f95519d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/render_pointnav_trace.py",
+      "source_sha256": "13c78dc6a84402304b4af6ae6d5f16a6625ae370b43395866f836a10f77771c8",
+      "export_sha256": "13c78dc6a84402304b4af6ae6d5f16a6625ae370b43395866f836a10f77771c8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/render_r2r_scripted_hd.py",
+      "source_sha256": "2e11ca3aa8c8b785a8fcadd1595d8b49b299dbcf7d20c9a5a8524cdc942a8095",
+      "export_sha256": "3217e8cf331886eedff22687086e7a002cf195c569cf4279ddd6cbf0b0caec44",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/rollout_vln_video.py",
+      "source_sha256": "b689c4115e4ba2b82ca952e4be3f4421e0485382188841d30dc7a224cb377788",
+      "export_sha256": "a695a992b279b5fcf449f89fbe4f86725dc29e851a2786144c57fd660926af48",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/run_a800_visual_cpu_ppo_smoke.sh",
+      "source_sha256": "1cc895624732157a2a83d00daae9de50c139d090d987e6e7a631c324b343c56a",
+      "export_sha256": "71f6a8cfba61fed7cc7f964fc70f53a997b1f737e6b0826ce26205b52f6918c6",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/run_mujoco_cpu_smoke.sh",
+      "source_sha256": "da2aba8f07e719c57000ab8a8a94ae7aa6ec66137edb3898a86d464c03b8c9a0",
+      "export_sha256": "c90d5c693706be27b03dc56c923c5e186abfc6e59d32753ae9eb5b0a13d777f5",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/serve_artifacts.py",
+      "source_sha256": "fdb0f07bb25ddaee474b58e7e77da8fc56797d57cfbd37ba173328c6419e2bd0",
+      "export_sha256": "fdb0f07bb25ddaee474b58e7e77da8fc56797d57cfbd37ba173328c6419e2bd0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/smoke_env.py",
+      "source_sha256": "ff62461a129e7c15ac68490339836e3030fbe435436eef8e72fad9218c724ead",
+      "export_sha256": "ff62461a129e7c15ac68490339836e3030fbe435436eef8e72fad9218c724ead",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/smoke_pointnav_split.py",
+      "source_sha256": "6fb96b7a309cc2bf3cc4a6c8b7bb933593bbd6279384fd09ca8bbbff567d70ae",
+      "export_sha256": "6fb96b7a309cc2bf3cc4a6c8b7bb933593bbd6279384fd09ca8bbbff567d70ae",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/vln_cpu_installed_integration.py",
+      "source_sha256": "2ef7ea80aba6878a1e1bb9562a5464f5e6cf2fadaa07e443a98e3a6f0eacf505",
+      "export_sha256": "705e088665d734dd13e8ddfc5c12e529f65f08ef4304e030faeadefa58b8f8f0",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "scripts/vln_rgbd_one_step_probe.py",
+      "source_sha256": "10fcdd423a2df782359a9f84cb82ba1888ea81afabffc42ecbbdbaca1a6880e3",
+      "export_sha256": "d770dde4504551ca54c69a4c11648a14fbc0e5b734ef1cba520c2ba1a4a04e33",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_grid_mock.py",
+      "source_sha256": "0737fa12ff712fb2a1758855c13e248cf0c31cc9efab6e77503a2199c7c3f72b",
+      "export_sha256": "0737fa12ff712fb2a1758855c13e248cf0c31cc9efab6e77503a2199c7c3f72b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_habitat_r2r_rgb_instruction_smoke.py",
+      "source_sha256": "924b3e21d577e27443edd1bacb279905809737ff7ee2c39e2c37a701831a9f3e",
+      "export_sha256": "924b3e21d577e27443edd1bacb279905809737ff7ee2c39e2c37a701831a9f3e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_habitat_r2r_service.py",
+      "source_sha256": "c518b523dcdb59464d8b6211c770601ff7777e0e6581552aad26d7103f97f58e",
+      "export_sha256": "c518b523dcdb59464d8b6211c770601ff7777e0e6581552aad26d7103f97f58e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_lightnav_a3_contracts.py",
+      "source_sha256": "ab2e5959bcbd4b90527312ff55ad0da39d3165a0db224f271769ec1656a015da",
+      "export_sha256": "ab2e5959bcbd4b90527312ff55ad0da39d3165a0db224f271769ec1656a015da",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_lightnav_a3_training_budget_receipt.py",
+      "source_sha256": "fd55e7081ad1e98051ff3514cf987cd68cddb502061d81e666d22e0397cb1c2b",
+      "export_sha256": "fd55e7081ad1e98051ff3514cf987cd68cddb502061d81e666d22e0397cb1c2b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_lightnav_a3_training_budget_receipt_launcher.py",
+      "source_sha256": "614ec53bee1036830993df588cbd24e4ca5383cd680fd284c93007a324728217",
+      "export_sha256": "410a0a1d188f014534706d5face51f7144a15d04ddac484031fe30b0cf668875",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_lightnav_l0_native_probe.py",
+      "source_sha256": "d4886aa6c6212ffe14a950ede1e77ceaece10d9a20589c85c886b3c378b8c248",
+      "export_sha256": "d4886aa6c6212ffe14a950ede1e77ceaece10d9a20589c85c886b3c378b8c248",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_archive_provenance.py",
+      "source_sha256": "98b5772ac6af08789a24e2f21091ffc9b736199a25fd5533363e7832c540ae25",
+      "export_sha256": "98b5772ac6af08789a24e2f21091ffc9b736199a25fd5533363e7832c540ae25",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_checkpoint_obs_archive.py",
+      "source_sha256": "c9ef3a245a4fa38daceb2c72828aca790119921bfcca0c32babcbd7a1d45f2e9",
+      "export_sha256": "a45746cf1fcc66f08a47e3dc9c4945d3abffe7de5f07310b4ff2112b270838b1",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_compare_handoff.py",
+      "source_sha256": "cc8c3c1825c23c8b68a4e961d3f4b588f3548115b31d9d8f1461884ed0c1971b",
+      "export_sha256": "cc8c3c1825c23c8b68a4e961d3f4b588f3548115b31d9d8f1461884ed0c1971b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_contracts.py",
+      "source_sha256": "7ac44988b8eefd0b495e66ccc239ce435c96f4ad47923cc2b3b49ab89c1b8e71",
+      "export_sha256": "7ac44988b8eefd0b495e66ccc239ce435c96f4ad47923cc2b3b49ab89c1b8e71",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_eval_code_inventory.py",
+      "source_sha256": "38395486309edb09e5d361e5d919b1385fd12548768e8f3df4141039cb677fb4",
+      "export_sha256": "38395486309edb09e5d361e5d919b1385fd12548768e8f3df4141039cb677fb4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_final_report.py",
+      "source_sha256": "b870945ae0db5e7ee1e164fb74de41d4954eb7db17778f24e4efec7f6e975fb2",
+      "export_sha256": "b870945ae0db5e7ee1e164fb74de41d4954eb7db17778f24e4efec7f6e975fb2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_parallel_eval_plan.py",
+      "source_sha256": "d4ab874149b62d2e28ae1beda55a1a4dec6a49f3fd401d964e574ab367cfe0a8",
+      "export_sha256": "d4ab874149b62d2e28ae1beda55a1a4dec6a49f3fd401d964e574ab367cfe0a8",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_post_training.py",
+      "source_sha256": "ef28ce8528a8389c055ef29899ecc7c971648e3cfe23d8e72d225fdf853bd098",
+      "export_sha256": "aec2c641a5d5cb5f5baa8d3623107ef86d952212e827e5ce8ccdde0a6c5ec530",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_remote_runtime_finalizer.py",
+      "source_sha256": "274f67c9dbabd764fbb8fabf9f552d6770bf178c4b3f0c48cc53f1cbcfb0e706",
+      "export_sha256": "274f67c9dbabd764fbb8fabf9f552d6770bf178c4b3f0c48cc53f1cbcfb0e706",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_stage2_anticollapse_formal_launcher.py",
+      "source_sha256": "1a76a8a8375431aa864a3d28aca2703542b40df3a4cede33bfafcc6d929ff196",
+      "export_sha256": "4dda62b6af91c13d48c171b2abdd44c666e0d2a9815320754d3318b30012b00f",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_stage2_anticollapse_smoke_launcher.py",
+      "source_sha256": "17b53857431048bef4fd379d072ca91762a7c2e890dc1cb0bbb9a1e2dabce9be",
+      "export_sha256": "448240e460df8acf01be42e5500b8f0dd721f7c87b0e3836fb4336f3216b83ff",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_stage2_repair_launcher.py",
+      "source_sha256": "159ae6304de2ab9641396c74fa0beca28832ad0044f102c1d2a99806b07cc2cd",
+      "export_sha256": "159ae6304de2ab9641396c74fa0beca28832ad0044f102c1d2a99806b07cc2cd",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_stage2_support.py",
+      "source_sha256": "6c6284131bee83bf3d51243ffad9c3344756d27e81dc499c3e60723bb2fa4e4e",
+      "export_sha256": "6c6284131bee83bf3d51243ffad9c3344756d27e81dc499c3e60723bb2fa4e4e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_navigation_rlt_storage_guard.py",
+      "source_sha256": "020178c2d8cb6e1b8cd4923ca3b6403e5f8ed4fd6fc259538ed38153aa54a5a4",
+      "export_sha256": "020178c2d8cb6e1b8cd4923ca3b6403e5f8ed4fd6fc259538ed38153aa54a5a4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_pointnav_bridge_split.py",
+      "source_sha256": "7415e8a58efeaa67b7cfc7bf943a89d4ad9c16e6ae881d86be2eaf8925b87ee6",
+      "export_sha256": "7415e8a58efeaa67b7cfc7bf943a89d4ad9c16e6ae881d86be2eaf8925b87ee6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_pointnav_service.py",
+      "source_sha256": "313580f80708f22c69905c9f2f61f44a23eebc32ac832168f63f7666254a569a",
+      "export_sha256": "313580f80708f22c69905c9f2f61f44a23eebc32ac832168f63f7666254a569a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_serve_artifacts.py",
+      "source_sha256": "2942bde55be958e06e9c64827430a9938c44628fda5d0382e36ecbfea8683a25",
+      "export_sha256": "2942bde55be958e06e9c64827430a9938c44628fda5d0382e36ecbfea8683a25",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_core.py",
+      "source_sha256": "8a897d32b42c6a0c799cf7f47d74bd7b5a34eb170b1290eab21752012537bd0b",
+      "export_sha256": "8a897d32b42c6a0c799cf7f47d74bd7b5a34eb170b1290eab21752012537bd0b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_legacy_task.py",
+      "source_sha256": "79106b66e458df8f184131d7a715193aa582ec5fd981ba2e7991af5642307550",
+      "export_sha256": "79106b66e458df8f184131d7a715193aa582ec5fd981ba2e7991af5642307550",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_lightweight_torch.py",
+      "source_sha256": "8d5588ff869bd85fa43d58996480385dd383b8c20c87408605b80c6c468f1670",
+      "export_sha256": "8d5588ff869bd85fa43d58996480385dd383b8c20c87408605b80c6c468f1670",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_ppo.py",
+      "source_sha256": "2d7c6cc7d0114579322e9339d63a610b7ca85195d23cc70a5a51c9d2d3ae5506",
+      "export_sha256": "2d7c6cc7d0114579322e9339d63a610b7ca85195d23cc70a5a51c9d2d3ae5506",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_s1_plugins.py",
+      "source_sha256": "2a27054e00a513a840b7c71c20fbe88e92d6bc98e6c87a75a22fa7da80862fc5",
+      "export_sha256": "2a27054e00a513a840b7c71c20fbe88e92d6bc98e6c87a75a22fa7da80862fc5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_stack_torch_ppo.py",
+      "source_sha256": "0528a0e4c8ac9f1e80ed8ad772ec14044439657134302474e4537636829ce235",
+      "export_sha256": "0528a0e4c8ac9f1e80ed8ad772ec14044439657134302474e4537636829ce235",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_a1_contextual_hybrid.py",
+      "source_sha256": "601cd55cf5c091f8f7226cd6f704e6ce3c64ca3a9ca230667ca7deda301aea4e",
+      "export_sha256": "601cd55cf5c091f8f7226cd6f704e6ce3c64ca3a9ca230667ca7deda301aea4e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_a1_fsdp_model.py",
+      "source_sha256": "5c79ada7029746a578a74ee8f79d09d084b3ea3800c13a4435c010c3bb9e81e2",
+      "export_sha256": "5c79ada7029746a578a74ee8f79d09d084b3ea3800c13a4435c010c3bb9e81e2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_candidates.py",
+      "source_sha256": "a601c3cba8f419944667c481a96711e60917b5ff14a3acb69dacbaf241c17179",
+      "export_sha256": "a601c3cba8f419944667c481a96711e60917b5ff14a3acb69dacbaf241c17179",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_candidates_g71.py",
+      "source_sha256": "39dc947aebbc12405a7943e2ac67c918b31d06518a27c99db9b8613f3efd77ef",
+      "export_sha256": "39dc947aebbc12405a7943e2ac67c918b31d06518a27c99db9b8613f3efd77ef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_chunk_ppo.py",
+      "source_sha256": "c7910e7d5428962711816df97107c5d98ca6df3616a2d558f92f36322daccdde",
+      "export_sha256": "c7910e7d5428962711816df97107c5d98ca6df3616a2d558f92f36322daccdde",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_context_replay.py",
+      "source_sha256": "75401d3b2df49b1cb8d2805d8c990631acdf20b469ca4c75d0b71c9103512030",
+      "export_sha256": "75401d3b2df49b1cb8d2805d8c990631acdf20b469ca4c75d0b71c9103512030",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_contextual_topology_waypoint.py",
+      "source_sha256": "deffcd52e3387db1cddc6a2e99fb32cde346c846f86b8873f3b7a25b8e81b7c2",
+      "export_sha256": "deffcd52e3387db1cddc6a2e99fb32cde346c846f86b8873f3b7a25b8e81b7c2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_env_contract.py",
+      "source_sha256": "c61e41d48be102d48062bad70626d77d56e00811b18ccdf22d9ceb734b346c39",
+      "export_sha256": "c61e41d48be102d48062bad70626d77d56e00811b18ccdf22d9ceb734b346c39",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g4_staging.py",
+      "source_sha256": "1f34a2b6e528df278380498343107fab2f44b395457f84442a50d31fa40954ee",
+      "export_sha256": "1f34a2b6e528df278380498343107fab2f44b395457f84442a50d31fa40954ee",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g5_policy_staging.py",
+      "source_sha256": "d11f7198c6f59866bb0c6c4cbd14cb197cf4a675543348d748c2529465f7dd75",
+      "export_sha256": "d11f7198c6f59866bb0c6c4cbd14cb197cf4a675543348d748c2529465f7dd75",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g5_staging.py",
+      "source_sha256": "7829f708c7c1a02b2c50569eade74381f4b127d62a8123c82a0098cdb5da25c1",
+      "export_sha256": "7829f708c7c1a02b2c50569eade74381f4b127d62a8123c82a0098cdb5da25c1",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g6_staging.py",
+      "source_sha256": "62194cb5844a91a114c991ad3e208c47a74c4c92d04924d3e725de49a3ad9df2",
+      "export_sha256": "62194cb5844a91a114c991ad3e208c47a74c4c92d04924d3e725de49a3ad9df2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g710_staging.py",
+      "source_sha256": "455c258b56c6e8b76926c6255136a3559755261da5721026207ce0fe0960525f",
+      "export_sha256": "455c258b56c6e8b76926c6255136a3559755261da5721026207ce0fe0960525f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g711_staging.py",
+      "source_sha256": "1a0555cac7d4756e1bbe013ac3d94037008792830e1e513b2fb55e914df71454",
+      "export_sha256": "1a0555cac7d4756e1bbe013ac3d94037008792830e1e513b2fb55e914df71454",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g712_staging.py",
+      "source_sha256": "e3bd176df2c821a390088c2f9eee8c4c13db9257082c49aa4d600b1ede6693f3",
+      "export_sha256": "e3bd176df2c821a390088c2f9eee8c4c13db9257082c49aa4d600b1ede6693f3",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g713_staging.py",
+      "source_sha256": "17adf5880ff1e97e2582a526593a3f4ad8e053673e6242cbe3fdbb5867131bf5",
+      "export_sha256": "17adf5880ff1e97e2582a526593a3f4ad8e053673e6242cbe3fdbb5867131bf5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g714_staging.py",
+      "source_sha256": "8cbd77543c5e1af9cb6fc5d5d97ad479b405813427ff8afd128e5ca47d2efcff",
+      "export_sha256": "d7723fb4262205392299cbbf65b4ffb7cba27556d83396a70d86580bbd2b7ec6",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g715_staging.py",
+      "source_sha256": "3a77f21164495300b021a1b4def84f7c820beb0aba237dabf09012a35c16c012",
+      "export_sha256": "4b2489849ee977708b170f03ee87f34ca3073e75afd1e3aec34d9fadd4041a21",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g716_contract.py",
+      "source_sha256": "53f16aec9718389693911253a09c7505161b207ca0d677579ad6ef32a3e6569c",
+      "export_sha256": "2bbe83ac88cfa197f17d3b943f6752dc5c7bde99ada6a60c9df43083bcb946de",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g717_plumbing.py",
+      "source_sha256": "5abc854bf8208143813400a2a1b1eb0a404101d50532a1d3c05124928ae21088",
+      "export_sha256": "cdf38c85525f896bc54e254afd6fcb0224cc9ebd6c378465e053b092f1c1012f",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g718_learning.py",
+      "source_sha256": "cbddbdc8b11109125c9cda57cb49db0545f1a5ddf3f9b1f6ae5a3edfe445ee0a",
+      "export_sha256": "8582f5d683a6b6e66e20463d6ddb0022d98472a1c6fec8164c055ce6c85ee249",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g719_stability.py",
+      "source_sha256": "e2fca399ac9fed228ea7d5b3a136eb41c96831c78e4f99d932538c150663f574",
+      "export_sha256": "aac86c173b2d99155daecd8d9954c0029a0966385dff9facd95568a3861b762a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g719_stability_v2.py",
+      "source_sha256": "88b1d8f43f64d71afcc62e0809c073164cf64a069c7fd43ad73db6e16faf953d",
+      "export_sha256": "be3fcb508984ea7cbd3e53cd31a89b8b1f9bc078df51ef18ebd2e4cfd4a72df5",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_g71_staging.py",
+      "source_sha256": "1980d80de7e2f63ffc66490d9deaf0ba6522797f526c50f324593b4488444e61",
+      "export_sha256": "1980d80de7e2f63ffc66490d9deaf0ba6522797f526c50f324593b4488444e61",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g720_atomic_guard.py",
+      "source_sha256": "1c6ea4cc43dad985c2e6683aadde104bb56876e5b8d37d430ba37e2146309325",
+      "export_sha256": "1c6ea4cc43dad985c2e6683aadde104bb56876e5b8d37d430ba37e2146309325",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g721_safety_transfer.py",
+      "source_sha256": "929e6bef2ad47e439f36abc5f0fe056e42e90785543c1c7c13fb5d4736ae3f2d",
+      "export_sha256": "929e6bef2ad47e439f36abc5f0fe056e42e90785543c1c7c13fb5d4736ae3f2d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g722_matched_behavior.py",
+      "source_sha256": "99ef4cc6f604a9708ccae2494c675ca5c6b77294606228ebd4c1e71bacd3c8ef",
+      "export_sha256": "99ef4cc6f604a9708ccae2494c675ca5c6b77294606228ebd4c1e71bacd3c8ef",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g723_executor_boundary.py",
+      "source_sha256": "50268add4a2e0aa1c4714699f70813a215616d5ba2eec0065381ce2c52386b63",
+      "export_sha256": "50268add4a2e0aa1c4714699f70813a215616d5ba2eec0065381ce2c52386b63",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g72_staging.py",
+      "source_sha256": "afaf43d4a935eac67a57beb145481103e107141b5fbb61b8a607d33c44481ac2",
+      "export_sha256": "afaf43d4a935eac67a57beb145481103e107141b5fbb61b8a607d33c44481ac2",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g73_staging.py",
+      "source_sha256": "ce96c5d35f4e75dc033ce9ec465c457d3c39baedb513cd50785acd4e7d800907",
+      "export_sha256": "ce96c5d35f4e75dc033ce9ec465c457d3c39baedb513cd50785acd4e7d800907",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g74_staging.py",
+      "source_sha256": "2a663d6cfd073156fa4e65612aed970ce2493d891076a3aff943983023ee4579",
+      "export_sha256": "2a663d6cfd073156fa4e65612aed970ce2493d891076a3aff943983023ee4579",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g75_staging.py",
+      "source_sha256": "60779d3dbfdda9375c62bff05c2e09acca65871c1b48b3d9baf8b0f182434b31",
+      "export_sha256": "60779d3dbfdda9375c62bff05c2e09acca65871c1b48b3d9baf8b0f182434b31",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g76_staging.py",
+      "source_sha256": "706b29e109657890ae431be6d96d59236a887c57e4213b5cb10f6117368568c7",
+      "export_sha256": "706b29e109657890ae431be6d96d59236a887c57e4213b5cb10f6117368568c7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g77_staging.py",
+      "source_sha256": "0b8901c3e43ceb1e9c603d66755dab8c05eeb4a0df0a44a2c7e8e3a0f267c310",
+      "export_sha256": "0b8901c3e43ceb1e9c603d66755dab8c05eeb4a0df0a44a2c7e8e3a0f267c310",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g78_staging.py",
+      "source_sha256": "60e6b63f37114f8a6ff45e1c3d96fc3b25e9760c044dd27769552fe9b3107ef0",
+      "export_sha256": "60e6b63f37114f8a6ff45e1c3d96fc3b25e9760c044dd27769552fe9b3107ef0",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g79_staging.py",
+      "source_sha256": "39e242fe702066642623da15c54276c9c4dae0c8120354285f813612dbdfae16",
+      "export_sha256": "39e242fe702066642623da15c54276c9c4dae0c8120354285f813612dbdfae16",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g7_staging.py",
+      "source_sha256": "9bffca5e3446162e49646b499f192fbf3d08b5bab7b7611b1fb811db6c68c043",
+      "export_sha256": "9bffca5e3446162e49646b499f192fbf3d08b5bab7b7611b1fb811db6c68c043",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g8_action.py",
+      "source_sha256": "128e0372dd32d911af8e5935ac7751338e434a31d4fb9f6fa9219851682a426b",
+      "export_sha256": "128e0372dd32d911af8e5935ac7751338e434a31d4fb9f6fa9219851682a426b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g8_aggregate.py",
+      "source_sha256": "b9cb25b578efd0ff83db7801f56e4a8dac044c0fc5a4119a49a44ac1fe6ae622",
+      "export_sha256": "b9cb25b578efd0ff83db7801f56e4a8dac044c0fc5a4119a49a44ac1fe6ae622",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g8_policy_staging.py",
+      "source_sha256": "7c3329b5fb911d1de420e697c286637a8f299a6c7a57d79ea3cbe5a48d6ae35e",
+      "export_sha256": "7c3329b5fb911d1de420e697c286637a8f299a6c7a57d79ea3cbe5a48d6ae35e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_g8_release_reference.py",
+      "source_sha256": "1e5a024eb84768d3bd14fce9c19d2de66c0f22799c092d2920e54b04cdd40f40",
+      "export_sha256": "1e5a024eb84768d3bd14fce9c19d2de66c0f22799c092d2920e54b04cdd40f40",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_a800_parity.py",
+      "source_sha256": "13ae3cbb94bfba7b08b5d5a0e8f9dc24764bb167bc7db7b9ce02e8cc921c152f",
+      "export_sha256": "8f31c7e92c96b9d6c8232cc685dac591585279793c055eacc3944b1dc6ddff9a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_p8_live_static.py",
+      "source_sha256": "7b3ddb602e141cc13dc52d8dee977d47f6cbc130cb629065aa13769413344dcb",
+      "export_sha256": "7b3ddb602e141cc13dc52d8dee977d47f6cbc130cb629065aa13769413344dcb",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_official_adapter.py",
+      "source_sha256": "2c349ad77ac8506566434384c2f12c26d6af3ab87fc5db826e2648d07d548dbb",
+      "export_sha256": "2c349ad77ac8506566434384c2f12c26d6af3ab87fc5db826e2648d07d548dbb",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_official_frame.py",
+      "source_sha256": "8a80a6ecadadc4dd30e4141f0ccd01f25ed9015b12c7fc31a7d38c5786a60f05",
+      "export_sha256": "8a80a6ecadadc4dd30e4141f0ccd01f25ed9015b12c7fc31a7d38c5786a60f05",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_residual.py",
+      "source_sha256": "e12960090ac2790768beefac103d49cfa9b7780acf75abccc988557f7be3c535",
+      "export_sha256": "e12960090ac2790768beefac103d49cfa9b7780acf75abccc988557f7be3c535",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_session.py",
+      "source_sha256": "3279e0143ac4553ecd02da9b1269d9c3761eab531b15ee728f9f9964461402ae",
+      "export_sha256": "3279e0143ac4553ecd02da9b1269d9c3761eab531b15ee728f9f9964461402ae",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_action.py",
+      "source_sha256": "abc6d1402f943b108dc9eb9e872c072d2a5e6aecd8011d54e5f0f7c4a926cf80",
+      "export_sha256": "abc6d1402f943b108dc9eb9e872c072d2a5e6aecd8011d54e5f0f7c4a926cf80",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_actor.py",
+      "source_sha256": "6c1fb8516949b107f90838dfa6ad95b78f7cd4e8f52c46c4efc5872abe250ede",
+      "export_sha256": "6c1fb8516949b107f90838dfa6ad95b78f7cd4e8f52c46c4efc5872abe250ede",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_bc_readiness.py",
+      "source_sha256": "4f097f1ab9850a8cd6950e93f024d65ab7ba13b1362b348b98e1343c0e997329",
+      "export_sha256": "4f097f1ab9850a8cd6950e93f024d65ab7ba13b1362b348b98e1343c0e997329",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_causal_probe.py",
+      "source_sha256": "a43e65ee581cee53c2e505a442da457b643e05f6ac95b3aff3e92938227434e9",
+      "export_sha256": "a43e65ee581cee53c2e505a442da457b643e05f6ac95b3aff3e92938227434e9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_ceiling.py",
+      "source_sha256": "1af21e9e16baf9e8cee26199a309de34efe75772e05c0670791f877de204c686",
+      "export_sha256": "1af21e9e16baf9e8cee26199a309de34efe75772e05c0670791f877de204c686",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_env_runtime.py",
+      "source_sha256": "2e7574dafc3fa07c767daf94dea87c1c6b3524cb3fb649e06c09d5df98f88edf",
+      "export_sha256": "2e7574dafc3fa07c767daf94dea87c1c6b3524cb3fb649e06c09d5df98f88edf",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_feature_v2.py",
+      "source_sha256": "735ec784007daa5df8dbc042fafc6e4352b1b1b4b0dfc92f7d1b9949b360f5db",
+      "export_sha256": "735ec784007daa5df8dbc042fafc6e4352b1b1b4b0dfc92f7d1b9949b360f5db",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_feature_v2_ab.py",
+      "source_sha256": "ed750fd83a4b2dee2d4243ef77fef1f8d33749c32fcaed364c2fda42647e83f8",
+      "export_sha256": "8fae54553d16be5ed7a9d552eacd10d32e598f3df9db7d351b200d4414195407",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": true
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_interface.py",
+      "source_sha256": "51b8f0fbb9e1507b04da75af115e6090a5280eb437e9df575c4caf31ab43512a",
+      "export_sha256": "51b8f0fbb9e1507b04da75af115e6090a5280eb437e9df575c4caf31ab43512a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_namespace.py",
+      "source_sha256": "c6795828b08cd3cde39a998be22dd563ac8d3d7d8ea51910ce112b97b8f4cd38",
+      "export_sha256": "c6795828b08cd3cde39a998be22dd563ac8d3d7d8ea51910ce112b97b8f4cd38",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_policy.py",
+      "source_sha256": "020aaec0d4cef6d59d809a14e4fd6c6998c02864063b86c20481648aa0fe844b",
+      "export_sha256": "020aaec0d4cef6d59d809a14e4fd6c6998c02864063b86c20481648aa0fe844b",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_protocol.py",
+      "source_sha256": "0d62022c5f860e926736d8d06db2ba5c0ef0d89041228fce4d8327717afe4ba3",
+      "export_sha256": "0d62022c5f860e926736d8d06db2ba5c0ef0d89041228fce4d8327717afe4ba3",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_runtime.py",
+      "source_sha256": "7a338340df0251c43adad55e5ffd28a0a554d4f5a8b765986adfc71402d725b7",
+      "export_sha256": "7a338340df0251c43adad55e5ffd28a0a554d4f5a8b765986adfc71402d725b7",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_successor_workers.py",
+      "source_sha256": "b7937abcc8f84ad2bd4f6efcb28c9b3da283ce99576fc58c993805dc6487714c",
+      "export_sha256": "b7937abcc8f84ad2bd4f6efcb28c9b3da283ce99576fc58c993805dc6487714c",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_p8_train_diagnostic.py",
+      "source_sha256": "ba2371d7977f44db3b177dac75887f4963340956bffed8f7aab58bea1e20137a",
+      "export_sha256": "ba2371d7977f44db3b177dac75887f4963340956bffed8f7aab58bea1e20137a",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_ppo_staging.py",
+      "source_sha256": "e171340f07524dc768034be395e5516e2b558aaa5fcb1861ae884756d797f572",
+      "export_sha256": "e171340f07524dc768034be395e5516e2b558aaa5fcb1861ae884756d797f572",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_recovery.py",
+      "source_sha256": "3f7a39e3717f2f8942f9748559073d3a0ccec38e239c4ac4044572970430dc9e",
+      "export_sha256": "3f7a39e3717f2f8942f9748559073d3a0ccec38e239c4ac4044572970430dc9e",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_staging.py",
+      "source_sha256": "337f0c3c49abeaccd48934ef5b252f211745997177653e59357b3e332dc7cea4",
+      "export_sha256": "337f0c3c49abeaccd48934ef5b252f211745997177653e59357b3e332dc7cea4",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_streamvln_topology.py",
+      "source_sha256": "2a30933cfa58f0ad6dafc172b9604e275e8a901e08d836387517d25e48ff5a0d",
+      "export_sha256": "2a30933cfa58f0ad6dafc172b9604e275e8a901e08d836387517d25e48ff5a0d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_topology_waypoint_stack.py",
+      "source_sha256": "83ce53674cee80efb80c9189d7b8d91e04e5ce186cf5015ca9a206b80dc671b9",
+      "export_sha256": "83ce53674cee80efb80c9189d7b8d91e04e5ce186cf5015ca9a206b80dc671b9",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_train_pointnav_ppo_cpu.py",
+      "source_sha256": "f2b91a9e1bb7fe574044bbfb4e750f239903cbe3ac73103fae720bac144851be",
+      "export_sha256": "f2b91a9e1bb7fe574044bbfb4e750f239903cbe3ac73103fae720bac144851be",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_asset_preflight.py",
+      "source_sha256": "d001e3b2ebc8971bc8e5273eb872a58a48b28659ec06836f979222309acbbbbf",
+      "export_sha256": "d001e3b2ebc8971bc8e5273eb872a58a48b28659ec06836f979222309acbbbbf",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_env.py",
+      "source_sha256": "7124c22e9e81147c674a578ff0c8c71b112a5a6ce500cf177eb99e8633133d16",
+      "export_sha256": "7124c22e9e81147c674a578ff0c8c71b112a5a6ce500cf177eb99e8633133d16",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_env_registry_config_staged.py",
+      "source_sha256": "a36982f28474073f3636768a35e9762afd02f2bb9b8fe527426c6ff5c616d730",
+      "export_sha256": "c3b87b2c3a4acbb744254f3a8ffc323cd5ef2a383f4e8da97af9a4695f021758",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_eval_metrics.py",
+      "source_sha256": "136b4235d3a1c0cfee4bc45fffef73db7fbc12d5e68aa03c7148e41772493653",
+      "export_sha256": "136b4235d3a1c0cfee4bc45fffef73db7fbc12d5e68aa03c7148e41772493653",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_policy.py",
+      "source_sha256": "3618c5026c6922a286fc781ea40b6129d95885c8dfd74e2a985910601d730d96",
+      "export_sha256": "3618c5026c6922a286fc781ea40b6129d95885c8dfd74e2a985910601d730d96",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_registry_staged.py",
+      "source_sha256": "f706a61d7c3037e207b79222cb0cd400ee140c9173fe237c2757ff2ca249dd36",
+      "export_sha256": "f706a61d7c3037e207b79222cb0cd400ee140c9173fe237c2757ff2ca249dd36",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_vln_transport_boundary.py",
+      "source_sha256": "2692f6ecacb4d873e31a4ce43dadfd309bc33c3685558c84779acdde345ed41d",
+      "export_sha256": "2692f6ecacb4d873e31a4ce43dadfd309bc33c3685558c84779acdde345ed41d",
+      "deployment_values_replaced": false,
+      "publication_edit_after_substitution": false
+    },
+    {
+      "path": "tests/test_worker_uuid_preflight.py",
+      "source_sha256": "8c372b9c71764c90cd18abfdb6e75908cd7f977f36a76ffcc8b2d64452512204",
+      "export_sha256": "409bb3b44a0a18c9ebabbdda6d23b2a3a3c86391353add08af812214144c5119",
+      "deployment_values_replaced": true,
+      "publication_edit_after_substitution": false
+    }
+  ],
+  "publication_edits": [
+    "Added public overview, validation report and LF checkout attributes.",
+    "Configuration smoke scripts accept RLINF_CHECKOUT and default to the containing fork.",
+    "Historical evidence assertions skip only when their external documents are absent; combined source assertions remain active.",
+    "Fixed P8 Feature-v2 test source-path relocation; historical expected digests are unchanged and the remaining errors are reported."
+  ],
+  "added_files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "c19a4e34c96c6ff91bd32dc91efc3e238d839cf374f57e228d38000ade278eef"
+    },
+    {
+      "path": "EXPORT_VALIDATION.md",
+      "sha256": "913efc6950bdd1d7ba717098ffad37a2609b59af8d724c60dd51c718e4c101ed"
+    }
+  ]
+}

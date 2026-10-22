@@ -1,0 +1,13 @@
+model_type: vln_policy
+model_path: ""
+policy_setup: vln_r2r
+vocab_size: 2504
+max_instruction_tokens: 200
+image_size: 64
+action_dim: 1
+discrete_n_actions: 4
+num_action_chunks: 1
+precision: "32"
+add_value_head: true
+is_lora: false
+lora_rank: 32

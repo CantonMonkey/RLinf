@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "stage": "G7.16 lower-layer sensing and action-execution contract",
+  "source_contract": {
+    "stream_commit": "e48f6ff7e9201d93aae003e8f64b04c00cec13bc",
+    "rlinf_commit": "0505431899574619da86f551bad70b71e0ea2177",
+    "original_stream_only": true,
+    "ttt_or_secondary_post_training": false
+  },
+  "source": {
+    "train_sha256": "340a80133b2157520354ab055a91d98feb2f42e4bbda17b200c911f8788492ea",
+    "val_unseen_sha256": "1767a407e2c8a011fbb7abece76cd64c5b39ff9fa0e9e340ebdce5a490d167c3"
+  },
+  "high_level_command": {
+    "modes": ["navigate", "stop", "recover"],
+    "waypoint_frame": "agent-local forward-left meters",
+    "primitive_actions": ["stop", "forward", "left", "right"],
+    "action_chunk": 4,
+    "forward_step_m": 0.25,
+    "turn_degrees": 15.0
+  },
+  "lower_layer_feedback": {
+    "availability": "post-action only",
+    "simulator_sources": [
+      "metric path-length increment",
+      "collision contact",
+      "terminated",
+      "truncated",
+      "environment reward"
+    ],
+    "robot_sources": [
+      "wheel or visual-inertial odometry displacement",
+      "depth or lidar local costmap collision/blockage",
+      "controller termination status"
+    ],
+    "blocked_rule": "forward realized_path_m / 0.25 < 0.5",
+    "collision_is_not_blockage": true,
+    "reward_accounting": "use each environment primitive reward exactly once; no added collision penalty"
+  },
+  "high_level_policy_observation_keys": [
+    "rgb",
+    "instruction_utf8",
+    "instruction_utf8_mask",
+    "scene_utf8",
+    "scene_utf8_mask",
+    "episode_utf8",
+    "episode_utf8_mask",
+    "env_id",
+    "episode_serial",
+    "episode_step",
+    "episode_start",
+    "previous_actions",
+    "previous_action_mask",
+    "terminal_frozen"
+  ],
+  "privileged_policy_blacklist": [
+    "navmesh",
+    "navigable",
+    "oracle_action",
+    "oracle_waypoint",
+    "shortest_path",
+    "geodesic_distance",
+    "distance_to_goal",
+    "future_collision",
+    "future_outcome",
+    "severity_label",
+    "success",
+    "spl"
+  ],
+  "deterministic_smoke": {
+    "split": "train",
+    "scene_specs": [
+      {"index": 70, "episode_id": "71", "scene": "i5noydFURQK"},
+      {"index": 3944, "episode_id": "3954", "scene": "e9zR4mvMWw7"}
+    ],
+    "repeat_count": 2,
+    "action_chunks": [
+      [1, 1, 2, 1],
+      [3, 1, 1, 1],
+      [0, 0, 0, 0]
+    ],
+    "expected_executed_lengths": [4, 4, 1],
+    "recovery_probe_after_decision_index": 1,
+    "gamma": 0.99,
+    "max_episode_steps": 12,
+    "expected_scene_repeat_records": 4,
+    "expected_chunk_records": 12,
+    "expected_executed_primitives": 36,
+    "val_unseen_episode_count": 0
+  },
+  "gates": {
+    "feedback_schema_valid": true,
+    "executed_prefix_exact": true,
+    "repeat_feedback_reward_observation_and_topology_exact": true,
+    "padded_reward_zero": true,
+    "primitive_reward_accounted_once": true,
+    "discounted_chunk_reward_matches_rlinf_math": true,
+    "topology_uses_realized_post_action_displacement": true,
+    "recovery_compiles_to_four_non_stop_primitives": true,
+    "policy_observation_blacklist_disjoint": true,
+    "model_load_count": 0,
+    "policy_update_count": 0,
+    "val_unseen_episode_count": 0
+  },
+  "model_load": false,
+  "model_fit": false,
+  "rl_update": false,
+  "controller_comparison": false,
+  "navigation_evaluation": false,
+  "g8_ready": false
+}
