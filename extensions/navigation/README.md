@@ -14,6 +14,9 @@ The P8 public unit-test packaging defect is repaired. See
 [P8 hashes and migration](P8_HASH_AND_MIGRATION.md) for the cause, test boundary
 and current Navigation-RLT source staging commands.
 
+For shared branch updates, private runtime overlays and per-experiment code
+identity, see [the remote workflow](REMOTE_WORKFLOW.md).
+
 ## Contents
 
 | Directory | Purpose |
